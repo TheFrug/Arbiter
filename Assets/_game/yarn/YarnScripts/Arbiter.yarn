@@ -1,0 +1,15 @@
+﻿title: Arbiter
+position: -221,-35
+color: purple
+---
+<<declare $TimesTalked = 1>>
+You poor thing. Welcome to the Arbiter Program.
+<<if $TimesTalked >= 1>>
+<<jump Node>>
+<<endif>>
+===
+title: Node
+position: 156,-234
+---
+Holy shit
+===
