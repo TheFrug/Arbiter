@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class book : MonoBehaviour
 {
@@ -11,19 +12,71 @@ public class book : MonoBehaviour
     [SerializeField] private GameObject backButton;
     [SerializeField] private GameObject forwardButton;
 
+    // --- Book Toggle + Slide Variables ---
+    [Header("Book Toggle")]
+    [SerializeField] private Button toggleButton;
+    [SerializeField] private float slideSpeed = 6f;
+    [SerializeField] private Vector2 hiddenPosition;
+    [SerializeField] private Vector2 visiblePosition;
+
+    [SerializeField] private RectTransform rectTransform;
+    private bool isVisible = false;
+    private bool isSliding = false;
+    // -------------------------------------------
+
     private void Start()
     {
         InitialState();
+
+        // --- Initialize sliding state ---
+        rectTransform.anchoredPosition = hiddenPosition;
+        isVisible = false;
+
+        if (toggleButton != null)
+        {
+            toggleButton.onClick.AddListener(ToggleBook);
+        }
+        // --------------------------------------
     }
-    
+
     public void InitialState()
     {
-        for (int i=0; i<pages.Count; i++)
+        for (int i = 0; i < pages.Count; i++)
         {
             pages[i].transform.rotation = Quaternion.identity;
         }
-        pages[0].SetAsLastSibling(); 
+        pages[0].SetAsLastSibling();
     }
+
+    // --- Toggle Book Visibility ---
+    public void ToggleBook()
+    {
+        if (isSliding) return;
+        StartCoroutine(SlideBook(!isVisible));
+    }
+
+    IEnumerator SlideBook(bool show)
+    {
+        isSliding = true;
+
+        Vector2 start = rectTransform.anchoredPosition;
+        Vector2 target = show ? visiblePosition : hiddenPosition;
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * slideSpeed;
+            rectTransform.anchoredPosition = Vector2.Lerp(start, target, t);
+            yield return null;
+        }
+
+        rectTransform.anchoredPosition = target;
+        isVisible = show;
+        isSliding = false;
+    }
+    // ------------------------------------
+
 
     public void RotateForward()
     {
