@@ -138,13 +138,10 @@ public class InfractionForm : MonoBehaviour
 
     #region Yarn Integration
 
+    /// <summary>
+    /// Called by YarnManager to set the suspect name and enable the button.
+    /// </summary>
     public void RevealNameFromYarn(string name)
-    {
-        revealedName = name;
-        nameFillButton.interactable = true;
-    }
-
-    public void OnYarnRevealName(string name)
     {
         revealedName = name;
         nameFillButton.interactable = true;
@@ -159,8 +156,12 @@ public class InfractionForm : MonoBehaviour
         if (string.IsNullOrEmpty(revealedName))
             return;
 
+        // Fill the TMP_Text with the revealed name
         suspectName = revealedName;
         nameDisplayText.text = revealedName;
+
+        // Disable the button so it can't be clicked again
+        nameFillButton.interactable = false;
     }
 
     #endregion

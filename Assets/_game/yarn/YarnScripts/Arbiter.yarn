@@ -32,7 +32,7 @@ title: Ask_Legal_Name
 COWORKER: My full legal name?
 COWORKER: Fine. It's Darion Vale.
 
-<<command RevealName "Darion Vale">>
+<<RevealName YarnManager "Darion Vale">>
 
 COWORKER: Go ahead. You can enter it on the form now.
 
