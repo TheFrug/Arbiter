@@ -1,15 +1,62 @@
-﻿title: Arbiter
-position: -221,-35
-color: purple
+﻿title: Tutorial_Arbiter
 ---
-<<declare $TimesTalked = 1>>
-You poor thing. Welcome to the Arbiter Program.
-<<if $TimesTalked >= 1>>
-<<jump Node>>
-<<endif>>
+
+<<set $SuspectName = "">>
+<<set $SuspectNameRevealed = false>>
+<<set $SuggestedViolation = "">>
+
+COWORKER: Welcome to Intake Processing, Arbiter!
+COWORKER: Today you'll be filling out an Infraction Analysis Form.
+COWORKER: I'll be your "suspect." Try not to enjoy it.
+
+<<jump Interview_Loop>>
+
 ===
-title: Node
-position: 156,-234
+
+title: Interview_Loop
 ---
-Holy shit
+
+COWORKER: What would you like to ask?
+
+-> Ask for legal name
+    <<jump Ask_Legal_Name>>
+-> Ask about violation
+    <<jump Ask_Violation>>
+-> Finish interview
+    <<jump Finish_Interview>>
+===
+
+title: Ask_Legal_Name
+---
+
+COWORKER: My full legal name?
+COWORKER: Fine. It's Darion Vale.
+
+<<command RevealName "Darion Vale">>
+
+COWORKER: Go ahead. You can enter it on the form now.
+
+<<jump Interview_Loop>>
+
+
+title: Ask_Violation
+---
+
+COWORKER: I was cited for Improper Assembly Permit Filing.
+COWORKER: Category C, if you're reading your Codex properly.
+
+<<set $SuggestedViolation = "AdministrativeObstruction">>
+
+COWORKER: Choose the violation classification.
+
+<<jump Interview_Loop>>
+===
+
+title: Finish_Interview
+---
+
+COWORKER: If you've filled everything out, stamp the form.
+COWORKER: Don't worry. It's fake.
+
+<<stop>>
 ===
