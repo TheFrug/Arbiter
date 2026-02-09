@@ -7,10 +7,23 @@ position: -220,119
 <<set $SuggestedViolation = "">>
 <<set $asked_name = false>>
 <<set $asked_violation = false>>
+<<set $asked_witnesses = false>>
 
-COWORKER: Welcome to Intake Processing, Arbiter!
-COWORKER: Today you'll be filling out an Infraction Analysis Form.
-COWORKER: I'll be your "suspect." Try not to enjoy it.
+COMRADE: Glorious day, comrade.
+COMRADE: Welcome to the intake department. I'm here to catch you up to speed about your new responsibilities.
+COMRADE: To start, we'll go over the Infraction Form, which you'll be getting very familiar with in the coming months.
+COMRADE: For the sake of instruction, I'll be your "suspect." Try not to enjoy it.
+-> Of course, comrade. Glory to our nation!
+    COMRADE: Glory to our nation, indeed.
+-> I don't know, you seem pretty guilty!
+    COMRADE: Curb your tone, rookie. You'll need to keep a straight face for suspects.
+COMRADE: First-things-first, at the bottom of your station are the Infraction Form and Codex.
+COMRADE: The Infraction Form is what you'll be filing out as you interview suspects.
+COMRADE: The codex will contain instruction regarding this job, as well as important definitions.
+COMRADE: The Arbitration system is ever-evolving, so you should anticipate changes to your codex.
+COMRADE: Now, onto the mock-interview. I'll do my best to simulate the average suspect.
+
+Your COMRADE hunches over noticeably smears a nasty grimace across her face.
 
 <<jump Interview_Loop_Tutorial>>
 
@@ -19,8 +32,7 @@ COWORKER: I'll be your "suspect." Try not to enjoy it.
 title: Interview_Loop_Tutorial
 position: 46,108
 ---
-
-COWORKER: What would you like to ask?
+'SUSPECT': Alright, pig, waddya want with me?
 
 -> Ask for legal name <<if not $asked_name>>
     <<set $asked_name = true>>
@@ -28,6 +40,9 @@ COWORKER: What would you like to ask?
 -> Ask about violation<<if not $asked_violation>>
     <<set $asked_violation = true>>
     <<jump Ask_Violation_Tutorial>>
+-> Ask about witnesses<<if not $asked_witnesses>>
+    <<set $asked_witnesses = true>>
+    <<jump Ask_Witnesses_Tutorial>>
 -> Finish interview
     <<jump Finish_Interview_Tutorial>>
 ===
@@ -36,12 +51,12 @@ title: Ask_Legal_Name_Tutorial
 position: 323,-86
 ---
 
-COWORKER: My full legal name?
-COWORKER: Fine. It's Darion Vale.
+'SUSPECT': My full legal name?
+'SUSPECT': It's Darion Vale. Not that you give a shit.
 
 <<RevealName YarnManager "Darion Vale">>
 
-COWORKER: Go ahead. You can enter it on the form now.
+COMRADE: (Go ahead, you can enter it into the form, now)
 
 <<jump Interview_Loop_Tutorial>>
 ===
@@ -51,19 +66,34 @@ title: Ask_Violation_Tutorial
 position: 439,147
 ---
 
-COWORKER: I was cited for Improper Assembly Permit Filing.
-COWORKER: Category C, if you're reading your Codex properly.
-COWORKER: Choose the violation classification.
+'SUSPECT': Well, 'ociffer', I was caught swiping an apple from a kind old lady's apple cart.
+'SUSPECT': If I knew what laws were, I'd call that 'stealing'. If only I had a handy book telling my what crimes there were!
+COMRADE: (Select the appropriate violation category now) 
 
 <<jump Interview_Loop_Tutorial>>
 ===
+
+title: Ask_Witnesses_Tutorial
+position: 439,147
+---
+
+'SUSPECT': Witnizzes? Wuzzat mean? 
+'SUSPECT': All there wuz were me, the old bat, and the pig that grabbed me.
+COMRADE: (Select the appropriate violation category now) 
+
+<<jump Interview_Loop_Tutorial>>
+===
+
 
 title: Finish_Interview_Tutorial
 position: 272,313
 ---
 
-COWORKER: If you've filled everything out, stamp the form.
-COWORKER: Don't worry. It's fake.
+'SUSPECT': Ifya fink ya got all- 
+COMRADE: Sorry, I'm getting carried away. If you think you have everything you need, you can stamp the Infraction form to submit it. 
+COMRADE: (Don't worry. It's fake. The boys at collections know to throw anything away with my name on it.)
+COMRADE: (Once you submit, the chamber will rotate, bringing you your next suspect.)
+COMRADE: Good luck. Glory to our nation.
 
 <<stop>>
 ===

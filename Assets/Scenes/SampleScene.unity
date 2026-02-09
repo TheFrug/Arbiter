@@ -1172,6 +1172,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2958262986520364888, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2958262987206614837, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7905,11 +7909,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1170736491801031245, guid: 5a31568e7e04abf40932180b7bf8994b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 320
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1170736491801031245, guid: 5a31568e7e04abf40932180b7bf8994b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 320
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1428064083493539870, guid: 5a31568e7e04abf40932180b7bf8994b, type: 3}
       propertyPath: m_IsActive

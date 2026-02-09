@@ -48,7 +48,12 @@ public class book : MonoBehaviour
         for (int i = 0; i < pages.Count; i++)
         {
             pages[i].localRotation = Quaternion.identity;
-            pages[i].SetSiblingIndex(i); // enforce correct stacking order
+        }
+
+        // Reverse sibling order so page 0 renders on top
+        for (int i = 0; i < pages.Count; i++)
+        {
+            pages[i].SetSiblingIndex(pages.Count - 1 - i);
         }
 
         backButton.SetActive(false);
