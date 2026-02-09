@@ -1,7 +1,6 @@
-﻿title: Tutorial_Arbiter
+﻿title: Punk
 position: -220,119
 ---
-
 <<set $SuspectName = "">>
 <<set $SuspectNameRevealed = false>>
 <<set $SuggestedViolation = "">>
@@ -12,11 +11,11 @@ COWORKER: Welcome to Intake Processing, Arbiter!
 COWORKER: Today you'll be filling out an Infraction Analysis Form.
 COWORKER: I'll be your "suspect." Try not to enjoy it.
 
-<<jump Interview_Loop_Tutorial>>
+<<jump Interview_Loop_Punk>>
 
 ===
 
-title: Interview_Loop_Tutorial
+title: Interview_Loop_Punk
 position: 46,108
 ---
 
@@ -24,30 +23,30 @@ COWORKER: What would you like to ask?
 
 -> Ask for legal name <<if not $asked_name>>
     <<set $asked_name = true>>
-    <<jump Ask_Legal_Name_Tutorial>>
+    <<jump Ask_Legal_Name_Punk>>
 -> Ask about violation<<if not $asked_violation>>
     <<set $asked_violation = true>>
-    <<jump Ask_Violation_Tutorial>>
+    <<jump Ask_Violation_Punk>>
 -> Finish interview
-    <<jump Finish_Interview_Tutorial>>
+    <<jump Finish_Interview_Punk>>
 ===
 
-title: Ask_Legal_Name_Tutorial
+title: Ask_Legal_Name_Punk
 position: 323,-86
 ---
 
 COWORKER: My full legal name?
 COWORKER: Fine. It's Darion Vale.
 
-<<RevealName YarnManager "Darion Vale">>
+<<RevealName YarnManager "William Gote">>
 
 COWORKER: Go ahead. You can enter it on the form now.
 
-<<jump Interview_Loop_Tutorial>>
+<<jump Interview_Loop_Punk>>
 ===
 
 
-title: Ask_Violation_Tutorial
+title: Ask_Violation_Punk
 position: 439,147
 ---
 
@@ -55,10 +54,10 @@ COWORKER: I was cited for Improper Assembly Permit Filing.
 COWORKER: Category C, if you're reading your Codex properly.
 COWORKER: Choose the violation classification.
 
-<<jump Interview_Loop_Tutorial>>
+<<jump Interview_Loop_Punk>>
 ===
 
-title: Finish_Interview_Tutorial
+title: Finish_Interview_Punk
 position: 272,313
 ---
 

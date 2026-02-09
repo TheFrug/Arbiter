@@ -44,6 +44,13 @@ public class InfractionForm : MonoBehaviour
 
     [Header("Header Data")]
     [SerializeField] private string caseID;
+    [SerializeField] private string ArrestingOfficer;
+    [SerializeField] private string CitizenshipTier;
+
+    [Header("Header Data UI")]
+    [SerializeField] private TMP_Text caseIDText;
+    [SerializeField] private TMP_Text arrestingOfficerText;
+    [SerializeField] private TMP_Text citizenshipTierText;
 
     [Header("Identity")]
     [SerializeField] private Button nameFillButton;
@@ -62,7 +69,7 @@ public class InfractionForm : MonoBehaviour
 
     [Header("Stamp")]
     [SerializeField] private Button stampButton;
-    [SerializeField] private Image stampVisual;
+    [SerializeField] private GameObject stampVisual;
 
     [Header("Form Toggle")]
     [SerializeField] private Button toggleButton;
@@ -72,6 +79,27 @@ public class InfractionForm : MonoBehaviour
     [SerializeField] private Vector2 visiblePosition;
 
     #endregion
+
+    public void SetSuspectData(SuspectData suspect)
+    {
+        if (suspect == null)
+            return;
+
+        caseID = suspect.caseID;
+        ArrestingOfficer = suspect.ArrestingOfficer;
+        CitizenshipTier = suspect.CitizenshipTier;
+
+        // Write to UI
+        if (caseIDText != null)
+            caseIDText.text = caseID;
+
+        if (arrestingOfficerText != null)
+            arrestingOfficerText.text = ArrestingOfficer;
+
+        if (citizenshipTierText != null)
+            citizenshipTierText.text = CitizenshipTier;
+    }
+
 
     #region Internal State
 
@@ -121,11 +149,13 @@ public class InfractionForm : MonoBehaviour
 
         stampButton.onClick.AddListener(OnStampClicked);
 
+        stampButton.interactable = false;
+
         if (toggleButton != null)
             toggleButton.onClick.AddListener(ToggleForm);
 
         if (stampVisual != null)
-            stampVisual.enabled = false;
+            stampVisual.SetActive(false);
     }
 
     private void Start()
@@ -135,6 +165,21 @@ public class InfractionForm : MonoBehaviour
     }
 
     #endregion
+
+    private void UpdateStampButtonState()
+    {
+        if (stampButton == null)
+            return;
+
+        if (stampApplied)
+        {
+            stampButton.interactable = false;
+            return;
+        }
+
+        stampButton.interactable = IsFormComplete();
+    }
+
 
     #region Yarn Integration
 
@@ -149,6 +194,30 @@ public class InfractionForm : MonoBehaviour
 
     #endregion
 
+    #region CaseID
+    public void SetCaseID(string id)
+    {
+        caseID = id;
+    }
+
+    #endregion
+
+    private void LockForm()
+    {
+        nameFillButton.interactable = false;
+
+        publicDisorderToggle.interactable = false;
+        economicToggle.interactable = false;
+        ideologicalToggle.interactable = false;
+        administrativeToggle.interactable = false;
+
+        minorToggle.interactable = false;
+        standardToggle.interactable = false;
+        aggravatedToggle.interactable = false;
+
+        stampButton.interactable = false;
+    }
+
     #region Name Logic
 
     private void OnNameButtonClicked()
@@ -162,6 +231,8 @@ public class InfractionForm : MonoBehaviour
 
         // Disable the button so it can't be clicked again
         nameFillButton.interactable = false;
+
+        UpdateStampButtonState();
     }
 
     #endregion
@@ -170,31 +241,54 @@ public class InfractionForm : MonoBehaviour
 
     private void OnViolationSelected(bool isOn, ViolationType type)
     {
-        if (!isOn) return;
-        selectedViolation = type;
+        if (isOn)
+        {
+            selectedViolation = type;
+        }
+        else
+        {
+            // If this toggle was the selected one, clear it
+            if (selectedViolation == type)
+                selectedViolation = null;
+        }
+
+        UpdateStampButtonState();
     }
 
     private void OnSeveritySelected(bool isOn, SeverityLevel level)
     {
-        if (!isOn) return;
-        selectedSeverity = level;
+        if (isOn)
+        {
+            selectedSeverity = level;
+        }
+        else
+        {
+            if (selectedSeverity == level)
+                selectedSeverity = null;
+        }
+
+        UpdateStampButtonState();
     }
 
     #endregion
 
     #region Submission
 
+    public event Action<InfractionFormData> OnFormSubmitted;
+
     private void OnStampClicked()
     {
+        if (!IsFormComplete())
+            return;
+
         stampApplied = true;
 
         if (stampVisual != null)
-            stampVisual.enabled = true;
+            stampVisual.SetActive(true);
 
-        if (IsFormComplete())
-            SubmitForm();
-        else
-            Debug.LogWarning("Form incomplete.");
+        LockForm();
+
+        SubmitForm();
     }
 
     private bool IsFormComplete()
@@ -207,6 +301,11 @@ public class InfractionForm : MonoBehaviour
 
     private void SubmitForm()
     {
+        StartCoroutine(SubmitSequence());
+    }
+
+    private IEnumerator SubmitSequence()
+    {
         InfractionFormData data = new InfractionFormData
         {
             caseID = caseID,
@@ -216,11 +315,19 @@ public class InfractionForm : MonoBehaviour
             stamped = stampApplied
         };
 
-        Debug.Log("FORM SUBMITTED:");
-        Debug.Log(JsonUtility.ToJson(data, true));
+        // Ensure stamp is visible
+        if (stampVisual != null)
+            stampVisual.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        ToggleForm();
+
+        OnFormSubmitted?.Invoke(data);
 
         ResetForm();
     }
+
 
     #endregion
 
@@ -268,6 +375,15 @@ public class InfractionForm : MonoBehaviour
         nameDisplayText.text = "";
         nameFillButton.interactable = false;
 
+        if (caseIDText != null)
+            caseIDText.text = "";
+
+        if (arrestingOfficerText != null)
+            arrestingOfficerText.text = "";
+
+        if (citizenshipTierText != null)
+            citizenshipTierText.text = "";
+
         publicDisorderToggle.isOn = false;
         economicToggle.isOn = false;
         ideologicalToggle.isOn = false;
@@ -278,7 +394,9 @@ public class InfractionForm : MonoBehaviour
         aggravatedToggle.isOn = false;
 
         if (stampVisual != null)
-            stampVisual.enabled = false;
+            stampVisual.SetActive(false);
+
+        stampButton.interactable = false;
     }
 
     #endregion

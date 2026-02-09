@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddd08d9d97b4734eb6e55ffde814d8d, type: 3}
+  m_Name: Punk
+  m_EditorClassIdentifier: 
+  caseID: 77-0445-D
+  displayName: William Gote
+  ArrestingOfficer: J. Hale
+  CitizenshipTier: Tier 2
+  yarnStartNode: Punk
+  portrait: {fileID: 21300000, guid: d37d14d410521554183523ba7d97cc9c, type: 3}
