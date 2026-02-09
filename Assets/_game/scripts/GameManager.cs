@@ -24,6 +24,27 @@ public class GameManager : MonoBehaviour
         StartCurrentSuspect();
     }
 
+    private void Update()
+    {
+        // Quit game with Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        }
+
+        // Restart scene with Tab
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
+            );
+        }
+    }
+
     private void HandleFormSubmitted(InfractionForm.InfractionFormData data)
     {
         NextSuspect();
