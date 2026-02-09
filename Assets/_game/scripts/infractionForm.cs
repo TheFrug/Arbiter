@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Yarn.Unity;
+using UnityEngine.EventSystems;
+
 
 public class InfractionForm : MonoBehaviour
 {
@@ -206,14 +208,7 @@ public class InfractionForm : MonoBehaviour
     {
         nameFillButton.interactable = false;
 
-        publicDisorderToggle.interactable = false;
-        economicToggle.interactable = false;
-        ideologicalToggle.interactable = false;
-        administrativeToggle.interactable = false;
-
-        minorToggle.interactable = false;
-        standardToggle.interactable = false;
-        aggravatedToggle.interactable = false;
+        SetFormInteractable(false);
 
         stampButton.interactable = false;
     }
@@ -323,9 +318,11 @@ public class InfractionForm : MonoBehaviour
 
         ToggleForm();
 
+        //Reset First
+        ResetForm();
+
         OnFormSubmitted?.Invoke(data);
 
-        ResetForm();
     }
 
 
@@ -336,7 +333,11 @@ public class InfractionForm : MonoBehaviour
     public void ToggleForm()
     {
         if (isSliding) return;
+
         StartCoroutine(SlideForm(!isVisible));
+
+        // Prevent spacebar from re-triggering this button
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private IEnumerator SlideForm(bool show)
@@ -397,7 +398,25 @@ public class InfractionForm : MonoBehaviour
             stampVisual.SetActive(false);
 
         stampButton.interactable = false;
+
+        // Re-enable interaction
+        SetFormInteractable(true);
+
+        nameFillButton.interactable = false; // stays disabled until Yarn reveals name
     }
+
+    private void SetFormInteractable(bool state)
+    {
+        publicDisorderToggle.interactable = state;
+        economicToggle.interactable = state;
+        ideologicalToggle.interactable = state;
+        administrativeToggle.interactable = state;
+
+        minorToggle.interactable = state;
+        standardToggle.interactable = state;
+        aggravatedToggle.interactable = state;
+    }
+
 
     #endregion
 }

@@ -7,12 +7,7 @@ position: -220,119
 <<set $asked_name = false>>
 <<set $asked_violation = false>>
 
-COWORKER: Welcome to Intake Processing, Arbiter!
-COWORKER: Today you'll be filling out an Infraction Analysis Form.
-COWORKER: I'll be your "suspect." Try not to enjoy it.
-
-<<jump Interview_Loop_Punk>>
-
+COWORKER: <END OF DEMO>
 ===
 
 title: Interview_Loop_Punk

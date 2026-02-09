@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 public class book : MonoBehaviour
 {
@@ -41,18 +43,26 @@ public class book : MonoBehaviour
 
     public void InitialState()
     {
+        index = 0;
+
         for (int i = 0; i < pages.Count; i++)
         {
-            pages[i].transform.rotation = Quaternion.identity;
+            pages[i].localRotation = Quaternion.identity;
+            pages[i].SetSiblingIndex(i); // enforce correct stacking order
         }
-        pages[0].SetAsLastSibling();
+
+        backButton.SetActive(false);
+        forwardButton.SetActive(pages.Count > 1);
     }
+
 
     // --- Toggle Book Visibility ---
     public void ToggleBook()
     {
         if (isSliding) return;
         StartCoroutine(SlideBook(!isVisible));
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     IEnumerator SlideBook(bool show)
@@ -80,14 +90,15 @@ public class book : MonoBehaviour
 
     public void RotateForward()
     {
-        if (rotate == true) { return; }
-        index++;
-        float angle = 180; //to rotate page back, set rotation to 180 degrees around y axis
+        if (rotate) return;
+        if (index >= pages.Count - 1) return;
 
-        ForwardButtonActions();
+        rotate = true;
+
         pages[index].SetAsLastSibling();
-        StartCoroutine(Rotate(angle, true));
+        StartCoroutine(RotatePage(index, 180f, true));
     }
+
 
     public void ForwardButtonActions()
     {
@@ -103,12 +114,16 @@ public class book : MonoBehaviour
 
     public void RotateBack()
     {
-        if (rotate == true) { return; }
-        float angle = 0; //to rotate page back, set rotation to 0 degrees around y axis
+        if (rotate) return;
+        if (index <= 0) return;
+
+        rotate = true;
+
+        index--;
         pages[index].SetAsLastSibling();
-        BackButtonAction();
-        StartCoroutine(Rotate(angle, false));
+        StartCoroutine(RotatePage(index, 0f, false));
     }
+
 
     public void BackButtonAction()
     {
@@ -123,27 +138,35 @@ public class book : MonoBehaviour
     }
 
 
-    IEnumerator Rotate(float angle, bool forward)
+    IEnumerator RotatePage(int pageIndex, float targetAngle, bool forward)
     {
-        float value = 0f;
-        while (true)
-        {
-            rotate = true;
-            Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
-            value += Time.deltaTime * pageSpeed;
-            pages[index].rotation = Quaternion.Slerp(pages[index].rotation, targetRotation, value); //smoothly turn page
-            float angle1 = Quaternion.Angle(pages[index].rotation, targetRotation); //calculate angle between given angle of rotation and current angle of rotation
-            if (angle1 < 0.1)
-            {
-                if (forward == false)
-                {
-                    index--;
-                }
-                rotate = false;
-                break;
+        Quaternion startRotation = pages[pageIndex].rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
 
-            }
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * pageSpeed;
+            pages[pageIndex].rotation = Quaternion.Slerp(startRotation, targetRotation, t);
             yield return null;
         }
+
+        pages[pageIndex].rotation = targetRotation;
+
+        if (forward)
+        {
+            index++;
+        }
+
+        rotate = false;
+
+        UpdateButtons();
+    }
+
+    private void UpdateButtons()
+    {
+        backButton.SetActive(index > 0);
+        forwardButton.SetActive(index < pages.Count - 1);
     }
 }
