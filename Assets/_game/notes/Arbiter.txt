@@ -1,0 +1,9 @@
+Arbiter Notes
+
+I am creating a choice-centered narrative game called 'Arbiter'. In it, players control an arbiter in a brutalist dystopian future, who reviews people accused of crime in branching dialogues, decides if they are guilty or innocent, and then decides a sentence for them. 
+
+I like the aesthetic of Papers Please, with the window showing the player's conversation partner, as well as the player's equipment they have on the inside of their room, which will include a book of instructions and stuff with multiple pages, a few levers, and a gun in a glass case. These should be diegetic, but still readable
+
+Jean Rah's Character Arc:
+
+Start of game: fully brainwashed youth. Completely buys the state's propaganda and even thinks his own father deserved to be arrested and disappeared. 

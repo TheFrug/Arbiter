@@ -1,0 +1,18 @@
+Arbiter is a Confession Extraction Simulator
+Interrogator who can employ empathy, intimidation, or insight in order to draw out the truth from arrested individuals. 
+
+Three stats player can set at start of the game and determine success in skill checks a la Disco Elysium
+-Empathy (Warmth, building trust, helps in good playthroughs to break down suspect barriers)
+-Intimidation (Be fierce, rude, even threatening. Can work quickly, which the state likes. Can also be used in good playthroughs for some key moments)
+-Insight (Reading between the lines in people's words/body language. Remembering details.)
+
+Player's goal is to fill out a form, but we can reconfigure what details there are. We have a whole semester, so we can get a little ambitious. 
+
+Gameplay Ideas:
+
+REID Technique - Begin with Factual Analysis, go into Behavior Analysis, can escalate into the 9 step interrogation where a written confession is rendered at the end.
+
+Plea Bargaining 
+- Threat of harsher sentence if trial is pursued, with a contrasting reduced sentence for admission of guilt.
+
+Pause Technique - Pausing after suspect answers to illicit further responses
