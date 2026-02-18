@@ -30,6 +30,8 @@ namespace Yarn.Unity
 
         [MustNotBeNull]
         [SerializeField] OptionItem? optionViewPrefab;
+        [MustNotBeNull]
+        [SerializeField] OptionItem? skillCheckOptionItemPrefab;
 
         // A cached pool of OptionView objects so that we can reuse them
         List<OptionItem> optionViews = new List<OptionItem>();

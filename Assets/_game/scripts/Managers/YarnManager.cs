@@ -35,7 +35,6 @@ public class YarnManager : MonoBehaviour
         if (variableStorage == null && dialogueRunner != null)
             variableStorage = dialogueRunner.VariableStorage;
     }
-
     #endregion
 
     // =========================================================
