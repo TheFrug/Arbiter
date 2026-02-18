@@ -4,17 +4,11 @@ Yarn Spinner is licensed to you under the terms found in the file LICENSE.md.
 
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 using Yarn.Unity.Attributes;
-
-#if USE_TMP
 using TMPro;
-#else
-using TextMeshProUGUI = Yarn.Unity.TMPShim;
-#endif
-
-#nullable enable
-
 using System.Threading;
+#nullable enable
 
 namespace Yarn.Unity
 {
@@ -24,7 +18,7 @@ namespace Yarn.Unity
     /// to choose from.
     /// </summary>
     [HelpURL("https://docs.yarnspinner.dev/using-yarnspinner-with-unity/components/dialogue-view/options-list-view")]
-    public sealed class OptionsPresenter : DialoguePresenterBase
+    public class SkillOptionsPresenter : DialoguePresenterBase
     {
         [SerializeField] CanvasGroup? canvasGroup;
 
@@ -264,7 +258,6 @@ namespace Yarn.Unity
 
                 // --- Bind Yarn data ---
                 optionView.Option = option;
-                /*
                 if (isSkillCheck)
                 {
                     var skillUI = optionView.GetComponent<SkillCheckUI>();
@@ -273,7 +266,6 @@ namespace Yarn.Unity
                         skillUI.Configure(skillStat, skillDifficulty);
                     }
                 }
-                */
 
                 optionView.OnOptionSelected = selectedOptionCompletionSource;
                 optionView.completionToken = completionCancellationSource.Token;

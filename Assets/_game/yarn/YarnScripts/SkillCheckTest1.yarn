@@ -3,7 +3,7 @@
 Narrator: Choose.
 
 -> "Normal Option"
--> "Skill Option" #skillcheck
+-> "Skill Option" #skillcheck:Willpower:12
     <<jump End>>
 ===
 
