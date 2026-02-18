@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCurrentSuspect();
+        //StartCurrentSuspect();
     }
 
     private void Update()

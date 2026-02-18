@@ -1,0 +1,22 @@
+﻿title: SkillCheckTest
+---
+Narrator: You enter the village square. A guard blocks your path.
+
+Guard: Halt. State your business.
+
+-> "Politely explain that you're here to help."
+    Guard: Hm. Very well. You may pass.
+    <<jump End>>
+
+-> "Force your way past the guard." #skillcheck
+    Guard: You attempt to push through with sheer force...
+    <<jump End>>
+
+-> "Read the guard's body language before responding." #skillcheck
+    Guard: You study the guard carefully before speaking...
+    <<jump End>>
+
+-> "Crack a heartfelt joke to lighten the mood." #skillcheck
+    Guard: You try to connect emotionally with the guard...
+    <<jump End>>
+===

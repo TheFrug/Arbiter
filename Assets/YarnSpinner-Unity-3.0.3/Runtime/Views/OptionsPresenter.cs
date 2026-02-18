@@ -164,74 +164,105 @@ namespace Yarn.Unity
         /// path="/param"/>
         /// <inheritdoc cref="DialoguePresenterBase.RunOptionsAsync"
         /// path="/returns"/>
-        public override async YarnTask<DialogueOption?> RunOptionsAsync(DialogueOption[] dialogueOptions, CancellationToken cancellationToken)
+
+        public override async YarnTask<DialogueOption?> RunOptionsAsync(
+    DialogueOption[] dialogueOptions,
+    CancellationToken cancellationToken)
         {
-            // If we don't already have enough option views, create more
-            while (dialogueOptions.Length > optionViews.Count)
+            // Destroy any previously created option views
+            foreach (var view in optionViews)
             {
-                var optionView = CreateNewOptionView();
-                optionViews.Add(optionView);
+                if (view != null)
+                    Destroy(view.gameObject);
             }
+            optionViews.Clear();
 
-            // A completion source that represents the selected option.
-            YarnTaskCompletionSource<DialogueOption?> selectedOptionCompletionSource = new YarnTaskCompletionSource<DialogueOption?>();
+            YarnTaskCompletionSource<DialogueOption?> selectedOptionCompletionSource =
+                new YarnTaskCompletionSource<DialogueOption?>();
 
-            // A cancellation token source that becomes cancelled when any
-            // option item is selected, or when this entire option view is
-            // cancelled
-            var completionCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            var completionCancellationSource =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             async YarnTask CancelSourceWhenDialogueCancelled()
             {
                 await YarnTask.WaitUntilCanceled(completionCancellationSource.Token);
 
-                if (cancellationToken.IsCancellationRequested == true)
+                if (cancellationToken.IsCancellationRequested)
                 {
-                    // The overall cancellation token was fired, not just our
-                    // internal 'something was selected' cancellation token.
-                    // This means that the dialogue view has been informed that
-                    // any value it returns will not be used. Set a 'null'
-                    // result on our completion source so that that we can get
-                    // out of here as quickly as possible.
                     selectedOptionCompletionSource.TrySetResult(null);
                 }
             }
 
-            // Start waiting 
             CancelSourceWhenDialogueCancelled().Forget();
+
+            // ==========================================
+            // CREATE OPTION VIEWS PER OPTION (3.0 SAFE)
+            // ==========================================
 
             for (int i = 0; i < dialogueOptions.Length; i++)
             {
-                var optionView = optionViews[i];
                 var option = dialogueOptions[i];
 
                 if (option.IsAvailable == false && showUnavailableOptions == false)
-                {
-                    // option is unavailable, skip it
                     continue;
+
+                // --- Detect skillcheck tag ---
+                bool isSkillCheck = false;
+
+                if (option.Line.Metadata != null)
+                {
+                    foreach (var tag in option.Line.Metadata)
+                    {
+                        if (tag == "skillcheck")
+                        {
+                            isSkillCheck = true;
+                            break;
+                        }
+                    }
                 }
 
-                optionView.gameObject.SetActive(true);
-                optionView.Option = option;
+                // --- Choose prefab ---
+                OptionItem prefabToUse =
+                    isSkillCheck && skillCheckOptionItemPrefab != null
+                    ? skillCheckOptionItemPrefab
+                    : optionViewPrefab;
 
+                if (prefabToUse == null)
+                {
+                    throw new System.InvalidOperationException(
+                        "OptionsPresenter: Prefab reference missing.");
+                }
+
+                // --- Instantiate ---
+                var optionView = Instantiate(prefabToUse);
+
+                var targetTransform =
+                    canvasGroup != null ? canvasGroup.transform : this.transform;
+
+                optionView.transform.SetParent(targetTransform, false);
+                optionView.transform.SetAsLastSibling();
+                optionView.gameObject.SetActive(true);
+
+                // --- Bind Yarn data ---
+                optionView.Option = option;
                 optionView.OnOptionSelected = selectedOptionCompletionSource;
                 optionView.completionToken = completionCancellationSource.Token;
+
+                optionViews.Add(optionView);
             }
 
-            // There is a bug that can happen where in-between option items being configured one can be selected
-            // and because the items are still being configured the others don't get the deselect message
-            // which means visually two items are selected.
-            // So instead now after configuring them we find if any are highlighted, and if so select that one
-            // otherwise select the first non-deactivated one
-            // because at this point now all of them are configured they will all get the select/deselect message
+            // ==========================================
+            // HIGHLIGHT FIX (UNCHANGED FROM 3.0 SOURCE)
+            // ==========================================
+
             int optionIndexToSelect = -1;
+
             for (int i = 0; i < optionViews.Count; i++)
             {
                 var view = optionViews[i];
+
                 if (!view.isActiveAndEnabled)
-                {
                     continue;
-                }
 
                 if (view.IsHighlighted)
                 {
@@ -239,29 +270,25 @@ namespace Yarn.Unity
                     break;
                 }
 
-                // ok at this point the view is enabled
-                // but not highlighted
-                // so if we haven't already decreed we have found one to select
-                // we select this one
                 if (optionIndexToSelect == -1)
-                {
                     optionIndexToSelect = i;
-                }
             }
+
             if (optionIndexToSelect > -1)
             {
                 optionViews[optionIndexToSelect].Select();
             }
 
-            // Update the last line, if one is configured
+            // ==========================================
+            // LAST LINE DISPLAY (UNCHANGED)
+            // ==========================================
+
             if (lastLineContainer != null)
             {
                 if (lastSeenLine != null && showsLastLine)
                 {
-                    // if we have a last line character name container
-                    // and the last line has a character then we show the nameplate
-                    // otherwise we turn off the nameplate
                     var line = lastSeenLine.Text;
+
                     if (lastLineCharacterNameContainer != null)
                     {
                         if (string.IsNullOrWhiteSpace(lastSeenLine.CharacterName))
@@ -272,10 +299,10 @@ namespace Yarn.Unity
                         {
                             line = lastSeenLine.TextWithoutCharacterName;
                             lastLineCharacterNameContainer.SetActive(true);
+
                             if (lastLineCharacterNameText != null)
-                            {
-                                lastLineCharacterNameText.text = lastSeenLine.CharacterName;
-                            }
+                                lastLineCharacterNameText.text =
+                                    lastSeenLine.CharacterName;
                         }
                     }
                     else
@@ -284,19 +311,17 @@ namespace Yarn.Unity
                     }
 
                     var lineText = line.Text;
-                    // if the line was tagged with the TruncateLastLineMarkupName marker we want to clean that up before display
-                    if (line.TryGetAttributeWithName(TruncateLastLineMarkupName, out var markup))
+
+                    if (line.TryGetAttributeWithName(
+                            TruncateLastLineMarkupName,
+                            out var markup))
                     {
-                        // we get the substring of 0 -> markup position
-                        // and replace that range with ...
                         var end = lineText.Substring(markup.Position);
                         lineText = "..." + end;
                     }
 
                     if (lastLineText != null)
-                    {
                         lastLineText.text = lineText;
-                    }
 
                     lastLineContainer.SetActive(true);
                 }
@@ -308,22 +333,23 @@ namespace Yarn.Unity
 
             if (useFadeEffect && canvasGroup != null)
             {
-                // fade up the UI now
-                await Effects.FadeAlphaAsync(canvasGroup, 0, 1, fadeUpDuration, cancellationToken);
+                await Effects.FadeAlphaAsync(
+                    canvasGroup,
+                    0,
+                    1,
+                    fadeUpDuration,
+                    cancellationToken);
             }
 
-            // allow interactivity and wait for an option to be selected
             if (canvasGroup != null)
             {
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
             }
 
-            // Wait for a selection to be made, or for the task to be completed.
             var completedTask = await selectedOptionCompletionSource.Task;
             completionCancellationSource.Cancel();
 
-            // now one of the option items has been selected so we do cleanup
             if (canvasGroup != null)
             {
                 canvasGroup.interactable = false;
@@ -332,26 +358,27 @@ namespace Yarn.Unity
 
             if (useFadeEffect && canvasGroup != null)
             {
-                // fade down
-                await Effects.FadeAlphaAsync(canvasGroup, 1, 0, fadeDownDuration, cancellationToken);
+                await Effects.FadeAlphaAsync(
+                    canvasGroup,
+                    1,
+                    0,
+                    fadeDownDuration,
+                    cancellationToken);
             }
 
-            // disabling ALL the options views now
             foreach (var optionView in optionViews)
             {
                 optionView.gameObject.SetActive(false);
             }
+
             await YarnTask.Yield();
 
-            // if we are cancelled we still need to return but we don't want to have a selection, so we return no selected option
             if (cancellationToken.IsCancellationRequested)
-            {
                 return await DialogueRunner.NoOptionSelected;
-            }
 
-            // finally we return the selected option
             return completedTask;
         }
+
 
         private OptionItem CreateNewOptionView()
         {

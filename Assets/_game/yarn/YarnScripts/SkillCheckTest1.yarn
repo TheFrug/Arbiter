@@ -1,0 +1,13 @@
+﻿title: SkillCheckTest1
+---
+Narrator: Choose.
+
+-> "Normal Option"
+-> "Skill Option" #skillcheck
+    <<jump End>>
+===
+
+title: End
+---
+Narrator: The moment from us passes
+===
