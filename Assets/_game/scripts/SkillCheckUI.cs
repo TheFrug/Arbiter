@@ -7,9 +7,9 @@ using Yarn.Unity;
 public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [Header("Skill Highlight Colors")]
-    [SerializeField] private Color empathyHighlight = new Color(0.4f, 0.9f, 1f);
+    [SerializeField] private Color empathyHighlight = new Color(0.8f, 0.6f, 1f);
     [SerializeField] private Color willpowerHighlight = new Color(1f, 0.4f, 0.4f);
-    [SerializeField] private Color insightHighlight = new Color(0.8f, 0.6f, 1f);
+    [SerializeField] private Color insightHighlight = new Color(0.4f, 0.9f, 1f);
 
     [Header("Dim Strength")]
     [Range(0f, 1f)]
