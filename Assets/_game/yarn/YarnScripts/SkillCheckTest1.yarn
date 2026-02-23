@@ -2,8 +2,12 @@
 ---
 Narrator: Choose.
 
--> "Normal Option"
--> "Skill Option" #skillcheck:Willpower:12
+-> Normal Option
+-> Relate to them #skillcheck:Empathy:12
+    <<jump End>>
+-> Mean-mug them #skillcheck:Willpower:6
+    <<jump End>>
+-> Analyze them #skillcheck:Insight:8
     <<jump End>>
 ===
 
