@@ -1,98 +1,41 @@
 {
   "main": {
-    "id": "d7d9053b61e9eb75",
+    "id": "7a967855f42e24f0",
     "type": "split",
     "children": [
       {
-        "id": "964cf2e7ade7faad",
+        "id": "d29bf05af6655379",
         "type": "tabs",
         "children": [
           {
-            "id": "179d8e18b1e936be",
+            "id": "5d6a3947b5a54e5c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Notes/Infraction Form Notes.md",
+                "file": "Arbiter/Characters/Jean Rah.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Infraction Form Notes"
-            }
-          },
-          {
-            "id": "44ebcf3f36efca9f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Notes/J. Murray - 02232026.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "J. Murray - 02232026"
-            }
-          },
-          {
-            "id": "7c51fbd984a96905",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Notes/Notes from Worldbuilding Lecture.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Notes from Worldbuilding Lecture"
-            }
-          },
-          {
-            "id": "21103b8589b3d6c0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Weekly Milestones"
-            }
-          },
-          {
-            "id": "5241497b6bc2d6de",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Notes/M. Evans - 03022026.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "M. Evans - 03022026"
+              "title": "Jean Rah"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "edaf825f427f0937",
+    "id": "d8f00ff04f930162",
     "type": "split",
     "children": [
       {
-        "id": "6426b9062a75bf43",
+        "id": "5d291fad6640fe12",
         "type": "tabs",
         "children": [
           {
-            "id": "dfad9e9ff0c3c696",
+            "id": "1c8d372249c323f4",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -105,7 +48,7 @@
             }
           },
           {
-            "id": "1fd7140fc07301b7",
+            "id": "8400cc46394d056e",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -122,7 +65,7 @@
             }
           },
           {
-            "id": "a592190582cd4230",
+            "id": "9c632a8d6e9d4c94",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -138,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "5cab81c037f8b6c1",
+    "id": "acb6d485dbc76f20",
     "type": "split",
     "children": [
       {
-        "id": "c2c6f5b420072ed6",
+        "id": "8ccf30a6dfac9c11",
         "type": "tabs",
         "children": [
           {
-            "id": "6c97061ce543c69a",
+            "id": "b5308dc2243d02b1",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
+                "file": "Arbiter/Characters/Jean Rah.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -161,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Weekly Milestones"
+              "title": "Backlinks for Jean Rah"
             }
           },
           {
-            "id": "c3dc5091fc5eaa8d",
+            "id": "dc612ca93fcf4673",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
+                "file": "Arbiter/Characters/Jean Rah.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Weekly Milestones"
+              "title": "Outgoing links from Jean Rah"
             }
           },
           {
-            "id": "5ec1347d1e8527e4",
+            "id": "78d995b876d30859",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -194,7 +137,7 @@
             }
           },
           {
-            "id": "ef975c3bcb9f112b",
+            "id": "36df78d11cc47bd7",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -208,18 +151,18 @@
             }
           },
           {
-            "id": "1349ca13099a492a",
+            "id": "82e50c92df77aaa3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
+                "file": "Arbiter/Characters/Jean Rah.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Weekly Milestones"
+              "title": "Outline of Jean Rah"
             }
           }
         ]
@@ -240,22 +183,6 @@
       "bases:Create new base": false
     }
   },
-  "active": "44ebcf3f36efca9f",
-  "lastOpenFiles": [
-    "Notes/Infraction Form Notes.md",
-    "Notes/M. Evans - 03022026.md",
-    "Notes/J. Murray - 02232026.md",
-    "Notes/Notes from Worldbuilding Lecture.md",
-    "Notes/Story Notes.md",
-    "Dev Docs/Weekly Milestones.md",
-    "Dev Docs/Pitch Doc.md",
-    "Dev Logs",
-    "Welcome.md",
-    "Dev Docs.md",
-    "Dev Docs",
-    "Notes",
-    "Characters/Jean Rah.md",
-    "Characters",
-    "World"
-  ]
+  "active": "1c8d372249c323f4",
+  "lastOpenFiles": []
 }
