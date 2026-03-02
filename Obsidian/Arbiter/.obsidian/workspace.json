@@ -1,0 +1,287 @@
+{
+  "main": {
+    "id": "d7d9053b61e9eb75",
+    "type": "split",
+    "children": [
+      {
+        "id": "964cf2e7ade7faad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2017a3e97163dccd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Welcome.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Welcome"
+            }
+          },
+          {
+            "id": "eed74c653421eba9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Notes/Story Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Story Notes"
+            }
+          },
+          {
+            "id": "c7d425e0d3c10b13",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Characters/Jean Rah.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Jean Rah"
+            }
+          },
+          {
+            "id": "50f951c6cf8a08a9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Dev Docs/Pitch Doc.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Pitch Doc"
+            }
+          },
+          {
+            "id": "179d8e18b1e936be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Dev Docs/Weekly Milestones.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Weekly Milestones"
+            }
+          },
+          {
+            "id": "7c51fbd984a96905",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Notes/Notes from Worldbuilding Lecture.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Notes from Worldbuilding Lecture"
+            }
+          },
+          {
+            "id": "21103b8589b3d6c0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Dev Docs/Weekly Milestones.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Weekly Milestones"
+            }
+          }
+        ],
+        "currentTab": 6
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "edaf825f427f0937",
+    "type": "split",
+    "children": [
+      {
+        "id": "6426b9062a75bf43",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dfad9e9ff0c3c696",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "1fd7140fc07301b7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "a592190582cd4230",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "5cab81c037f8b6c1",
+    "type": "split",
+    "children": [
+      {
+        "id": "c2c6f5b420072ed6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6c97061ce543c69a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Dev Docs/Weekly Milestones.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Weekly Milestones"
+            }
+          },
+          {
+            "id": "c3dc5091fc5eaa8d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Dev Docs/Weekly Milestones.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Weekly Milestones"
+            }
+          },
+          {
+            "id": "5ec1347d1e8527e4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ef975c3bcb9f112b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "1349ca13099a492a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Dev Docs/Weekly Milestones.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Weekly Milestones"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "21103b8589b3d6c0",
+  "lastOpenFiles": [
+    "Notes/Notes from Worldbuilding Lecture.md",
+    "Dev Docs/Pitch Doc.md",
+    "Dev Docs/Weekly Milestones.md",
+    "Notes/Story Notes.md",
+    "Dev Logs",
+    "Welcome.md",
+    "Untitled.md",
+    "Dev Docs.md",
+    "Dev Docs",
+    "Notes",
+    "Characters/Jean Rah.md",
+    "Characters",
+    "World"
+  ]
+}
