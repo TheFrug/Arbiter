@@ -5,7 +5,7 @@ Narrator: Choose.
 -> Normal Option
 -> Relate to them #skillcheck:Empathy:12
     <<jump End>>
--> Mean-mug them #skillcheck:Willpower:6
+-> Mean-mug them #skillcheck:Force:6
     <<jump End>>
 -> Analyze them #skillcheck:Insight:8
     <<jump End>>
@@ -13,5 +13,5 @@ Narrator: Choose.
 
 title: End
 ---
-Narrator: [Em]The moment from us passes[/Em]
+Empathy: [Em]The moment from has passed[/Em]
 ===

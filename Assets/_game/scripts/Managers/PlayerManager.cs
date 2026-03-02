@@ -7,13 +7,13 @@ public class PlayerManager : MonoBehaviour
     public enum PlayerStat
     {
         Empathy,
-        Willpower,
+        Force,
         Insight
     }
 
     [Header("Core Stats")]
     [SerializeField] private int empathy = 5;
-    [SerializeField] private int willpower = 5;
+    [SerializeField] private int force = 5;
     [SerializeField] private int insight = 5;
 
     #region Unity Lifecycle
@@ -54,8 +54,8 @@ public class PlayerManager : MonoBehaviour
             case "empathy":
                 return empathy;
 
-            case "willpower":
-                return willpower;
+            case "force":
+                return force;
 
             case "insight":
                 return insight;
@@ -77,8 +77,8 @@ public class PlayerManager : MonoBehaviour
             case PlayerStat.Empathy:
                 return empathy;
 
-            case PlayerStat.Willpower:
-                return willpower;
+            case PlayerStat.Force:
+                return force;
 
             case PlayerStat.Insight:
                 return insight;
@@ -100,8 +100,8 @@ public class PlayerManager : MonoBehaviour
                 empathy += amount;
                 break;
 
-            case "willpower":
-                willpower += amount;
+            case "force":
+                force += amount;
                 break;
 
             case "insight":
@@ -122,8 +122,8 @@ public class PlayerManager : MonoBehaviour
                 empathy = value;
                 break;
 
-            case "willpower":
-                willpower = value;
+            case "force":
+                force = value;
                 break;
 
             case "insight":
@@ -141,6 +141,6 @@ public class PlayerManager : MonoBehaviour
     // =========================================================
 
     public int Empathy => empathy;
-    public int Willpower => willpower;
+    public int Force => force;
     public int Insight => insight;
 }

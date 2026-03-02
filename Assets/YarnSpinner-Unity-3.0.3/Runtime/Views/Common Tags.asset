@@ -48,7 +48,7 @@ MonoBehaviour:
     Italicised: 0
     Underlined: 0
     Strikedthrough: 0
-  - Marker: Wi
+  - Marker: Fo
     CustomColor: 1
     Color: {r: 1, g: 0.4, b: 0.4, a: 0.9098039}
     Boldened: 0

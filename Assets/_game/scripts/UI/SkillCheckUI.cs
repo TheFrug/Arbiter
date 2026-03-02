@@ -4,14 +4,17 @@ using UnityEngine.EventSystems;
 using Yarn.Unity;
 
 [RequireComponent(typeof(OptionItem))]
-public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class SkillCheckUI : MonoBehaviour,
+    ISelectHandler,
+    IDeselectHandler,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     [Header("Skill Highlight Colors")]
     [SerializeField] private Color empathyHighlight = new Color(0.8f, 0.6f, 1f);
-    [SerializeField] private Color willpowerHighlight = new Color(1f, 0.4f, 0.4f);
+    [SerializeField] private Color forceHighlight = new Color(1f, 0.4f, 0.4f);
     [SerializeField] private Color insightHighlight = new Color(0.4f, 0.9f, 1f);
 
-    [Header("Dim Strength")]
     [Range(0f, 1f)]
     [SerializeField] private float dimMultiplier = 0.6f;
 
@@ -35,6 +38,10 @@ public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         ApplyBaseStyle();
     }
 
+    // ==============================
+    // VISUAL STYLE
+    // ==============================
+
     private void ApplyBaseStyle()
     {
         if (optionItem == null || text == null || optionItem.Option == null)
@@ -46,21 +53,7 @@ public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         string prefix = $"[{StatName} - {difficultyLabel} {Difficulty}] ";
 
         text.text = prefix + baseText;
-
-        // Apply dimmed color by default
         text.color = GetDimmedColor();
-    }
-
-    // Called when highlighted (hovered / keyboard selected)
-    public void OnSelect(BaseEventData eventData)
-    {
-        ApplyHighlightColor();
-    }
-
-    // Called when unhighlighted
-    public void OnDeselect(BaseEventData eventData)
-    {
-        ApplyBaseStyle();
     }
 
     private void ApplyHighlightColor()
@@ -69,11 +62,45 @@ public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
             text.color = GetHighlightColor();
     }
 
-    private Color GetDimmedColor()
+    public void OnSelect(BaseEventData eventData)
     {
-        Color c = GetHighlightColor();
-        return new Color(c.r * dimMultiplier, c.g * dimMultiplier, c.b * dimMultiplier, c.a);
+        ApplyHighlightColor();
     }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        ApplyBaseStyle();
+    }
+
+    // ==============================
+    // TOOLTIP EVENTS
+    // ==============================
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Enter Skill Option");
+
+        int statValue = FindObjectOfType<PlayerManager>()
+            .GetStat(StatName);
+
+        float chance = SkillCheckResolver.Instance
+            .CalculateChance01(statValue, Difficulty);
+
+        SkillCheckTooltipPanel.Instance.Show(
+            StatName,
+            Difficulty,
+            chance
+        );
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Exit Skill Option");
+
+        SkillCheckTooltipPanel.Instance.Hide();
+    }
+
+    // ==============================
 
     private string GetDifficultyLabel(int difficulty)
     {
@@ -83,12 +110,18 @@ public class SkillCheckUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         return "Extreme";
     }
 
+    private Color GetDimmedColor()
+    {
+        Color c = GetHighlightColor();
+        return new Color(c.r * dimMultiplier, c.g * dimMultiplier, c.b * dimMultiplier, c.a);
+    }
+
     private Color GetHighlightColor()
     {
         switch (StatName.ToLower())
         {
             case "empathy": return empathyHighlight;
-            case "willpower": return willpowerHighlight;
+            case "force": return forceHighlight;
             case "insight": return insightHighlight;
             default: return Color.white;
         }

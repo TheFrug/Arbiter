@@ -66,29 +66,33 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("SkillCheck")]
     public void SkillCheck(string statName, int difficulty, string passNode, string failNode)
     {
-        if (playerManager == null)
+        if (playerManager == null || SkillCheckResolver.Instance == null)
         {
-            Debug.LogError("YarnManager: PlayerManager reference missing!");
+            Debug.LogError("Missing PlayerManager or SkillCheckResolver.");
             return;
         }
 
         int statValue = playerManager.GetStat(statName);
-        int roll = UnityEngine.Random.Range(minRoll, maxRoll + 1);
-        int total = roll + statValue;
 
-        Debug.Log($"SkillCheck: {statName} | Roll: {roll} + Stat: {statValue} = {total} vs DC {difficulty}");
+        var result = SkillCheckResolver.Instance
+            .RollSkillCheck(statValue, difficulty);
 
-        bool success = total >= difficulty;
+        Debug.Log(
+            $"SkillCheck: {statName} | " +
+            $"{result.Die1}+{result.Die2} + {statValue} = {result.FinalTotal} " +
+            $"vs {difficulty} | Success: {result.Success}"
+        );
 
-        // Optional: store results in Yarn variables
-        SetFloat("$lastRoll", roll);
-        SetFloat("$lastTotal", total);
-        SetBool("$lastCheckSuccess", success);
+        SetFloat("$lastRoll", result.DiceTotal);
+        SetFloat("$lastTotal", result.FinalTotal);
+        SetBool("$lastCheckSuccess", result.Success);
 
-        // Branch dialogue
-        if (!string.IsNullOrEmpty(passNode) && !string.IsNullOrEmpty(failNode))
+        if (!string.IsNullOrEmpty(passNode) &&
+            !string.IsNullOrEmpty(failNode))
         {
-            dialogueRunner.StartDialogue(success ? passNode : failNode);
+            dialogueRunner.StartDialogue(
+                result.Success ? passNode : failNode
+            );
         }
     }
 
