@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 2576261519635394348}
   - component: {fileID: 5304106805916645415}
   - component: {fileID: 2576261519635394347}
-  - component: {fileID: -8385472903693001481}
+  - component: {fileID: -5537928536330348189}
   m_Layer: 5
   m_Name: Option Item_SkillChecks
   m_TagString: Untagged
@@ -341,7 +341,7 @@ MonoBehaviour:
     sprite: {fileID: 0}
     colour: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
   disabledStrikeThrough: 1
---- !u!114 &-8385472903693001481
+--- !u!114 &-5537928536330348189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,9 +350,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8135782471263027723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3760d91de0edb90498518a06ffede6c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d88aca35a8028241a6d1f764670ba21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empathyColor: {r: 0.8000001, g: 0.6, b: 1, a: 1}
-  willpowerColor: {r: 1, g: 0.4, b: 0.4, a: 1}
-  insightColor: {r: 0.4, g: 0.9, b: 1, a: 1}

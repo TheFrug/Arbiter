@@ -260,10 +260,14 @@ namespace Yarn.Unity
                 optionView.Option = option;
                 if (isSkillCheck)
                 {
-                    var skillUI = optionView.GetComponent<SkillCheckUI>();
+                    var skillUI = optionView.GetComponent<OptionSkillCheckUI>();
                     if (skillUI != null)
                     {
                         skillUI.Configure(skillStat, skillDifficulty);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Skill option prefab missing OptionSkillCheckUI component.");
                     }
                 }
 
