@@ -31,7 +31,7 @@ public class SkillCheckResolver : MonoBehaviour
         else if (autoSuccess)
             success = true;
         else
-            success = total > difficulty;
+            success = total >= difficulty;
 
         return new SkillCheckResult
         {
@@ -71,7 +71,7 @@ public class SkillCheckResolver : MonoBehaviour
                     continue;
                 }
 
-                if ((dice + statValue) > difficulty)
+                if ((dice + statValue) >= difficulty)
                     successfulOutcomes++;
             }
         }

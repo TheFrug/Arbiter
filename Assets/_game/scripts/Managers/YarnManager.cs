@@ -61,10 +61,10 @@ public class YarnManager : MonoBehaviour
 
     /*
      * Usage in Yarn:
-     * <<SkillCheck "Intimidation" 12 "Intimidation_Pass" "Intimidation_Fail">>
+     * <<SkillCheck "YarnManager" "Force" 12 >>
      */
     [YarnCommand("SkillCheck")]
-    public void SkillCheck(string statName, int difficulty, string passNode, string failNode)
+    public void SkillCheck(string statName, int difficulty)
     {
         if (playerManager == null || SkillCheckResolver.Instance == null)
         {
@@ -83,17 +83,12 @@ public class YarnManager : MonoBehaviour
             $"vs {difficulty} | Success: {result.Success}"
         );
 
-        SetFloat("$lastRoll", result.DiceTotal);
-        SetFloat("$lastTotal", result.FinalTotal);
-        SetBool("$lastCheckSuccess", result.Success);
-
-        if (!string.IsNullOrEmpty(passNode) &&
-            !string.IsNullOrEmpty(failNode))
-        {
-            dialogueRunner.StartDialogue(
-                result.Success ? passNode : failNode
-            );
-        }
+        // Store everything Yarn might need
+        dialogueRunner.VariableStorage.SetValue("$lastRoll", result.DiceTotal);
+        dialogueRunner.VariableStorage.SetValue("$lastTotal", result.FinalTotal);
+        dialogueRunner.VariableStorage.SetValue("$lastRollStat", result.StatValue);
+        dialogueRunner.VariableStorage.SetValue("$lastRollDifficulty", result.Difficulty);
+        dialogueRunner.VariableStorage.SetValue("$lastCheckSuccess", result.Success);
     }
 
     // =========================================================

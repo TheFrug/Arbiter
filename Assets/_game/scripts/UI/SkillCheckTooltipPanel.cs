@@ -8,9 +8,15 @@ public class SkillCheckTooltipPanel : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private RectTransform panelRoot;
+    [SerializeField] private Image skillLineBackground;
     [SerializeField] private TextMeshProUGUI skillLineText;
     [SerializeField] private TextMeshProUGUI chanceText;
     [SerializeField] private TextMeshProUGUI difficultyText;
+
+    [Header("Skill Highlight Colors")]
+    [SerializeField] private Color empathyHighlight = new Color(0.8f, 0.6f, 1f);
+    [SerializeField] private Color forceHighlight = new Color(1f, 0.4f, 0.4f);
+    [SerializeField] private Color insightHighlight = new Color(0.4f, 0.9f, 1f);
 
     [Header("Difficulty Colors")]
     [SerializeField] private Color lowColor = new Color(0.9f, 0.2f, 0.2f);
@@ -32,7 +38,6 @@ public class SkillCheckTooltipPanel : MonoBehaviour
         if (canvasGroup == null)
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
-        // CRITICAL: never block raycasts
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
 
@@ -53,7 +58,7 @@ public class SkillCheckTooltipPanel : MonoBehaviour
 
     public void Show(string statName, int threshold, float successChance01)
     {
-        if (isVisible) return; // prevents redundant re-show flicker
+        if (isVisible) return;
 
         isVisible = true;
         gameObject.SetActive(true);
@@ -63,6 +68,10 @@ public class SkillCheckTooltipPanel : MonoBehaviour
 
         difficultyText.text = GetDifficultyRating(successChance01);
         difficultyText.color = GetDifficultyColor(successChance01);
+
+        // Apply skill color to background
+        if (skillLineBackground != null)
+            skillLineBackground.color = GetSkillColor(statName);
 
         FollowMouse();
     }
@@ -82,7 +91,7 @@ public class SkillCheckTooltipPanel : MonoBehaviour
     }
 
     // =========================
-    // POSITIONING (NO JITTER)
+    // POSITIONING
     // =========================
 
     private void FollowMouse()
@@ -92,18 +101,15 @@ public class SkillCheckTooltipPanel : MonoBehaviour
         float width = panelRoot.rect.width;
         float height = panelRoot.rect.height;
 
-        // Anchor tooltip so mouse is at top-right corner
         Vector2 position = new Vector2(
             mouse.x - width,
             mouse.y
         );
 
-        // ----- SCREEN CLAMP -----
-
         float minX = screenPadding.x;
         float maxX = Screen.width - width - screenPadding.x;
 
-        float minY = height + screenPadding.y; // bottom bound (because pivot top)
+        float minY = height + screenPadding.y;
         float maxY = Screen.height - screenPadding.y;
 
         position.x = Mathf.Clamp(position.x, minX, maxX);
@@ -113,8 +119,19 @@ public class SkillCheckTooltipPanel : MonoBehaviour
     }
 
     // =========================
-    // DIFFICULTY VISUALS
+    // COLOR RESOLUTION
     // =========================
+
+    private Color GetSkillColor(string statName)
+    {
+        switch (statName.ToLower())
+        {
+            case "empathy": return empathyHighlight;
+            case "force": return forceHighlight;
+            case "insight": return insightHighlight;
+            default: return Color.white;
+        }
+    }
 
     private string GetDifficultyRating(float chance)
     {

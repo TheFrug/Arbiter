@@ -1,17 +1,73 @@
-﻿title: SkillCheckTest1
+﻿title: Insight
 ---
+// --- Variables ---
+<<declare $lastCheckSuccess = false>>
+<<declare $lastRollTotal = 0>>
+<<declare $lastRollStat = 0>>
+<<declare $lastRollDifficulty = 0>>
+// --- End Variables ---
+
+// --- Command Examples ---
+// -- 1: Hard Branch --
+// -> Mean-mug them #skillcheck:Force:8
+// <<SkillCheck "YarnManager" "Force" 8>>
+// <<if $lastCheckSuccess>>
+//    <<jump PassNode>>
+//<<else>>
+//    <<jump FailNode>>
+//<<endif>>
+
+// -- 2: Inline Alternate Lines --
+// <<SkillCheck "YarnManager" "Empathy" 12>>
+// <<if $lastCheckSuccess>>
+//    There's something in their eye...
+//<<endif>>
+
+<<jump SkillCheckTest1>>
+===
+
+title: SkillCheckTest1
+---
+
 Narrator: Choose.
+<<SkillCheck "YarnManager" "Empathy" 5>>
+<<if $lastCheckSuccess>>
+    Empathy: [Em]There's something in their eye... recognition?[/Em]
+<<endif>>
 
 -> Normal Option
 -> Relate to them #skillcheck:Empathy:12
     <<jump End>>
 -> Mean-mug them #skillcheck:Force:6
-    <<jump End>>
+    <<SkillCheck "YarnManager" "Force" 16>>
+    <<if $lastCheckSuccess>>
+        <<jump MeanMug_Pass>>
+    <<else>>
+        <<jump MeanMug_Fail>>
+    <<endif>>
 -> Analyze them #skillcheck:Insight:8
     <<jump End>>
+===
+
+title: MeanMug_Pass
+---
+Force: [Fo]They are willows against the gale of your dominance.[/Fo]
+Force: uuuuh
+===
+
+title: MeanMug_Fail
+---
+Force: [Fo]No reaction...[/Fo]
 ===
 
 title: End
 ---
 Empathy: [Em]The moment from has passed[/Em]
+<<SkillCheck "YarnManager" "Force" 2>>
+
+<<if $lastCheckSuccess>>
+    You succeed.
+<<else>>
+    You fail.
+<<endif>>
 ===
