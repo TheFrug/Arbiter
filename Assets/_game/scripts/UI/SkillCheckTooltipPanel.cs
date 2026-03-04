@@ -55,7 +55,6 @@ public class SkillCheckTooltipPanel : MonoBehaviour
     // =========================
     // SHOW / HIDE
     // =========================
-
     public void Show(string statName, int threshold, float successChance01)
     {
         if (isVisible) return;
