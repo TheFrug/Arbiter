@@ -13,6 +13,8 @@ using System;
 /// </summary>
 public class YarnManager : MonoBehaviour
 {
+    public static YarnManager Instance { get; private set; }
+
     [Header("Core References")]
     [SerializeField] private DialogueRunner dialogueRunner;
     [SerializeField] private VariableStorageBehaviour variableStorage;
@@ -29,11 +31,26 @@ public class YarnManager : MonoBehaviour
 
     private void Awake()
     {
-        if (dialogueRunner == null)
-            dialogueRunner = FindObjectOfType<DialogueRunner>();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        if (variableStorage == null && dialogueRunner != null)
-            variableStorage = dialogueRunner.VariableStorage;
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void RegisterSceneDependencies(
+        DialogueRunner runner,
+        VariableStorageBehaviour storage,
+        InfractionForm form,
+        PlayerManager player)
+    {
+        dialogueRunner = runner;
+        variableStorage = storage;
+        infractionForm = form;
+        playerManager = FindObjectOfType<PlayerManager>();
     }
     #endregion
 
@@ -144,6 +161,40 @@ public class YarnManager : MonoBehaviour
         }
 
         return string.Empty;
+    }
+
+    // =========================================================
+    // ================= CHARACTER CREATION ====================
+    // =========================================================
+
+    [YarnCommand("AddStat")]
+    public void AddStat(string statName, int amount)
+    {
+        if (playerManager == null)
+        {
+            Debug.LogError("PlayerManager missing.");
+            return;
+        }
+
+        playerManager.ModifyStat(statName, amount);
+
+        Debug.Log($"CharacterCreation: {statName} +{amount}");
+    }
+
+    [YarnCommand("SetStat")]
+    public void SetStat(string statName, int value)
+    {
+        if (playerManager == null)
+            return;
+
+        playerManager.SetStat(statName, value);
+    }
+
+    [YarnCommand("FinalizeCharacter")]
+    public void FinalizeCharacter(string nextScene)
+    {
+        Debug.Log("Character creation finalized.");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
     // =========================================================

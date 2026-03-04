@@ -1,0 +1,69 @@
+﻿title: CC_Start
+---
+<<SetStat "YarnManager" "Empathy" 2>>
+<<SetStat "YarnManager" "Force" 2>>
+<<SetStat "YarnManager" "Insight" 2>>
+
+Interviewer: Before we proceed, Arbiter, we require clarification.
+
+Interviewer: These responses will be entered into your official record.
+
+-> Continue
+    <<jump CC_Question1>>
+===
+
+title: CC_Question1
+---
+Interviewer: What motivates you most?
+
+-> Helping others.
+    <<AddStat "YarnManager" "Empathy" 1>>
+    Interviewer: Noted. You are driven by the well-being of others.
+    <<jump CC_Question2>>
+-> Becoming stronger.
+    <<AddStat "YarnManager" "Force" 1>>
+    Interviewer: Strength as purpose. Understood.
+    <<jump CC_Question2>>
+-> Understanding the truth.
+    <<AddStat "YarnManager" "Insight" 1>>
+    Interviewer: Knowledge as foundation. Logged.
+    <<jump CC_Question2>>
+===
+
+title: CC_Question2
+---
+Interviewer: When conflict arises, your first instinct is to—
+
+-> De-escalate and find common ground.
+    <<AddStat "YarnManager" "Empathy" 1>>
+    Interviewer: You value stability through connection.
+    <<jump CC_Question3>>
+-> Take control of the situation.
+    <<AddStat "YarnManager" "Force" 1>>
+    Interviewer: You prefer decisive authority.
+    <<jump CC_Question3>>
+-> Observe before acting.
+    <<AddStat "YarnManager" "Insight" 1>>
+    Interviewer: Patience before action. Sensible.
+    <<jump CC_Question3>>
+===
+
+title: CC_Question3
+---
+Interviewer: One final question.
+
+Interviewer: Failure reveals—
+
+-> Someone needed you more.
+    <<AddStat "YarnManager" "Empathy" 2>>
+    Interviewer: Responsibility internalized.
+-> You were not strong enough.
+    <<AddStat "YarnManager" "Force" 2>>
+    Interviewer: Deficiency corrected through strength.
+-> You misunderstood something.
+    <<AddStat "YarnManager" "Insight" 2>>
+    Interviewer: Error as data.
+Interviewer: Profile complete.
+
+<<FinalizeCharacter "YarnManager" "Interrogation">>
+===

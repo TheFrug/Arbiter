@@ -28,10 +28,23 @@ public class PlayerManager : MonoBehaviour
 
         Instance = this;
         // Optional:
-        // DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     #endregion
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("CharacterCreation");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Interrogation");
+        }
+    }
 
     // =========================================================
     // ================= STRING LOOKUP (YARN) ==================
