@@ -1,0 +1,128 @@
+﻿title: Interview_JohnHalberd
+---
+
+// Reset the form for a new interview
+<<reset_form YarnManager>>
+
+Narrator: The door buzzes. A man in grease-stained work clothes enters the interview room.
+
+John: Uh... am I supposed to sit here?
+
+-> Yes. Please sit.
+    Interviewer: Please take a seat, Mr. Halberd.
+    John: Right.
+
+-> Remain silent
+    John: ...okay then.
+    John: I'll just sit.
+
+John: So... what is this about exactly?
+
+Interviewer: Routine civic compliance review. Just answer a few questions.
+
+John: Right. Sure.
+
+Interviewer: State your full name for the record.
+
+John: John Halberd.
+<<set_name YarnManager "John Halberd">>
+
+Interviewer: And your occupation?
+
+John: Mechanic. I work down on Carver Street.
+<<set_occupation YarnManager "Mechanic">>
+
+// Passive skill read
+<<SkillCheck "YarnManager" "Empathy" 6>>
+<<if $lastCheckSuccess>>
+Empathy: [Em]He's nervous, but not hiding anything obvious.[/Em]
+<<endif>>
+
+-> Ask about work
+    Interviewer: Busy work lately?
+    John: Depends. Mostly fleet repairs.
+
+-> Question loyalty directly
+    Interviewer: Do you consider yourself loyal to the State?
+    John: I mean... yeah. Of course.
+
+-> Change subject
+    Interviewer: Let's move on.
+
+
+Interviewer: Where were you last night around 9PM?
+
+John: Home, mostly. Watching broadcasts.
+
+
+// Suspicion check
+<<SkillCheck "YarnManager" "Insight" 10>>
+<<if $lastCheckSuccess>>
+Insight: [In]He answered quickly. Maybe rehearsed.[/In]
+<<endif>>
+
+
+-> Press harder #skillcheck:Force:8
+    <<SkillCheck "YarnManager" "Force" 8>>
+    <<if $lastCheckSuccess>>
+        <<jump Force_Pass>>
+    <<else>>
+        <<jump Force_Fail>>
+    <<endif>>
+
+-> Accept answer
+    Interviewer: Understood.
+    <<jump WrapUp>>
+
+===
+
+
+title: Force_Pass
+---
+
+Interviewer: I asked where you were.
+
+John: I told you. My apartment.
+
+John: Look, you can check the building logs if you want.
+
+<<jump WrapUp>>
+
+===
+
+
+title: Force_Fail
+---
+
+Interviewer: I asked where you were.
+
+John: And I answered.
+
+John: Is there a problem?
+
+Force: [Fo]The push didn't land. He stiffens slightly.[/Fo]
+
+<<jump WrapUp>>
+
+===
+
+
+title: WrapUp
+---
+
+Interviewer: That concludes the questions.
+
+John: That's it?
+
+Interviewer: For now.
+
+// Player is expected to fill out the behavior flags
+// and loyalty rating before continuing
+
+Narrator: Complete the Compliance Assessment Form.
+
+<<submit_form YarnManager>>
+
+Narrator: Interview recorded.
+
+===

@@ -6,27 +6,27 @@ public class GameManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private DialogueRunner dialogueRunner;
-    [SerializeField] private InfractionForm infractionForm;
+    [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PortraitManager portraitController;
 
-    [Header("Suspects")]
-    [SerializeField] private List<SuspectData> suspects;
+    [Header("Subjects")]
+    [SerializeField] private List<SubjectData> subjects;
 
-    private int currentSuspectIndex = 0;
+    private int currentSubjectIndex = 0;
 
     private void Awake()
     {
-        infractionForm.OnFormSubmitted += HandleFormSubmitted;
+        if (complianceForm != null)
+            complianceForm.OnFormSubmitted += HandleFormSubmitted;
     }
 
     private void Start()
     {
-        //StartCurrentSuspect();
+        StartCurrentSubject();
     }
 
     private void Update()
     {
-        // Quit game with Escape
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
 #endif
         }
 
-        // Restart scene with Tab
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(
@@ -45,49 +44,55 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandleFormSubmitted(InfractionForm.InfractionFormData data)
+    private void HandleFormSubmitted(ComplianceForm.ComplianceFormData data)
     {
-        NextSuspect();
+        NextSubject();
     }
 
-    private void StartCurrentSuspect()
+    private void StartCurrentSubject()
     {
-        if (currentSuspectIndex >= suspects.Count)
+        if (currentSubjectIndex >= subjects.Count)
         {
             Debug.Log("Shift complete.");
             return;
         }
 
-        SuspectData suspect = suspects[currentSuspectIndex];
+        SubjectData subject = subjects[currentSubjectIndex];
 
-        // Set form case ID
-        infractionForm.SetSuspectData(suspect);
+        // Reset the form
+        complianceForm.ResetForm();
 
-        // Reset Yarn state variables if needed
+        // Set interview ID on the form header
+        complianceForm.SetInterviewID(subject.InterviewID);
+
+        // Reset Yarn variables if needed
         dialogueRunner.VariableStorage.SetValue("$asked_name", false);
         dialogueRunner.VariableStorage.SetValue("$asked_violation", false);
 
         // Show portrait
-        portraitController.ShowPortrait(suspect.portrait);
+        if (portraitController != null)
+            portraitController.ShowPortrait(subject.portrait);
 
         // Start dialogue
-        dialogueRunner.StartDialogue(suspect.yarnStartNode);
+        dialogueRunner.StartDialogue(subject.yarnStartNode);
     }
 
-    private void NextSuspect()
+    private void NextSubject()
     {
         dialogueRunner.Stop();
-        portraitController.HidePortrait();
 
-        currentSuspectIndex++;
+        if (portraitController != null)
+            portraitController.HidePortrait();
 
-        if (currentSuspectIndex < suspects.Count)
+        currentSubjectIndex++;
+
+        if (currentSubjectIndex < subjects.Count)
         {
-            StartCurrentSuspect();
+            StartCurrentSubject();
         }
         else
         {
-            Debug.Log("No more suspects.");
+            Debug.Log("No more subjects.");
         }
     }
 }

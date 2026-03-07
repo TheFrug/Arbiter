@@ -1,4 +1,4 @@
-﻿title: Insight
+﻿title: Init
 ---
 // --- Variables ---
 <<declare $lastCheckSuccess = false>>

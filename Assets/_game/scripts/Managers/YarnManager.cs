@@ -20,7 +20,7 @@ public class YarnManager : MonoBehaviour
     [SerializeField] private VariableStorageBehaviour variableStorage;
 
     [Header("Game System References")]
-    [SerializeField] private InfractionForm infractionForm;
+    [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PlayerManager playerManager;
 
     [Header("Skill Check Settings")]
@@ -44,33 +44,72 @@ public class YarnManager : MonoBehaviour
     public void RegisterSceneDependencies(
         DialogueRunner runner,
         VariableStorageBehaviour storage,
-        InfractionForm form,
-        PlayerManager player)
+        PlayerManager player,
+        ComplianceForm compliance)
     {
         dialogueRunner = runner;
         variableStorage = storage;
-        infractionForm = form;
-        playerManager = FindObjectOfType<PlayerManager>();
+        playerManager = player;
+        complianceForm = compliance;
     }
+
     #endregion
 
+
     // =========================================================
-    // =============== BASIC COMMAND EXAMPLE ===================
+    // ================= COMPLIANCE FORM =======================
     // =========================================================
 
-    /// Usage in Yarn:
-    /// <<RevealName "Darion Vale">>
-    [YarnCommand("RevealName")]
-    public void RevealName(string name)
+    /*
+     * Yarn Usage:
+     * <<set_name YarnManager "John Halberd">>
+     */
+    [YarnCommand("set_name")]
+    public void SetName(string name)
     {
-        if (infractionForm == null)
+        complianceForm.RevealNameFromYarn(name);
+    }
+
+    /*
+     * Yarn Usage:
+     * <<set_occupation YarnManager "Mechanic">>
+     */
+    [YarnCommand("set_occupation")]
+    public void SetOccupation(string occupation)
+    {
+        complianceForm.RevealOccupationFromYarn(occupation);
+    }
+
+    /*
+     * Yarn Usage:
+     * <<submit_form YarnManager>>
+     */
+    [YarnCommand("submit_form")]
+    public void SubmitComplianceForm()
+    {
+        if (complianceForm == null)
         {
-            Debug.LogWarning("YarnManager: InfractionForm reference missing!");
+            Debug.LogWarning("ComplianceForm reference missing.");
             return;
         }
 
-        infractionForm.RevealNameFromYarn(name);
+        complianceForm.SubmitForm();
     }
+
+    /*
+     * Optional — start a new interview cleanly
+     * Yarn Usage:
+     * <<reset_form YarnManager>>
+     */
+    [YarnCommand("reset_form")]
+    public void ResetComplianceForm()
+    {
+        if (complianceForm == null)
+            return;
+
+        complianceForm.ResetForm();
+    }
+
 
     // =========================================================
     // ==================== SKILL CHECK ========================
@@ -78,7 +117,7 @@ public class YarnManager : MonoBehaviour
 
     /*
      * Usage in Yarn:
-     * <<SkillCheck "YarnManager" "Force" 12 >>
+     * <<SkillCheck "Force" 12>>
      */
     [YarnCommand("SkillCheck")]
     public void SkillCheck(string statName, int difficulty)
@@ -100,13 +139,13 @@ public class YarnManager : MonoBehaviour
             $"vs {difficulty} | Success: {result.Success}"
         );
 
-        // Store everything Yarn might need
         dialogueRunner.VariableStorage.SetValue("$lastRoll", result.DiceTotal);
         dialogueRunner.VariableStorage.SetValue("$lastTotal", result.FinalTotal);
         dialogueRunner.VariableStorage.SetValue("$lastRollStat", result.StatValue);
         dialogueRunner.VariableStorage.SetValue("$lastRollDifficulty", result.Difficulty);
         dialogueRunner.VariableStorage.SetValue("$lastCheckSuccess", result.Success);
     }
+
 
     // =========================================================
     // ================= VARIABLE HELPERS ======================
@@ -163,6 +202,7 @@ public class YarnManager : MonoBehaviour
         return string.Empty;
     }
 
+
     // =========================================================
     // ================= CHARACTER CREATION ====================
     // =========================================================
@@ -197,24 +237,18 @@ public class YarnManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
+
     // =========================================================
     // =============== OPTIONAL: INLINE FUNCTION ===============
     // =========================================================
 
-    /*
-     * Usage in Yarn:
-     * <<if RollStat($intimidation, 12) >= 1>>
-     *     You succeed.
-     * <<else>>
-     *     You fail.
-     * <<endif>>
-     */
     [YarnFunction("RollStat")]
     public static int RollStat(float statValue, float difficulty)
     {
         int roll = UnityEngine.Random.Range(1, 21);
         return (roll + statValue) >= difficulty ? 1 : 0;
     }
+
 
     // =========================================================
     // ================= DEBUG / UTILITIES =====================
