@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DialogueRunner dialogueRunner;
     [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PortraitManager portraitController;
+    [SerializeField] private InterviewManager interviewManager;
 
     [Header("Subjects")]
     [SerializeField] private List<SubjectData> subjects;
@@ -51,29 +52,23 @@ public class GameManager : MonoBehaviour
 
     private void StartCurrentSubject()
     {
-        if (currentSubjectIndex >= subjects.Count)
+        SubjectData subject = interviewManager.GetNextSubject();
+
+        if (subject == null)
         {
             Debug.Log("Shift complete.");
             return;
         }
 
-        SubjectData subject = subjects[currentSubjectIndex];
-
-        // Reset the form
         complianceForm.ResetForm();
-
-        // Set interview ID on the form header
         complianceForm.SetInterviewID(subject.InterviewID);
 
-        // Reset Yarn variables if needed
         dialogueRunner.VariableStorage.SetValue("$asked_name", false);
         dialogueRunner.VariableStorage.SetValue("$asked_violation", false);
 
-        // Show portrait
         if (portraitController != null)
             portraitController.ShowPortrait(subject.portrait);
 
-        // Start dialogue
         dialogueRunner.StartDialogue(subject.yarnStartNode);
     }
 
@@ -84,15 +79,6 @@ public class GameManager : MonoBehaviour
         if (portraitController != null)
             portraitController.HidePortrait();
 
-        currentSubjectIndex++;
-
-        if (currentSubjectIndex < subjects.Count)
-        {
-            StartCurrentSubject();
-        }
-        else
-        {
-            Debug.Log("No more subjects.");
-        }
+        StartCurrentSubject();
     }
 }
