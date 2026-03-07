@@ -12,7 +12,6 @@ Question example:
 
 ### Flow
 Each question will be its own panel that, when answered adds points to the stats in a struct called pendingStats or something. Once the questions are done, the player will see their pendingStats in a vertical line and arrows on either side. These arrows are how the player can increase their stats further with their remaining points, displayed in a box in the corner. Once they've allocated every point, the 'Submit' box lights up, allowing them to end character creation and move to the next scene. Doing this will save the pendingStats as characterStats, which I guess doesn't change? This part I am less sure about because I haven't made a character creator before.
-
 ### Questions
 1. Should the character creator be its own scene? What managers and such need to be loaded into that scene and made DontDestroyOnLoad?
 2. Should we use Yarn for the character creation choices? It might work fine, but it also might make more sense to use buttons and control the flow with our own script. 

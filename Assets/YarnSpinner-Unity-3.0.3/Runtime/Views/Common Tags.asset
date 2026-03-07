@@ -50,14 +50,14 @@ MonoBehaviour:
     Strikedthrough: 0
   - Marker: Fo
     CustomColor: 1
-    Color: {r: 1, g: 0.4, b: 0.4, a: 0.9098039}
+    Color: {r: 1, g: 0.4, b: 0.4, a: 0.8}
     Boldened: 0
     Italicised: 0
     Underlined: 0
     Strikedthrough: 0
   - Marker: In
     CustomColor: 1
-    Color: {r: 0.4, g: 0.9, b: 1, a: 0}
+    Color: {r: 0.4, g: 0.9, b: 1, a: 0.8}
     Boldened: 0
     Italicised: 0
     Underlined: 0

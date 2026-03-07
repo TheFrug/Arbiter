@@ -1,4 +1,5 @@
 ﻿title: CC_Start
+position: -384,-339
 ---
 <<SetStat "YarnManager" "Empathy" 2>>
 <<SetStat "YarnManager" "Force" 2>>
@@ -13,57 +14,92 @@ Interviewer: These responses will be entered into your official record.
 ===
 
 title: CC_Question1
+position: 11,-342
 ---
 Interviewer: What motivates you most?
 
 -> Helping others.
     <<AddStat "YarnManager" "Empathy" 1>>
-    Interviewer: Noted. You are driven by the well-being of others.
+    Interviewer: How noble. You will come to learn that there are some who are... undeserving of your help.
     <<jump CC_Question2>>
 -> Becoming stronger.
     <<AddStat "YarnManager" "Force" 1>>
-    Interviewer: Strength as purpose. Understood.
+    Interviewer: Some say strength runs the world. They are right.
     <<jump CC_Question2>>
 -> Understanding the truth.
     <<AddStat "YarnManager" "Insight" 1>>
-    Interviewer: Knowledge as foundation. Logged.
+    Interviewer: The only truth you will understand is ours.
     <<jump CC_Question2>>
 ===
 
 title: CC_Question2
+position: 362,-348
 ---
 Interviewer: When conflict arises, your first instinct is to—
 
 -> De-escalate and find common ground.
     <<AddStat "YarnManager" "Empathy" 1>>
-    Interviewer: You value stability through connection.
+    Interviewer: So, you see the peace in cooperation. Excellent.
     <<jump CC_Question3>>
--> Take control of the situation.
+-> Take control of the situation with my MASSIVE MUSCLES.
     <<AddStat "YarnManager" "Force" 1>>
-    Interviewer: You prefer decisive authority.
+    Interviewer: You can't control every situation, but you can control most people.
     <<jump CC_Question3>>
--> Observe before acting.
+-> Observe and make judgements before acting. 
     <<AddStat "YarnManager" "Insight" 1>>
-    Interviewer: Patience before action. Sensible.
+    Interviewer: You see the forest [i]and[/] its trees.
     <<jump CC_Question3>>
 ===
 
 title: CC_Question3
+position: 694,-355
 ---
-Interviewer: One final question.
+Interviewer: In your previous work, you were known for:
 
-Interviewer: Failure reveals—
-
--> Someone needed you more.
+-> Working well with others.
     <<AddStat "YarnManager" "Empathy" 2>>
-    Interviewer: Responsibility internalized.
--> You were not strong enough.
+    Interviewer: That should translate nicely.
+-> Getting results.
     <<AddStat "YarnManager" "Force" 2>>
-    Interviewer: Deficiency corrected through strength.
--> You misunderstood something.
+    Interviewer: Good answer.
+-> Actually knowing how to do my job.
     <<AddStat "YarnManager" "Insight" 2>>
-    Interviewer: Error as data.
-Interviewer: Profile complete.
+    Interviewer: You'll be in competent company here.
+Interviewer: We're almost done here.
+<<jump CC_Question4>>
+===
+
+title: CC_Question4
+position: 1066,-348
+---
+Interviewer: Final question.
+Interviewer: To whom or to what does your loyalty belong to?
+
+-> The world, from where we were all born.
+    <<detour CC_HoldUp>>
+-> My mom, mostly.
+    <<detour CC_HoldUp>>
+-> Whoever's paying my bills.
+    <<detour CC_HoldUp>>
+Interviewer: A model response. 
+Someone Important: [Fo]Good save, lad. You already show a knack for following orders![/Fo]
+<<jump CC_Final>>
+===
+
+title: CC_HoldUp
+position: 1068,-130
+---
+Someone Important: [Fo]Woah woah [b]WOAH[/b], buddy.[/Fo]
+Someone Important: [Fo]You weren't about to say [i]that[/i], were you? You know that isn't the right answer![/Fo]
+Someone Important: [Fo]Think of what they [i]want[/i] to hear, and if that's too hard, think about what [b]I[/b] want to hear.[/Fo]
+-> My country, of course. Long live our free nation. 
+===
+
+title: CC_Final
+position: 1431,-347
+---
+Interviewer: It appears you are a perfect match for the role of Arbiter. 
+Interviewer: Here is your official ID card.
 
 <<FinalizeCharacter "YarnManager" "Interrogation">>
 ===
