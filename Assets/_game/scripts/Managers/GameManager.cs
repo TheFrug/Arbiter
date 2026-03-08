@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour
         dialogueRunner.VariableStorage.SetValue("$asked_name", false);
         dialogueRunner.VariableStorage.SetValue("$asked_violation", false);
 
+        dialogueRunner.VariableStorage.SetValue("$asked_name", false);
+        dialogueRunner.VariableStorage.SetValue("$asked_occupation", false);
+        dialogueRunner.VariableStorage.SetValue("$asked_loyalty", false);
+
         if (portraitController != null)
             portraitController.ShowPortrait(subject.portrait);
 

@@ -1,0 +1,82 @@
+﻿title: testInterview_Start
+position: -215,-2
+---
+// --- Variables ---
+<<reset_form YarnManager>>
+
+<<set $asked_name = false>>
+<<set $asked_occupation = false>>
+<<set $asked_loyalty = false>>
+
+<<set $lastCheckSuccess = false>>
+<<set $lastRollTotal = 0>>
+<<set $lastRollStat = 0>>
+<<set $lastRollDifficulty = 0>>
+// --- End Variables ---
+
+// --- Command Examples ---
+// -- 1: Hard Branch --
+// -> Mean-mug them #skillcheck:Force:8
+// <<SkillCheck "YarnManager" "Force" 8>>
+// <<if $lastCheckSuccess>>
+//    <<jump PassNode>>
+//<<else>>
+//    <<jump FailNode>>
+//<<endif>>
+
+// -- 2: Inline Alternate Lines --
+// <<SkillCheck "YarnManager" "Empathy" 12>>
+// <<if $lastCheckSuccess>>
+//    There's something in their eye...
+//<<endif>>
+
+<<jump testInterview_Intro>>
+===
+
+title: testInterview_Intro
+position: 102,1
+---
+Subject: Hi.
+<<jump testInterview_Nucleus>>
+===
+
+title: testInterview_Nucleus
+position: 459,-4
+---
+You look at your compliance form. You still have questions to ask.
+
+-> Ask for full name <<if not $asked_name>>
+    <<jump testInterview_Name>>
+-> Ask about occupation <<if not $asked_occupation>>
+    <<jump testInterview_Occupation>>
+-> Ask a loyalty question <<if not $asked_loyalty>>
+    <<jump testInterview_Loyalty>>
+-> Finish Interview <<if $asked_name and $asked_occupation and $asked_loyalty>>
+    <<jump testInterview_End>>
+===
+
+title: testInterview_Name
+position: 451,-195
+---
+name line
+<<set_name YarnManager "">>
+<<set $asked_name = true>>
+<<jump testInterview_Nucleus>>
+===
+
+title: testInterview_Occupation
+position: 831,-61
+---
+occupation line
+<<set_occupation YarnManager "">>
+<<set $asked_occupation = true>>
+<<jump testInterview_Nucleus>>
+===
+
+title: testInterview_Loyalty
+position: 591,278
+---
+loyalty line
+<<set $asked_loyalty = true>>
+<<jump testInterview_Nucleus>>
+===

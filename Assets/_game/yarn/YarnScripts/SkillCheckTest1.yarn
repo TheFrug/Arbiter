@@ -5,6 +5,10 @@
 <<declare $lastRollTotal = 0>>
 <<declare $lastRollStat = 0>>
 <<declare $lastRollDifficulty = 0>>
+
+<<declare $asked_name = false>>
+<<declare $asked_occupation = false>>
+<<declare $asked_loyalty = false>>
 // --- End Variables ---
 
 // --- Command Examples ---
