@@ -57,7 +57,7 @@ title: MaryGonzalez_Late_PassNode
 ---
 [Fo]Your face becomes like granite carved into an expression that screams 'Not happy' as you relay her tardiness to her.[/Fo]
 Intense Woman: Well I- I'm sorry, officer.
-The Voice of Someone Important: [Fo][b]Oh yeah.[/b] That's the stuff[/Fo]
+The Voice of Someone Important: [Fo][b]Oh yeah.[/b] That's the stuff.[/Fo]
 ===
 
 title: MaryGonzalez_Late_FailNode
@@ -67,12 +67,11 @@ Intense Woman: Yes, well, some of us do more rigorous work than sit in an office
 The Voice of Someone Important: [Fo]What are you, a school teacher? That was fucking lame.[/Fo]
 ===
 
-
 title: MaryGonzalez_Nucleus
 position: 459,-4
 ---
 You look at your compliance form. You have questions to ask.
--> Please state your full name <<if not $asked_name>>
+-> Please state your full name. <<once>>
     <<jump MaryGonzalez_Name>>
 -> What is your current occupation? <<if not $asked_occupation>>
     <<jump MaryGonzalez_Occupation>>
@@ -85,7 +84,7 @@ You look at your compliance form. You have questions to ask.
 title: MaryGonzalez_Name
 position: 451,-195
 ---
-Intense Woman: My name is Mary Gonzalez
+Intense Woman: My name is Mary Gonzalez.
 <<set_name YarnManager "Mary Gonzalez">>
 <<set $asked_name = true>>
 <<SkillCheck "YarnManager" "Empathy" 7>>
@@ -96,7 +95,7 @@ Empathy: [Em]Her pronunciation shifts as she sings her last name. She watches yo
 <<if $lastCheckSuccess>>
 Insight: [In]'Gonzalez' is a Spanish surname of Germanic origin. It was much more common in the Second Republic before the Purification Movement[/In]
 <<endif>>
--> Thank you
+-> Thank you.
 -> Your last name is rather uncommon. <<if $lastCheckSuccess>>
     <<detour MaryGonzalez_LastName>>
 <<jump MaryGonzalez_Nucleus>>
@@ -116,7 +115,7 @@ position: 831,-61
 ---
 Intense Woman: I am a gardener. 
 She smirks.
-Intense Woman: I work at the Gregory Estate
+Intense Woman: I work at the Gregory Estate.
 <<set_occupation YarnManager "Gardener">>
 <<SkillCheck "YarnManager" "Insight" 9>>
 <<if $lastCheckSuccess>>
@@ -141,7 +140,7 @@ title: MaryGonzalez_Loyalty
 position: 591,278
 ---
 Intense Woman: Of course I am.
-Intense Woman: The Gregory family built half the systems that run this *lovely* country
+Intense Woman: The Gregory family built half the systems that run this *lovely* country.
 <<SkillCheck "YarnManager" "Insight" 6>>
 <<if $lastCheckSuccess>>
 Insight: [In]'Lovely' is hardly a word one would use to describe the Second Republic. Awe-inspiring, dominant, efficient, these all fit the bill.[/In]
