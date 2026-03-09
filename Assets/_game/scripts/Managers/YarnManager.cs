@@ -23,9 +23,6 @@ public class YarnManager : MonoBehaviour
     [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PlayerManager playerManager;
 
-    [Header("Skill Check Settings")]
-    [SerializeField] private int minRoll = 1;
-    [SerializeField] private int maxRoll = 20;
 
     #region Unity Lifecycle
 
@@ -50,6 +47,7 @@ public class YarnManager : MonoBehaviour
         dialogueRunner = runner;
         variableStorage = storage;
         playerManager = player;
+        playerManager = FindObjectOfType<PlayerManager>();
         complianceForm = compliance;
     }
 
@@ -234,18 +232,6 @@ public class YarnManager : MonoBehaviour
     {
         Debug.Log("Character creation finalized.");
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
-    }
-
-
-    // =========================================================
-    // =============== OPTIONAL: INLINE FUNCTION ===============
-    // =========================================================
-
-    [YarnFunction("RollStat")]
-    public static int RollStat(float statValue, float difficulty)
-    {
-        int roll = UnityEngine.Random.Range(1, 21);
-        return (roll + statValue) >= difficulty ? 1 : 0;
     }
 
 

@@ -7,18 +7,16 @@
 Narrator: The door buzzes. A man in grease-stained work clothes enters the interview room.
 
 John: Uh... am I supposed to sit here?
-
 -> Yes. Please sit.
     Interviewer: Please take a seat, Mr. Halberd.
     John: Right.
-
 -> Remain silent
     John: ...okay then.
     John: I'll just sit.
-
 John: So... what is this about exactly?
 
 Interviewer: Routine civic compliance review. Just answer a few questions.
+<<jump WrapUp>>
 
 John: Right. Sure.
 
@@ -41,14 +39,11 @@ Empathy: [Em]He's nervous, but not hiding anything obvious.[/Em]
 -> Ask about work
     Interviewer: Busy work lately?
     John: Depends. Mostly fleet repairs.
-
 -> Question loyalty directly
     Interviewer: Do you consider yourself loyal to the State?
     John: I mean... yeah. Of course.
-
 -> Change subject
     Interviewer: Let's move on.
-
 
 Interviewer: Where were you last night around 9PM?
 
@@ -62,7 +57,7 @@ Insight: [In]He answered quickly. Maybe rehearsed.[/In]
 <<endif>>
 
 
--> Press harder #skillcheck:Force:8
+-> Press harder
     <<SkillCheck "YarnManager" "Force" 8>>
     <<if $lastCheckSuccess>>
         <<jump Force_Pass>>
@@ -121,8 +116,8 @@ Interviewer: For now.
 
 Narrator: Complete the Compliance Assessment Form.
 
-<<submit_form YarnManager>>
-
 Narrator: Interview recorded.
+
+<<submit_form YarnManager>>
 
 ===

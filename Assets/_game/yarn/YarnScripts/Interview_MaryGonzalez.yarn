@@ -1,4 +1,4 @@
-﻿title: testInterview_Start
+﻿title: Interview_MaryGonzalez
 position: -215,-2
 ---
 // --- Variables ---
@@ -30,65 +30,60 @@ position: -215,-2
 //    There's something in their eye...
 //<<endif>>
 
-<<jump testInterview_Intro>>
+<<jump MaryGonzalez_Intro>>
 ===
 
-title: testInterview_Intro
+title: MaryGonzalez_Intro
 position: 102,1
 ---
 Subject: Hi.
-<<jump testInterview_Nucleus>>
+<<jump MaryGonzalez_Nucleus>>
 ===
 
-title: testInterview_Nucleus
+title: MaryGonzalez_Nucleus
+position: 459,-4
 ---
-You look at your compliance form.
+You look at your compliance form. You still have questions to ask.
 
 -> Ask for full name <<if not $asked_name>>
-    <<jump testInterview_Name>>
+    <<jump MaryGonzalez_Name>>
 -> Ask about occupation <<if not $asked_occupation>>
-    <<jump testInterview_Occupation>>
+    <<jump MaryGonzalez_Occupation>>
 -> Ask a loyalty question <<if not $asked_loyalty>>
-    <<jump testInterview_Loyalty>>
+    <<jump MaryGonzalez_Loyalty>>
+-> Finish Interview <<if $asked_name and $asked_occupation and $asked_loyalty>>
+    <<jump MaryGonzalez_End>>
 ===
 
-title: testInterview_Name
+title: MaryGonzalez_Name
 position: 451,-195
 ---
-<<if $asked_name == true>>
-    <<jump testInterview_Nucleus>>
-<<endif>>
 name line
-<<set_name YarnManager "Name">>
+<<set_name YarnManager "">>
 <<set $asked_name = true>>
-<<jump testInterview_Nucleus>>
+<<jump MaryGonzalez_Nucleus>>
 ===
 
-title: testInterview_Occupation
+title: MaryGonzalez_Occupation
 position: 831,-61
 ---
-<<if $asked_occupation == true>>
-    <<jump testInterview_Nucleus>>
-<<endif>>
 occupation line
-<<set_occupation YarnManager "Occupation">>
+<<set_occupation YarnManager "">>
 <<set $asked_occupation = true>>
-<<jump testInterview_Nucleus>>
+<<jump MaryGonzalez_Nucleus>>
 ===
 
-title: testInterview_Loyalty
+title: MaryGonzalez_Loyalty
 position: 591,278
 ---
-<<if $asked_loyalty == true>>
-    <<jump testInterview_Nucleus>>
-<<endif>>
-loyalty line
+Select which loyalty question to ask: What
+-> shit
 <<set $asked_loyalty = true>>
-<<jump testInterview_Nucleus>>
+<<jump MaryGonzalez_Nucleus>>
 ===
 
 
-title: testInterview_End
+title: MaryGonzalez_End
 ---
 We done now
 <<submit_form YarnManager>>

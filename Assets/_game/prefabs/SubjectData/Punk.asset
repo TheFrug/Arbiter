@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02005771a42ec3f4580367cefd49c1ae, type: 3}
   m_Name: Punk
   m_EditorClassIdentifier: 
-  CaseID: 77-0445-D
+  InterviewID: 
+  Date: 
   displayName: William Gote
   occupation: Dockworker
-  yarnStartNode: Punk
+  yarnStartNode: testInterview_Start
   portrait: {fileID: 21300000, guid: d37d14d410521554183523ba7d97cc9c, type: 3}

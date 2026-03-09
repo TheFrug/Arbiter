@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void StartCurrentSubject()
     {
+        print("Starting current subject");
         SubjectData subject = interviewManager.GetNextSubject();
 
         if (subject == null)
@@ -66,7 +67,6 @@ public class GameManager : MonoBehaviour
         dialogueRunner.VariableStorage.SetValue("$asked_name", false);
         dialogueRunner.VariableStorage.SetValue("$asked_violation", false);
 
-        dialogueRunner.VariableStorage.SetValue("$asked_name", false);
         dialogueRunner.VariableStorage.SetValue("$asked_occupation", false);
         dialogueRunner.VariableStorage.SetValue("$asked_loyalty", false);
 
@@ -78,10 +78,17 @@ public class GameManager : MonoBehaviour
 
     private void NextSubject()
     {
+        StartCoroutine(StartNextSubjectNextFrame());
+    }
+
+    private System.Collections.IEnumerator StartNextSubjectNextFrame()
+    {
         dialogueRunner.Stop();
 
         if (portraitController != null)
             portraitController.HidePortrait();
+
+        yield return null;
 
         StartCurrentSubject();
     }
