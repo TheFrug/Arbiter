@@ -44,6 +44,7 @@ public class InterviewManager : MonoBehaviour
             workingPool.RemoveAt(index);
         }
 
+        /*
         // Optional: randomize order
         List<SubjectData> shuffleList = new List<SubjectData>(dailyQueue);
         dailyQueue.Clear();
@@ -54,6 +55,7 @@ public class InterviewManager : MonoBehaviour
             dailyQueue.Enqueue(shuffleList[index]);
             shuffleList.RemoveAt(index);
         }
+        */
     }
 
     public SubjectData GetNextSubject()

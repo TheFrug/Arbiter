@@ -36,39 +36,103 @@ position: -215,-2
 title: MaryGonzalez_Intro
 position: 102,1
 ---
-Subject: Hi.
+The door swings open with a harsh mechanical buzz.
+A woman steps, practically stomps into the tiny office and stands behind the chair.
+
+Intense Woman: Is this compliance assessment office 11?
+-> It is.
+-> It says so on the sign outside.
+-> You are late by two minutes.#skillcheck:Force:9
+    <<SkillCheck "YarnManager" "Force" 9>>
+    <<if $lastCheckSuccess>>
+    <<detour MaryGonzalez_Late_PassNode>>
+    <<else>>
+    <<detour MaryGonzalez_Late_FailNode>>
+    <<endif>>
+Intense Woman: Lets get this sorted, shall we?
 <<jump MaryGonzalez_Nucleus>>
 ===
+
+title: MaryGonzalez_Late_PassNode
+---
+[Fo]Your face becomes like granite carved into an expression that screams 'Not happy' as you relay her tardiness to her.[/Fo]
+Intense Woman: Well I- I'm sorry, officer.
+The Voice of Someone Important: [Fo][b]Oh yeah.[/b] That's the stuff[/Fo]
+===
+
+title: MaryGonzalez_Late_FailNode
+---
+[Fo]You squeak the words out, and her expression sours.[/Fo]
+Intense Woman: Yes, well, some of us do more rigorous work than sit in an office and ask people questions. 
+The Voice of Someone Important: [Fo]What are you, a school teacher? That was fucking lame.[/Fo]
+===
+
 
 title: MaryGonzalez_Nucleus
 position: 459,-4
 ---
-You look at your compliance form. You still have questions to ask.
-
--> Ask for full name <<if not $asked_name>>
+You look at your compliance form. You have questions to ask.
+-> Please state your full name <<if not $asked_name>>
     <<jump MaryGonzalez_Name>>
--> Ask about occupation <<if not $asked_occupation>>
+-> What is your current occupation? <<if not $asked_occupation>>
     <<jump MaryGonzalez_Occupation>>
--> Ask a loyalty question <<if not $asked_loyalty>>
+-> Do you consider yourself loyal to the second republic? <<if not $asked_loyalty>>
     <<jump MaryGonzalez_Loyalty>>
--> Finish Interview <<if $asked_name and $asked_occupation and $asked_loyalty>>
+-> I have everything I needed from you. Thank you. <<if $asked_name and $asked_occupation and $asked_loyalty>>
     <<jump MaryGonzalez_End>>
 ===
 
 title: MaryGonzalez_Name
 position: 451,-195
 ---
-name line
-<<set_name YarnManager "">>
+Intense Woman: My name is Mary Gonzalez
+<<set_name YarnManager "Mary Gonzalez">>
 <<set $asked_name = true>>
+<<SkillCheck "YarnManager" "Empathy" 7>>
+<<if $lastCheckSuccess>>
+Empathy: [Em]Her pronunciation shifts as she sings her last name. She watches your reaction closely.[/Em]
+<<endif>>
+<<SkillCheck "YarnManager" "Insight" 7>>
+<<if $lastCheckSuccess>>
+Insight: [In]'Gonzalez' is a Spanish surname of Germanic origin. It was much more common in the Second Republic before the Purification Movement[/In]
+<<endif>>
+-> Thank you
+-> Your last name is rather uncommon. <<if $lastCheckSuccess>>
+    <<detour MaryGonzalez_LastName>>
 <<jump MaryGonzalez_Nucleus>>
+===
+
+title: MaryGonzalez_LastName
+---
+Intense Woman: Yes, I am aware. Just make sure you spell it right on the form. 
+<<SkillCheck "YarnManager" "Force" 10>>
+<<if $lastCheckSuccess>>
+Force: [Fo]Her gaze intesifies, almost theateningly, as though  a platoon of gunmen stood behind her ready to fire upon any she points at.[/Fo]
+<<endif>>
 ===
 
 title: MaryGonzalez_Occupation
 position: 831,-61
 ---
-occupation line
-<<set_occupation YarnManager "">>
+Intense Woman: I am a gardener. 
+She smirks.
+Intense Woman: I work at the Gregory Estate
+<<set_occupation YarnManager "Gardener">>
+<<SkillCheck "YarnManager" "Insight" 9>>
+<<if $lastCheckSuccess>>
+Insight: [In]The Gregory family owns one of the largest tech companies in the Second Republic. Their surveilance technology and charitable donations were instrumental in the New Freedom Party's rise to dominance.[/In]
+<<SkillCheck "YarnManager" "Empathy" 7>>
+<<if $lastCheckSuccess>>
+Empathy: [Em]This gardener is both proud and relieved to be associated with such a family.[/Em]
+<<endif>>
+<<endif>>
+Intense Woman: We aren't just talking about trimming hedges. I design half the arrangements in the south Terrace.
+Intense Woman: I've handled flowers more expensive than some people's monthly rent.
+Intense Woman: If you have the space, you should write my full title: Senior Estate Gardener of the Gregory Mansion.
+-> Gardener should suffice, thank you.
+    <<set_occupation YarnManager "Gardener">>
+-> I'll try to fit all that in.
+    <<set_occupation YarnManager "Estate Gardener of the Gregory Mansion">>
 <<set $asked_occupation = true>>
 <<jump MaryGonzalez_Nucleus>>
 ===
@@ -76,8 +140,17 @@ occupation line
 title: MaryGonzalez_Loyalty
 position: 591,278
 ---
-Select which loyalty question to ask: What
--> shit
+Intense Woman: Of course I am.
+Intense Woman: The Gregory family built half the systems that run this *lovely* country
+<<SkillCheck "YarnManager" "Insight" 6>>
+<<if $lastCheckSuccess>>
+Insight: [In]'Lovely' is hardly a word one would use to describe the Second Republic. Awe-inspiring, dominant, efficient, these all fit the bill.[/In]
+<<endif>>
+Intense Woman: The only thing that could make this place better is if the Gregory family were running the show!
+<<SkillCheck "YarnManager" "Empathy" 9>>
+<<if $lastCheckSuccess>>
+Empathy: [Em]Oooh, she definitely should not say that in earshot of a microphone.[/Em]
+<<endif>>
 <<set $asked_loyalty = true>>
 <<jump MaryGonzalez_Nucleus>>
 ===
@@ -85,6 +158,9 @@ Select which loyalty question to ask: What
 
 title: MaryGonzalez_End
 ---
-We done now
+Intense Woman: If that's it, then I'm leaving. 
+Intense Woman: If you ever have time to appreciate true beauty, visit the Gregory Mansion.
+Intense Woman: My gardens are so vibrant, you'll be able to see them from the outer gate!
+She struts out of the room, earrings jingling as she goes. 
 <<submit_form YarnManager>>
 ===

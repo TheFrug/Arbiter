@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02005771a42ec3f4580367cefd49c1ae, type: 3}
+  m_Name: MaryGonzalez
+  m_EditorClassIdentifier: 
+  InterviewID: 77-5921-A
+  Date: 04-11-55
+  displayName: Mary Gonzalez
+  occupation: Gardener
+  yarnStartNode: Interview_MaryGonzalez
+  portrait: {fileID: 21300000, guid: fcd56ff59a6c41c459bb9f838b62eed7, type: 3}

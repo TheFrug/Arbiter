@@ -6,6 +6,16 @@
 
 Narrator: The door buzzes. A man in grease-stained work clothes enters the interview room.
 
+John: MY ONLY REASON FOR LIVING IS TO TELL YOU THE CORE GAME LOOP WORKS.
+
+John: I LIVE IN A SEPARATE YARN NODE, WHICH MEANS THE GAME MOVES THROUGH YARN NODES TO ADVANCE BETWEEN SUBJECTS
+<<SkillCheck "YarnManager" "Insight" 7>>
+<<if $lastCheckSuccess>>
+Insight: [In]Dude, this guy is totally fucking up the fourth wall.[/In]
+<<endif>>
+
+<<submit_form YarnManager>>
+
 John: Uh... am I supposed to sit here?
 -> Yes. Please sit.
     Interviewer: Please take a seat, Mr. Halberd.
