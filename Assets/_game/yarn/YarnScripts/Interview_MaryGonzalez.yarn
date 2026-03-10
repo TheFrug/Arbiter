@@ -2,23 +2,23 @@
 position: -215,-2
 ---
 // --- Variables ---
-<<reset_form YarnManager>>
+<<form_reset YarnManager>>
 
 <<set $asked_name = false>>
 <<set $asked_occupation = false>>
 <<set $asked_loyalty = false>>
 
-<<set $lastCheckSuccess = false>>
-<<set $lastRollTotal = 0>>
-<<set $lastRollStat = 0>>
-<<set $lastRollDifficulty = 0>>
+<<set $last_check_success = false>>
+<<set $last_check_stat = 0>>
+<<set $last_check_total = 0>>
+<<set $last_check_difficulty = 0>>
 // --- End Variables ---
 
 // --- Command Examples ---
 // -- 1: Hard Branch --
 // -> Mean-mug them #skillcheck:Force:8
 // <<SkillCheck "YarnManager" "Force" 8>>
-// <<if $lastCheckSuccess>>
+// <<if $last_check_success>>
 //    <<jump PassNode>>
 //<<else>>
 //    <<jump FailNode>>
@@ -26,7 +26,7 @@ position: -215,-2
 
 // -- 2: Inline Alternate Lines --
 // <<SkillCheck "YarnManager" "Empathy" 12>>
-// <<if $lastCheckSuccess>>
+// <<if $last_check_success>>
 //    There's something in their eye...
 //<<endif>>
 
@@ -44,7 +44,7 @@ Intense Woman: Is this compliance assessment office 11?
 -> It says so on the sign outside.
 -> You are late by two minutes.#skillcheck:Force:9
     <<SkillCheck "YarnManager" "Force" 9>>
-    <<if $lastCheckSuccess>>
+    <<if $last_check_success>>
     <<detour MaryGonzalez_Late_PassNode>>
     <<else>>
     <<detour MaryGonzalez_Late_FailNode>>
@@ -85,18 +85,18 @@ title: MaryGonzalez_Name
 position: 451,-195
 ---
 Intense Woman: My name is Mary Gonzalez.
-<<set_name YarnManager "Mary Gonzalez">>
+<<form_set_name YarnManager "Mary Gonzalez">>
 <<set $asked_name = true>>
 <<SkillCheck "YarnManager" "Empathy" 7>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Empathy: [Em]Her pronunciation shifts as she sings her last name. She watches your reaction closely.[/Em]
 <<endif>>
 <<SkillCheck "YarnManager" "Insight" 7>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Insight: [In]'Gonzalez' is a Spanish surname of Germanic origin. It was much more common in the Second Republic before the Purification Movement[/In]
 <<endif>>
 -> Thank you.
--> Your last name is rather uncommon. <<if $lastCheckSuccess>>
+-> Your last name is rather uncommon. <<if $last_check_success>>
     <<detour MaryGonzalez_LastName>>
 <<jump MaryGonzalez_Nucleus>>
 ===
@@ -105,7 +105,7 @@ title: MaryGonzalez_LastName
 ---
 Intense Woman: Yes, I am aware. Just make sure you spell it right on the form. 
 <<SkillCheck "YarnManager" "Force" 10>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Force: [Fo]Her gaze intesifies, almost theateningly, as though  a platoon of gunmen stood behind her ready to fire upon any she points at.[/Fo]
 <<endif>>
 ===
@@ -113,15 +113,15 @@ Force: [Fo]Her gaze intesifies, almost theateningly, as though  a platoon of gun
 title: MaryGonzalez_Occupation
 position: 831,-61
 ---
+<<form_set_occupation YarnManager "Gardener">>
 Intense Woman: I am a gardener. 
 She smirks.
 Intense Woman: I work at the Gregory Estate.
-<<set_occupation YarnManager "Gardener">>
 <<SkillCheck "YarnManager" "Insight" 9>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Insight: [In]The Gregory family owns one of the largest tech companies in the Second Republic. Their surveilance technology and charitable donations were instrumental in the New Freedom Party's rise to dominance.[/In]
 <<SkillCheck "YarnManager" "Empathy" 7>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Empathy: [Em]This gardener is both proud and relieved to be associated with such a family.[/Em]
 <<endif>>
 <<endif>>
@@ -129,9 +129,8 @@ Intense Woman: We aren't just talking about trimming hedges. I design half the a
 Intense Woman: I've handled flowers more expensive than some people's monthly rent.
 Intense Woman: If you have the space, you should write my full title: Senior Estate Gardener of the Gregory Mansion.
 -> Gardener should suffice, thank you.
-    <<set_occupation YarnManager "Gardener">>
 -> I'll try to fit all that in.
-    <<set_occupation YarnManager "Estate Gardener of the Gregory Mansion">>
+    <<form_set_occupation YarnManager "Estate Gardener of the Gregory Mansion">>
 <<set $asked_occupation = true>>
 <<jump MaryGonzalez_Nucleus>>
 ===
@@ -142,12 +141,12 @@ position: 591,278
 Intense Woman: Of course I am.
 Intense Woman: The Gregory family built half the systems that run this *lovely* country.
 <<SkillCheck "YarnManager" "Insight" 6>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Insight: [In]'Lovely' is hardly a word one would use to describe the Second Republic. Awe-inspiring, dominant, efficient, these all fit the bill.[/In]
 <<endif>>
 Intense Woman: The only thing that could make this place better is if the Gregory family were running the show!
 <<SkillCheck "YarnManager" "Empathy" 9>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Empathy: [Em]Oooh, she definitely should not say that in earshot of a microphone.[/Em]
 <<endif>>
 <<set $asked_loyalty = true>>
@@ -161,5 +160,5 @@ Intense Woman: If that's it, then I'm leaving.
 Intense Woman: If you ever have time to appreciate true beauty, visit the Gregory Mansion.
 Intense Woman: My gardens are so vibrant, you'll be able to see them from the outer gate!
 She struts out of the room, earrings jingling as she goes. 
-<<submit_form YarnManager>>
+<<form_submit YarnManager>>
 ===

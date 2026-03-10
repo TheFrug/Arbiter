@@ -1,12 +1,10 @@
 ﻿title: CC_Start
 position: -384,-339
 ---
-<<SetStat "YarnManager" "Empathy" 2>>
-<<SetStat "YarnManager" "Force" 2>>
-<<SetStat "YarnManager" "Insight" 2>>
-
+<<set_stat "YarnManager" "Empathy" 2>>
+<<set_stat "YarnManager" "Force" 2>>
+<<set_stat "YarnManager" "Insight" 2>>
 Interviewer: Before we proceed, Arbiter, we require clarification.
-
 Interviewer: These responses will be entered into your official record.
 
 -> Continue
@@ -19,15 +17,15 @@ position: 11,-342
 Interviewer: What motivates you most?
 
 -> Helping others.
-    <<AddStat "YarnManager" "Empathy" 1>>
+    <<add_stat "YarnManager" "Empathy" 1>>
     Interviewer: How noble. You will come to learn that there are some who are... undeserving of your help.
     <<jump CC_Question2>>
 -> Becoming stronger.
-    <<AddStat "YarnManager" "Force" 1>>
+    <<add_stat "YarnManager" "Force" 1>>
     Interviewer: Some say strength runs the world. They are right.
     <<jump CC_Question2>>
 -> Understanding the truth.
-    <<AddStat "YarnManager" "Insight" 1>>
+    <<add_stat "YarnManager" "Insight" 1>>
     Interviewer: The only truth you will understand is ours.
     <<jump CC_Question2>>
 ===
@@ -38,15 +36,15 @@ position: 362,-348
 Interviewer: When conflict arises, your first instinct is to—
 
 -> De-escalate and find common ground.
-    <<AddStat "YarnManager" "Empathy" 1>>
+    <<add_stat "YarnManager" "Empathy" 1>>
     Interviewer: So, you see the peace in cooperation. Excellent.
     <<jump CC_Question3>>
 -> Take control of the situation with my MASSIVE MUSCLES.
-    <<AddStat "YarnManager" "Force" 1>>
+    <<add_stat "YarnManager" "Force" 1>>
     Interviewer: You can't control every situation, but you can control most people.
     <<jump CC_Question3>>
 -> Observe and make judgements before acting. 
-    <<AddStat "YarnManager" "Insight" 1>>
+    <<add_stat "YarnManager" "Insight" 1>>
     Interviewer: You see the forest [i]and[/] its trees.
     <<jump CC_Question3>>
 ===
@@ -57,13 +55,13 @@ position: 694,-355
 Interviewer: In your previous work, you were known for:
 
 -> Working well with others.
-    <<AddStat "YarnManager" "Empathy" 2>>
+    <<add_stat "YarnManager" "Empathy" 2>>
     Interviewer: That should translate nicely.
 -> Getting results.
-    <<AddStat "YarnManager" "Force" 2>>
+    <<add_stat "YarnManager" "Force" 2>>
     Interviewer: Good answer.
 -> Actually knowing how to do my job.
-    <<AddStat "YarnManager" "Insight" 2>>
+    <<add_stat "YarnManager" "Insight" 2>>
     Interviewer: You'll be in competent company here.
 Interviewer: We're almost done here.
 <<jump CC_Question4>>
@@ -101,5 +99,5 @@ position: 1431,-347
 Interviewer: It appears you are a perfect match for the role of Arbiter. 
 Interviewer: Here is your official ID card.
 
-<<FinalizeCharacter "YarnManager" "Interrogation">>
+<<finalize_character "YarnManager" "Interrogation">>
 ===

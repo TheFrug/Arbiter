@@ -61,7 +61,7 @@ public class YarnManager : MonoBehaviour
      * Yarn Usage:
      * <<set_name YarnManager "John Halberd">>
      */
-    [YarnCommand("set_name")]
+    [YarnCommand("form_set_name")]
     public void SetName(string name)
     {
         complianceForm.RevealNameFromYarn(name);
@@ -71,7 +71,7 @@ public class YarnManager : MonoBehaviour
      * Yarn Usage:
      * <<set_occupation YarnManager "Mechanic">>
      */
-    [YarnCommand("set_occupation")]
+    [YarnCommand("form_set_occupation")]
     public void SetOccupation(string occupation)
     {
         complianceForm.RevealOccupationFromYarn(occupation);
@@ -81,7 +81,7 @@ public class YarnManager : MonoBehaviour
      * Yarn Usage:
      * <<submit_form YarnManager>>
      */
-    [YarnCommand("submit_form")]
+    [YarnCommand("form_submit")]
     public void SubmitComplianceForm()
     {
         if (complianceForm == null)
@@ -98,7 +98,7 @@ public class YarnManager : MonoBehaviour
      * Yarn Usage:
      * <<reset_form YarnManager>>
      */
-    [YarnCommand("reset_form")]
+    [YarnCommand("form_reset")]
     public void ResetComplianceForm()
     {
         if (complianceForm == null)
@@ -136,11 +136,11 @@ public class YarnManager : MonoBehaviour
             $"vs {difficulty} | Success: {result.Success}"
         );
 
-        dialogueRunner.VariableStorage.SetValue("$lastRoll", result.DiceTotal);
-        dialogueRunner.VariableStorage.SetValue("$lastTotal", result.FinalTotal);
-        dialogueRunner.VariableStorage.SetValue("$lastRollStat", result.StatValue);
-        dialogueRunner.VariableStorage.SetValue("$lastRollDifficulty", result.Difficulty);
-        dialogueRunner.VariableStorage.SetValue("$lastCheckSuccess", result.Success);
+        dialogueRunner.VariableStorage.SetValue("$last_check_roll", result.DiceTotal);
+        dialogueRunner.VariableStorage.SetValue("$last_check_total", result.FinalTotal);
+        dialogueRunner.VariableStorage.SetValue("$last_check_stat", result.StatValue);
+        dialogueRunner.VariableStorage.SetValue("$last_check_difficulty", result.Difficulty);
+        dialogueRunner.VariableStorage.SetValue("$last_check_success", result.Success);
     }
 
 
@@ -204,7 +204,7 @@ public class YarnManager : MonoBehaviour
     // ================= CHARACTER CREATION ====================
     // =========================================================
 
-    [YarnCommand("AddStat")]
+    [YarnCommand("add_stat")]
     public void AddStat(string statName, int amount)
     {
         if (playerManager == null)
@@ -218,7 +218,7 @@ public class YarnManager : MonoBehaviour
         Debug.Log($"CharacterCreation: {statName} +{amount}");
     }
 
-    [YarnCommand("SetStat")]
+    [YarnCommand("set_stat")]
     public void SetStat(string statName, int value)
     {
         if (playerManager == null)
@@ -227,7 +227,7 @@ public class YarnManager : MonoBehaviour
         playerManager.SetStat(statName, value);
     }
 
-    [YarnCommand("FinalizeCharacter")]
+    [YarnCommand("finalize_character")]
     public void FinalizeCharacter(string nextScene)
     {
         Debug.Log("Character creation finalized.");
@@ -239,7 +239,7 @@ public class YarnManager : MonoBehaviour
     // ================= DEBUG / UTILITIES =====================
     // =========================================================
 
-    [YarnCommand("PrintVariable")]
+    [YarnCommand("print_variable")]
     public void PrintVariable(string variableName)
     {
         if (variableStorage != null &&

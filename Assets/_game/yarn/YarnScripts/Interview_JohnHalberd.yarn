@@ -2,7 +2,7 @@
 ---
 
 // Reset the form for a new interview
-<<reset_form YarnManager>>
+<<form_reset YarnManager>>
 
 Narrator: The door buzzes. A man in grease-stained work clothes enters the interview room.
 
@@ -10,11 +10,11 @@ John: MY ONLY REASON FOR LIVING IS TO TELL YOU THE CORE GAME LOOP WORKS.
 
 John: I LIVE IN A SEPARATE YARN NODE, WHICH MEANS THE GAME MOVES THROUGH YARN NODES TO ADVANCE BETWEEN SUBJECTS
 <<SkillCheck "YarnManager" "Insight" 7>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Insight: [In]Dude, this guy is totally fucking up the fourth wall.[/In]
 <<endif>>
 
-<<submit_form YarnManager>>
+<<form_submit YarnManager>>
 
 John: Uh... am I supposed to sit here?
 -> Yes. Please sit.
@@ -42,7 +42,7 @@ John: Mechanic. I work down on Carver Street.
 
 // Passive skill read
 <<SkillCheck "YarnManager" "Empathy" 6>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Empathy: [Em]He's nervous, but not hiding anything obvious.[/Em]
 <<endif>>
 
@@ -62,14 +62,14 @@ John: Home, mostly. Watching broadcasts.
 
 // Suspicion check
 <<SkillCheck "YarnManager" "Insight" 10>>
-<<if $lastCheckSuccess>>
+<<if $last_check_success>>
 Insight: [In]He answered quickly. Maybe rehearsed.[/In]
 <<endif>>
 
 
 -> Press harder
     <<SkillCheck "YarnManager" "Force" 8>>
-    <<if $lastCheckSuccess>>
+    <<if $last_check_success>>
         <<jump Force_Pass>>
     <<else>>
         <<jump Force_Fail>>
@@ -128,6 +128,6 @@ Narrator: Complete the Compliance Assessment Form.
 
 Narrator: Interview recorded.
 
-<<submit_form YarnManager>>
+<<form_reset YarnManager>>
 
 ===

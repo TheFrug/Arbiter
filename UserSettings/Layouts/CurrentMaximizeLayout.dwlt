@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 1624
+  controlID: 3736
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 1619
+  controlID: 3731
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -219,7 +219,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0cc3ffff1ad4ffff6cdaffff04dbffff6ee2ffff2ce3ffff4cedffffe4edffff48f5ffff00f6ffff76f9ffff148800005c8800007a880000c08d0000
+      m_ExpandedIDs: f6f8ffff0efbffff12fbffff18fbffff54720000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -641,9 +641,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 800.9063, y: 136.63274, z: -9.529166}
+    m_Target: {x: 925.44684, y: 413.13754, z: -7.3652086}
     speed: 2
-    m_Value: {x: 800.9063, y: 136.63274, z: -9.529166}
+    m_Value: {x: 925.44684, y: 413.13754, z: -7.3652086}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -693,9 +693,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 962.9123
+    m_Target: 746.5165
     speed: 2
-    m_Value: 962.9123
+    m_Value: 746.5165
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -969,7 +969,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_game/scenes
+    - Assets/_game/yarn/YarnScripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -977,16 +977,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/_game/scenes
+  - Assets/_game/yarn/YarnScripts
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\_MyProjects\Unity\Arbiter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 163.00049}
-    m_SelectedIDs: d8760000
-    m_LastClickedID: 30424
-    m_ExpandedIDs: 00000000da760000dc760000e0760000e2760000ea760000ee76000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 155}
+    m_SelectedIDs: c4790000
+    m_LastClickedID: 31172
+    m_ExpandedIDs: 0000000090790000927900009479000096790000987900009a79000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1014,7 +1014,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: a627feff
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000da760000dc760000e0760000e2760000ea760000ee76000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000090790000927900009479000096790000987900009a79000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
