@@ -53,6 +53,11 @@ public class ComplianceForm : MonoBehaviour
     [SerializeField] private Vector2 hiddenPosition;
     [SerializeField] private Vector2 visiblePosition;
 
+    [Header("Reveal Flash")]
+    [SerializeField] private Color flashColor = new Color(1f, 0.9f, 0.2f);
+    [SerializeField] private int flashCount = 3;
+    [SerializeField] private float flashDuration = 0.15f;
+
     #endregion
 
     #region Internal State
@@ -103,7 +108,10 @@ public class ComplianceForm : MonoBehaviour
         revealedName = name;
 
         if (string.IsNullOrEmpty(subjectName))
+        {
             nameFillButton.interactable = true;
+            StartCoroutine(FlashButton(nameFillButton));
+        }
     }
 
     public void RevealOccupationFromYarn(string occ)
@@ -111,7 +119,10 @@ public class ComplianceForm : MonoBehaviour
         revealedOccupation = occ;
 
         if (string.IsNullOrEmpty(occupation))
+        {
             occupationFillButton.interactable = true;
+            StartCoroutine(FlashButton(occupationFillButton));
+        }
     }
 
     #endregion
@@ -257,4 +268,24 @@ public class ComplianceForm : MonoBehaviour
     }
 
     #endregion
+
+    private IEnumerator FlashButton(Button button)
+    {
+        Image img = button.GetComponent<Image>();
+        if (img == null)
+            yield break;
+
+        Color original = img.color;
+
+        for (int i = 0; i < flashCount; i++)
+        {
+            img.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+
+            img.color = original;
+            yield return new WaitForSeconds(flashDuration);
+        }
+
+        img.color = original;
+    }
 }

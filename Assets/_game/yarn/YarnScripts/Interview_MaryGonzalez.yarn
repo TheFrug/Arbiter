@@ -37,6 +37,7 @@ title: MaryGonzalez_Intro
 position: 102,1
 ---
 The door swings open with a harsh mechanical buzz.
+<<form_set_name YarnManager "Gonzalez">>
 A woman steps, practically stomps into the tiny office and stands behind the chair.
 
 Intense Woman: Is this compliance assessment office 11?

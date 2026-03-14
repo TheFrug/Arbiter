@@ -3077,9 +3077,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
+      propertyPath: flashColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
+      propertyPath: flashColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
+      propertyPath: flashColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
       propertyPath: toggleButton
       value: 
       objectReference: {fileID: 519878021}
+    - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
+      propertyPath: flashDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
       propertyPath: hiddenPosition.x
       value: 550
