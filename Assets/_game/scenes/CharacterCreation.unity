@@ -170,6 +170,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5104002229308942231, guid: 9bdfe93682e37e344be05e7d4896a5e1, type: 3}
+      propertyPath: force
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104002229308942231, guid: 9bdfe93682e37e344be05e7d4896a5e1, type: 3}
+      propertyPath: empathy
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104002229308942231, guid: 9bdfe93682e37e344be05e7d4896a5e1, type: 3}
+      propertyPath: insight
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8920595551553186371, guid: 9bdfe93682e37e344be05e7d4896a5e1, type: 3}
       propertyPath: m_Name
       value: PlayerManager

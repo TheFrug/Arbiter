@@ -97,7 +97,10 @@ title: CC_Final
 position: 1431,-347
 ---
 Interviewer: It appears you are a perfect match for the role of Arbiter. 
+<<show_id YarnManager>>
 Interviewer: Here is your official ID card.
+// CHANGE THIS ITS SHIT AND PLACEHOLDER
+Interviewer: We thank you for your assistance in establishing an orderly society.
 
 <<finalize_character "YarnManager" "Interrogation">>
 ===

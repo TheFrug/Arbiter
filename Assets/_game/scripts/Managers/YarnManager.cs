@@ -231,9 +231,16 @@ public class YarnManager : MonoBehaviour
     public void FinalizeCharacter(string nextScene)
     {
         Debug.Log("Character creation finalized.");
+        FindObjectOfType<IDCardUI>()?.FinishCharacterCreation();
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
+    // ID Card Control
+    [YarnCommand("show_id")]
+    public void ShowID()
+    {
+        FindObjectOfType<IDCardUI>()?.ShowCard();
+    }
 
     // =========================================================
     // ================= DEBUG / UTILITIES =====================
