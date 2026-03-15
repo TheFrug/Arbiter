@@ -110,7 +110,7 @@ public class ComplianceForm : MonoBehaviour
         if (string.IsNullOrEmpty(subjectName))
         {
             nameFillButton.interactable = true;
-            StartCoroutine(FlashButton(nameFillButton));
+            StartCoroutine(FlashButton(toggleButton));
         }
     }
 
@@ -121,7 +121,7 @@ public class ComplianceForm : MonoBehaviour
         if (string.IsNullOrEmpty(occupation))
         {
             occupationFillButton.interactable = true;
-            StartCoroutine(FlashButton(occupationFillButton));
+            StartCoroutine(FlashButton(toggleButton));
         }
     }
 
@@ -279,13 +279,49 @@ public class ComplianceForm : MonoBehaviour
 
         for (int i = 0; i < flashCount; i++)
         {
-            img.color = flashColor;
-            yield return new WaitForSeconds(flashDuration);
+            // Fade to flash color
+            float t = 0f;
+            while (t < flashDuration)
+            {
+                t += Time.deltaTime;
+                float lerp = Mathf.SmoothStep(0f, 1f, t / flashDuration);
+                img.color = Color.Lerp(original, flashColor, lerp);
+                yield return null;
+            }
 
-            img.color = original;
-            yield return new WaitForSeconds(flashDuration);
+            // If this is the LAST flash
+            if (i == flashCount - 1)
+            {
+                // Hold bright for 2 seconds
+                yield return new WaitForSeconds(2f);
+
+                // Slow fade back to original
+                float slowFade = flashDuration * 3f;
+                t = 0f;
+
+                while (t < slowFade)
+                {
+                    t += Time.deltaTime;
+                    float lerp = Mathf.SmoothStep(0f, 1f, t / slowFade);
+                    img.color = Color.Lerp(flashColor, original, lerp);
+                    yield return null;
+                }
+
+                break;
+            }
+
+            // Normal fade back for early flashes
+            t = 0f;
+            while (t < flashDuration)
+            {
+                t += Time.deltaTime;
+                float lerp = Mathf.SmoothStep(0f, 1f, t / flashDuration);
+                img.color = Color.Lerp(flashColor, original, lerp);
+                yield return null;
+            }
         }
 
         img.color = original;
     }
+
 }
