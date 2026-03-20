@@ -1,0 +1,169 @@
+﻿title: Interview_WilliamGote
+---
+// ==========================
+// ===== INITIAL SETUP ======
+// ==========================
+
+<<form_reset YarnManager>>
+
+<<set $asked_name = false>>
+<<set $asked_occupation = false>>
+<<set $asked_loyalty = false>>
+
+// ==========================
+// ===== ENTRY POINT ========
+// ==========================
+
+<<jump WilliamGote_Intro>>
+===
+
+
+title: WilliamGote_Intro
+---
+WilliamGote
+
+-> WilliamGote
+-> WilliamGote
+-> CONTENT #skillcheck:Force:9
+    <<SkillCheck "YarnManager" "Force" 9>>
+    <<if $last_check_success>>
+        <<detour WilliamGote_Late_Pass>>
+    <<else>>
+        <<detour WilliamGote_Late_Fail>>
+    <<endif>>
+<<jump WilliamGote_Hub>>
+===
+
+
+title: WilliamGote_Late_Pass
+---
+CONTENT
+===
+
+
+title: WilliamGote_Late_Fail
+---
+CONTENT
+===
+
+
+// ==========================
+// ===== HUB LOOP ===========
+// ==========================
+
+title: WilliamGote_Hub
+---
+CONTENT
+
+-> CONTENT <<once>>
+    <<jump WilliamGote_Name>>
+
+-> CONTENT <<if not $asked_occupation>>
+    <<jump WilliamGote_Occupation>>
+
+-> CONTENT <<if not $asked_loyalty>>
+    <<jump WilliamGote_Loyalty>>
+
+-> CONTENT <<if $asked_name and $asked_occupation and $asked_loyalty>>
+    <<jump WilliamGote_End>>
+===
+
+
+// ==========================
+// ===== NAME ===============
+// ==========================
+
+title: WilliamGote_Name
+---
+CONTENT
+
+<<form_set_name YarnManager "CONTENT">>
+<<set $asked_name = true>>
+
+<<SkillCheck "YarnManager" "Empathy" 7>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<SkillCheck "YarnManager" "Insight" 7>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+-> CONTENT
+-> CONTENT <<if $last_check_success>>
+    <<detour WilliamGote_Name_Followup>>
+
+<<jump WilliamGote_Hub>>
+===
+
+
+title: WilliamGote_Name_Followup
+---
+CONTENT
+===
+
+
+// ==========================
+// ===== OCCUPATION =========
+// ==========================
+
+title: WilliamGote_Occupation
+---
+<<form_set_occupation YarnManager "CONTENT">>
+
+CONTENT
+
+<<SkillCheck "YarnManager" "Insight" 9>>
+<<if $last_check_success>>
+CONTENT
+
+    <<SkillCheck "YarnManager" "Empathy" 7>>
+    <<if $last_check_success>>
+    CONTENT
+    <<endif>>
+
+<<endif>>
+
+-> CONTENT
+-> CONTENT
+    <<form_set_occupation YarnManager "CONTENT">>
+
+<<set $asked_occupation = true>>
+<<jump WilliamGote_Hub>>
+===
+
+
+// ==========================
+// ===== LOYALTY ============
+// ==========================
+
+title: WilliamGote_Loyalty
+---
+CONTENT
+
+<<SkillCheck "YarnManager" "Insight" 6>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<SkillCheck "YarnManager" "Empathy" 9>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<set $asked_loyalty = true>>
+<<jump WilliamGote_Hub>>
+===
+
+
+// ==========================
+// ===== END ================
+// ==========================
+
+title: WilliamGote_End
+---
+CONTENT
+
+<<form_submit YarnManager>>
+===

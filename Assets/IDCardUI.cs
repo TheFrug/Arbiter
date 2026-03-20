@@ -29,14 +29,11 @@ public class IDCardUI : MonoBehaviour
 
     public void ToggleCard()
     {
-        if (FinishedCharacterCreation)
-        {
             bool show = !cardRoot.activeSelf;
             cardRoot.SetActive(show);
 
             if (show)
                 Refresh();
-        }
     }
 
     public void ShowCard()
