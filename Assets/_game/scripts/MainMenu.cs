@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        SceneManager.LoadScene(firstLevel);
     }
 
     public void OpenOptions()
