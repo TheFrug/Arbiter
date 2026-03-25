@@ -4483,7 +4483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4636014558335844085, guid: 1d35a35ba79b59c46b49385f71e16565, type: 3}
       propertyPath: routineSubjects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4636014558335844085, guid: 1d35a35ba79b59c46b49385f71e16565, type: 3}
       propertyPath: routineSubjects.Array.data[0]

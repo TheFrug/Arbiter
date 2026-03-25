@@ -17,31 +17,41 @@
 <<jump WilliamGote_Intro>>
 ===
 
-
 title: WilliamGote_Intro
 ---
-WilliamGote
-
--> WilliamGote
--> WilliamGote
--> CONTENT #skillcheck:Force:9
-    <<SkillCheck "YarnManager" "Force" 9>>
+Narrator: A young man marches in, the extraneous zippers and chain on his clothing clinking with every heavy bootstep.
+Narrator: He crashes into his seat and glares at you.
+<<SkillCheck "YarnManager" "Empathy" 11>>
+<<if $last_check_success>>
+Empathy: [Em]He keeps glancing at your badge, and he grimaces slightly every time. [/Em]
+Empathy: [Em]You are getting the sense that for whatever reason, and despite you having never met him in your life, this man doesn't like you very much.[/Em]
+<<endif>>
+<<SkillCheck "YarnManager" "Force" 7>>
+<<if $last_check_success>>
+Force: [Fo]Oh yeah, this guy fucking [b]HATES[/b] you.[/Fo]
+<<endif>>
+Punk: ...
+-> Good afternoon, citizen.
+-> Hello!
+-> Is there something on my face? #skillcheck:Force:11
+    <<SkillCheck "YarnManager" "Force" 12>>
     <<if $last_check_success>>
-        <<detour WilliamGote_Late_Pass>>
+        <<detour WilliamGote_Problem_Pass>>
     <<else>>
-        <<detour WilliamGote_Late_Fail>>
+        <<detour WilliamGote_Problem_Fail>>
     <<endif>>
+Punk: Lets just get this over with.
 <<jump WilliamGote_Hub>>
 ===
 
 
-title: WilliamGote_Late_Pass
+title: WilliamGote_Problem_Pass
 ---
-CONTENT
+Punk: 
 ===
 
 
-title: WilliamGote_Late_Fail
+title: WilliamGote_Problem_Fail
 ---
 CONTENT
 ===
@@ -53,54 +63,57 @@ CONTENT
 
 title: WilliamGote_Hub
 ---
-CONTENT
-
--> CONTENT <<once>>
+You look at your compliance form. You have questions to ask.
+-> Please state your name. <<once>>
     <<jump WilliamGote_Name>>
-
--> CONTENT <<if not $asked_occupation>>
+-> What is your current occupation? <<if not $asked_occupation>>
     <<jump WilliamGote_Occupation>>
-
--> CONTENT <<if not $asked_loyalty>>
+-> Do you consider yourself loyal to the second republic? <<if not $asked_loyalty>>
     <<jump WilliamGote_Loyalty>>
-
--> CONTENT <<if $asked_name and $asked_occupation and $asked_loyalty>>
+-> I have everything I needed from you. Thank you. <<if $asked_name and $asked_occupation and $asked_loyalty>>
     <<jump WilliamGote_End>>
 ===
-
 
 // ==========================
 // ===== NAME ===============
 // ==========================
-
 title: WilliamGote_Name
 ---
-CONTENT
-
-<<form_set_name YarnManager "CONTENT">>
+Punk: Billy's my name.
+<<form_set_name YarnManager "Billy">>
 <<set $asked_name = true>>
-
-<<SkillCheck "YarnManager" "Empathy" 7>>
-<<if $last_check_success>>
-CONTENT
-<<endif>>
-
 <<SkillCheck "YarnManager" "Insight" 7>>
 <<if $last_check_success>>
-CONTENT
+Insight: [In]Hold up, mononymity was outlawed by the Second Republic in June of 28 AT, 12 years ago.[/In]
+Force: [Fo]He lied to us! He wanted us to fill out his name wrong on the form.[/Fo]
+Force: [Fo]Wait, you didn't fill his name out already, did you? That would be really stupid if you did.[/Fo]
 <<endif>>
-
--> CONTENT
--> CONTENT <<if $last_check_success>>
-    <<detour WilliamGote_Name_Followup>>
-
+-> Sounds good to me.
+    Punk: I'm sure it does.
+-> That's a strange name.
+    Punk: Well, its the one I got, so fill it out, boy scout.
+-> Your full name can't be just 'Billy'. <<if $last_check_success>> #skillcheck:Force:6 
+    <<SkillCheck "YarnManager" "Force" 6>>
+    <<if $last_check_success>>
+    <<detour WilliamGote_Name_PassNode>>
+    <<else>>
+    <<detour WilliamGote_Name_FailNode>>
+    <<endif>>
 <<jump WilliamGote_Hub>>
 ===
 
-
-title: WilliamGote_Name_Followup
+title: WilliamGote_Name_PassNode
 ---
-CONTENT
+[Fo]Your face becomes like granite carved into an expression that screams 'Not happy' as you relay her tardiness to her.[/Fo]
+Intense Woman: Well I- I'm sorry, officer.
+The Voice of Someone Important: [Fo][b]Oh yeah.[/b] That's the stuff.[/Fo]
+===
+
+title: WilliamGote_Name_FailNode
+---
+[Fo]You squeak the words out, and her expression sours.[/Fo]
+Intense Woman: Yes, well, some of us do more rigorous work than sit in an office and ask people questions. 
+The Voice of Someone Important: [Fo]What are you, a school teacher? That was fucking lame.[/Fo]
 ===
 
 
