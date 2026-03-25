@@ -3,7 +3,7 @@
 	- All normal goods produced now, except they are produced in production centers across a spiderweb network of carved up American land
 - What are major trade goods?
 	- AI Servants, both digital and physical
-- Are there trading centeres
+- Are there trading centers?
 	- Yes, trading happens on the internet almost entirely through online shopping where a gang of hungry capitalists vie for attention via intrusive advertisement
 - What economic systems are used?
 	- Ultra-capitalism; completely unregulated

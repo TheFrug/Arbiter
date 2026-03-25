@@ -2,8 +2,7 @@
 [Name] (Jean Rah)
 
 ## ID No
-
-### RR-CCC-G-BYYY
+### RR-CC-G-BYYY
 #### RR - Race Codes:
 00 | “American Stock” (state-preferred category; white citizens of European descent) |
 01 | Northern European
@@ -26,10 +25,11 @@
 18 | Non-Citizen Resident
 19 | Undocumented / Unregistered Person
 
-#### CCC - District Number
-Can be any three digits to represent a specific district. Keep shit internally consistent and keep a running list below:
-
+#### CC - District Number
+Can be any two digits to represent a specific district. Keep shit internally consistent and keep a running list below:
 
 #### G - Gender
 1 | Male
 2 | Female
+
+#### BYYY
