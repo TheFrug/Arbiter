@@ -7,7 +7,7 @@ https://arcadia.net/Cruinne/DnD/Articles/worldbuilding.html#government
 - Are there trading centers?
 	- Yes, trading happens on the internet almost entirely through online shopping where a gang of hungry capitalists vie for attention via intrusive advertisement
 - What economic systems are used?
-	- Ultra-capitalism; completely unregulated
+	- Ultra-capitalism; almost entirely unregulated
 - Are there banks?
 	- NEEDS EXPANSION
 - Do people barter or use money?

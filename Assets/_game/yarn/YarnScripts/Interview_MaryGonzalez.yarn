@@ -1,4 +1,4 @@
-﻿title: Interview_MaryGonzalez
+title: Interview_MaryGonzalez
 position: -215,-2
 ---
 // --- Variables ---
@@ -8,10 +8,11 @@ position: -215,-2
 <<set $asked_occupation = false>>
 <<set $asked_loyalty = false>>
 
-<<set $last_check_success = false>>
-<<set $last_check_stat = 0>>
-<<set $last_check_total = 0>>
-<<set $last_check_difficulty = 0>>
+//<<set $last_check_success = false>>
+//<<set $last_check_stat = 0>>
+//<<set $last_check_total = 0>>
+//<<set $last_check_difficulty = 0>>
+
 // --- End Variables ---
 
 // --- Command Examples ---

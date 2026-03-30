@@ -47,13 +47,14 @@ Punk: Lets just get this over with.
 
 title: WilliamGote_Problem_Pass
 ---
-Punk: 
+Punk: No.
 ===
 
 
 title: WilliamGote_Problem_Fail
 ---
-CONTENT
+Punk: Other than your ugly mug? No.
+Force: [Fo]Asshole.[/Fo]
 ===
 
 
@@ -105,7 +106,7 @@ Force: [Fo]Wait, you didn't fill his name out already, did you? That would be re
 
 title: WilliamGote_Name_PassNode
 ---
-Force: [Fo]That's right, we're not just powerful, we're smart too.[/Fo]
+Force: [Fo]That's right, we're not [i]just[/i] powerful, we're smart too.[/Fo]
 Insight: [In]You're welcome.[/In]
 Punk: You figured it out, oh wise hand of the Republic. Billy's not my government name.
     <<form_set_name YarnManager "William">>
@@ -126,8 +127,8 @@ Insight:[In]He still hasn't told us his last name. He must think he's slick.[/In
 
 title: WilliamGote_Name_FailNode
 ---
-[Fo]You meekly open your mouth to speak, but his [b]eyes[/b] stop you. Your body tenses.[/Fo]
-Punk: What's wrong, stiff? Got some boot stuck in your throat?
+[Fo]You meekly open your mouth to speak, but his [b]eyes[/b] pierce you. Your body tenses.[/Fo]
+Punk: What's wrong, pig? Got some boot stuck in your throat?
 Punk: Seriously, lets move on. 
 ===
 
@@ -146,7 +147,7 @@ Insight: [In]Devon Mail is a coast-to-coast postal business whose marketing feat
 Punk: I was en-route to a delivery when I was stopped for compliance. The republic has a knack for timing.
 <<SkillCheck "YarnManager" "Empathy" 8>>
 <<if $last_check_success>>
-Empathy: [Em] You should be unsurprised to hear that he is being sarcastic.[/Em]
+Empathy: [Em]He smirks. What does he know?[/Em]
 <<endif>>
 ===
 
@@ -157,7 +158,7 @@ Empathy: [Em] You should be unsurprised to hear that he is being sarcastic.[/Em]
 
 title: WilliamGote_Loyalty
 ---
-CONTENT
+Punk: The Republic pays my bills. 
 
 <<SkillCheck "YarnManager" "Insight" 6>>
 <<if $last_check_success>>

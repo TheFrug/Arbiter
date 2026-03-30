@@ -17,4 +17,4 @@ MonoBehaviour:
   displayName: William Gote
   occupation: 
   yarnStartNode: Interview_WilliamGote
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: d37d14d410521554183523ba7d97cc9c, type: 3}
