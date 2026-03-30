@@ -36,21 +36,33 @@
             }
           },
           {
+<<<<<<< HEAD
             "id": "a6d5242e2a732619",
+=======
+            "id": "481183e270a87196",
+>>>>>>> origin/main
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
                 "file": "World/Worldbuilding Checklist - 03232026.md",
+=======
+                "file": "Timeline 03252026.md",
+>>>>>>> origin/main
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
+<<<<<<< HEAD
               "title": "Worldbuilding Checklist - 03232026"
+=======
+              "title": "Timeline 03252026"
+>>>>>>> origin/main
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
         "id": "5ff3170d83f5a006",
@@ -71,12 +83,20 @@
             }
           },
           {
+<<<<<<< HEAD
             "id": "cdee968a786df52c",
+=======
+            "id": "6d84bf7109234f29",
+>>>>>>> origin/main
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
                 "file": "NPCs/William Gote.md",
+=======
+                "file": "William Gote.md",
+>>>>>>> origin/main
                 "mode": "source",
                 "source": false
               },
@@ -247,11 +267,19 @@
       "bases:Create new base": false
     }
   },
+<<<<<<< HEAD
   "active": "a6d5242e2a732619",
   "lastOpenFiles": [
     "Templates/template-NPC.md",
     "World/The World - The Free and United Second Republic.md",
     "NPCs/William Gote.md",
+=======
+  "active": "481183e270a87196",
+  "lastOpenFiles": [
+    "Templates/template-NPC.md",
+    "Timeline 03252026.md",
+    "William Gote.md",
+>>>>>>> origin/main
     "World/ID Card Needs - 03152026.md",
     "Notes/Notes from Worldbuilding Lecture.md",
     "World/Worldbuilding Checklist - 03232026.md",

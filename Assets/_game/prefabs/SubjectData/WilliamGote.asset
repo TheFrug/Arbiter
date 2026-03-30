@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02005771a42ec3f4580367cefd49c1ae, type: 3}
-  m_Name: NewSubject
+  m_Name: WilliamGote
   m_EditorClassIdentifier: 
   InterviewID: 
   Date: 
-  displayName: 
+  displayName: William Gote
   occupation: 
   yarnStartNode: 
   portrait: {fileID: 0}
