@@ -1,3 +1,4 @@
+https://arcadia.net/Cruinne/DnD/Articles/worldbuilding.html#government
 # Economy
 - What goods are produced and where are they produced?
 	- All normal goods produced now, except they are produced in production centers across a spiderweb network of carved up American land
