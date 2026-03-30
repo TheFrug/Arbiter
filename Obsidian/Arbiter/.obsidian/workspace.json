@@ -1,102 +1,19 @@
 {
   "main": {
-    "id": "d7d9053b61e9eb75",
+    "id": "5c81143dc5092d68",
     "type": "split",
     "children": [
       {
-        "id": "964cf2e7ade7faad",
+        "id": "47aea5b4a08abaae",
         "type": "tabs",
         "children": [
           {
-            "id": "179d8e18b1e936be",
+            "id": "ec3fd3aebd5529a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "World/The World - The Free and United Second Republic.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "The World - The Free and United Second Republic"
-            }
-          },
-          {
-            "id": "41cb1c38edf0682b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Templates/template-NPC.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "template-NPC"
-            }
-          },
-          {
-<<<<<<< HEAD
-            "id": "a6d5242e2a732619",
-=======
-            "id": "481183e270a87196",
->>>>>>> origin/main
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-<<<<<<< HEAD
-                "file": "World/Worldbuilding Checklist - 03232026.md",
-=======
-                "file": "Timeline 03252026.md",
->>>>>>> origin/main
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-<<<<<<< HEAD
-              "title": "Worldbuilding Checklist - 03232026"
-=======
-              "title": "Timeline 03252026"
->>>>>>> origin/main
-            }
-          }
-        ],
-        "currentTab": 3
-      },
-      {
-        "id": "5ff3170d83f5a006",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "703a85773ec90645",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "World/ID Card Needs - 03152026.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ID Card Needs - 03152026"
-            }
-          },
-          {
-<<<<<<< HEAD
-            "id": "cdee968a786df52c",
-=======
-            "id": "6d84bf7109234f29",
->>>>>>> origin/main
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-<<<<<<< HEAD
                 "file": "NPCs/William Gote.md",
-=======
-                "file": "William Gote.md",
->>>>>>> origin/main
                 "mode": "source",
                 "source": false
               },
@@ -104,22 +21,21 @@
               "title": "William Gote"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "edaf825f427f0937",
+    "id": "03192c25452f3df8",
     "type": "split",
     "children": [
       {
-        "id": "6426b9062a75bf43",
+        "id": "0433633aa555b8e1",
         "type": "tabs",
         "children": [
           {
-            "id": "dfad9e9ff0c3c696",
+            "id": "881a187857674e96",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -132,7 +48,7 @@
             }
           },
           {
-            "id": "1fd7140fc07301b7",
+            "id": "5ebc4ca1bea47b6a",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -149,7 +65,7 @@
             }
           },
           {
-            "id": "a592190582cd4230",
+            "id": "b596ffe83d2c00fe",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -165,15 +81,15 @@
     "width": 300
   },
   "right": {
-    "id": "5cab81c037f8b6c1",
+    "id": "7567cf6102e6132a",
     "type": "split",
     "children": [
       {
-        "id": "c2c6f5b420072ed6",
+        "id": "7d0d94d05ed35bf9",
         "type": "tabs",
         "children": [
           {
-            "id": "6c97061ce543c69a",
+            "id": "dbe5b142bc696846",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -192,21 +108,21 @@
             }
           },
           {
-            "id": "c3dc5091fc5eaa8d",
+            "id": "760467c4c5f215cc",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
+                "file": "NPCs/William Gote.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Weekly Milestones"
+              "title": "Outgoing links from William Gote"
             }
           },
           {
-            "id": "5ec1347d1e8527e4",
+            "id": "4cbf8f6a0d08ccc3",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -221,7 +137,7 @@
             }
           },
           {
-            "id": "ef975c3bcb9f112b",
+            "id": "a586091c1b99bc20",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -235,18 +151,18 @@
             }
           },
           {
-            "id": "1349ca13099a492a",
+            "id": "e6b1f49f121a0c6f",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Dev Docs/Weekly Milestones.md",
+                "file": "NPCs/William Gote.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Weekly Milestones"
+              "title": "Outline of William Gote"
             }
           }
         ]
@@ -267,45 +183,6 @@
       "bases:Create new base": false
     }
   },
-<<<<<<< HEAD
-  "active": "a6d5242e2a732619",
-  "lastOpenFiles": [
-    "Templates/template-NPC.md",
-    "World/The World - The Free and United Second Republic.md",
-    "NPCs/William Gote.md",
-=======
-  "active": "481183e270a87196",
-  "lastOpenFiles": [
-    "Templates/template-NPC.md",
-    "Timeline 03252026.md",
-    "William Gote.md",
->>>>>>> origin/main
-    "World/ID Card Needs - 03152026.md",
-    "Notes/Notes from Worldbuilding Lecture.md",
-    "World/Worldbuilding Checklist - 03232026.md",
-    "Templates",
-    "Districts.md",
-    "Compliance Assessment Form.md",
-    "3D or 2D - 03042026.md",
-    "Character Creator - 03042026.md",
-    "World/The Second Republic Worldbuilding - 03232026.md",
-    "NPCs",
-    "Dev Docs/Weekly Milestones.md",
-    "Gameplay Loop.md",
-    "Welcome.md",
-    "Notes/Infraction Form Notes.md",
-    "World",
-    "Notes/J. Murray - 02232026.md",
-    "Notes/M. Evans - 03022026.md",
-    "Meeting about Arbiter - 03022026.md",
-    "Notes/Story Notes.md",
-    "Dev Docs/Pitch Doc.md",
-    "Dev Logs",
-    "Dev Docs.md",
-    "Dev Docs",
-    "Notes",
-    "Characters/Jean Rah.md",
-    "Characters",
-    "World"
-  ]
+  "active": "ec3fd3aebd5529a9",
+  "lastOpenFiles": []
 }
