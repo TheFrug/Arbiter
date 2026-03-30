@@ -9,3 +9,10 @@ I love humor, I love criticizing things through humor, I love designing worlds. 
 Maybe I'm not writing legit conversations? Its not like I've been interrogated by fascists before, so I don't know how that process would actually work. Maybe more time before questions? Is the interrogation/interview situation too suffocating for my creativity?
 
 I need to come up with 20 different premises that we can move to that carries over the skill checks, worldbuilding, and gameplay loop from this current Compliance Assessment idea. I feel like it needs revision. Maybe the protagonist's POV shouldn't be as a propagandized youth working for the state, but as a more neutral entity. Still a young person who grew up entirely within this fascist dystopia but starting from a position the player can influence towards either resistance or loyalty.
+
+---
+Talked to Professor Evans
+- DONT DO GIANT REVISION: What you have is good! 
+- You are in the slough part where the idea is no longer new and fresh. Its work now, its not as much fun, but that is normal and part of the process
+- Develop the first day with just two subjects. 
+- Create the *very rough* prototype of what the game could look like with one alternative 

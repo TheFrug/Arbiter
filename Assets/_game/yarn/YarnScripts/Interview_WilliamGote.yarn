@@ -158,11 +158,11 @@ Empathy: [Em]He smirks. What does he know?[/Em]
 
 title: WilliamGote_Loyalty
 ---
-Punk: The Republic pays my bills. 
-
-<<SkillCheck "YarnManager" "Insight" 6>>
+Punk: The Republic's been paying my bills for years and now they want to question my loyalty?
+Punk: Of course I'm loyal. If I weren't loyal, I'd be dead.
+<<SkillCheck "YarnManager" "Insight" 9>>
 <<if $last_check_success>>
-CONTENT
+[Im]Dead? What the fuck is he talking about?[/Im]
 <<endif>>
 
 <<SkillCheck "YarnManager" "Empathy" 9>>

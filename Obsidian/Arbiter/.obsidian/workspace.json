@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Districts.md",
+                "file": "The Problem.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Districts"
+              "title": "The Problem"
             }
           }
         ],
@@ -215,6 +215,7 @@
   "active": "1334b052f41e8d58",
   "lastOpenFiles": [
     "World/Worldbuilding Checklist - 03232026.md",
+    "Districts.md",
     "The Problem.md",
     "20 Alternative Roles.md",
     "NPCs/William Gote.md",
