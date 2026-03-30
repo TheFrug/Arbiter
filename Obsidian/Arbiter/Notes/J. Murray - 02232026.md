@@ -33,22 +33,18 @@ With Disco Elysium skill checks, maybe filling the form is too much?
 -- Empathy
 -- Insight
 
-
-
 Enemies to lovers romance between MC and anarchist
 "This is how you lose the time war"
 
 Difficult thing: Balancing the experience I want to deliver
 - Fun mechanical thing?
 - Provocative through writing
-- 
 - Maybe fun is not the right term for what I want to achieve
 - My Goal: Write interesting characters in weird situation
 - Disco Elysium dialogue is not 'fun'; its delivering an experience
 -- Can be funny at some points, humor is in service of building the emotion you want
 - Morality through gameplay choices
 - Disco Elysium: Harry D.B. changes retroactively based on player choices (backstory is slightly different depending on whatcha do)
-
 
 Confession Form:
 - Subject Name
@@ -74,4 +70,3 @@ Discourages players from picking options just to work through because someone wi
 Game can gotcha you on it later 
 - (Something worse happened to a person that you marked as OK)
 - Your decisions either grease or gum up the system's gears
-

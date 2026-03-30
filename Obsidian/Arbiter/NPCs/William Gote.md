@@ -11,5 +11,6 @@ Billy
 The Goat
 ## Occupation
 **Description:**
-
+Courier/Smuggler
 ## Loyalty
+Billy hates the state. They arrested his ma on bogus charges a long time ago, seemingly as a means of calling him out for his smuggling business, but this hasn't made Billy any more loyal. 

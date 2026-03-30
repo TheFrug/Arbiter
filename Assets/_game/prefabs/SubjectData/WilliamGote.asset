@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02005771a42ec3f4580367cefd49c1ae, type: 3}
   m_Name: WilliamGote
   m_EditorClassIdentifier: 
-  InterviewID: 
+  InterviewID: 02-91-1-4510
   Date: 
   displayName: William Gote
   occupation: 
-  yarnStartNode: 
+  yarnStartNode: Interview_WilliamGote
   portrait: {fileID: 0}
