@@ -1,4 +1,5 @@
 ﻿title: Interview_WilliamGote
+position: 957,-3
 ---
 // ==========================
 // ===== INITIAL SETUP ======
@@ -15,9 +16,11 @@
 // ==========================
 
 <<jump WilliamGote_Intro>>
+<<jump Node_1775067058752>>
 ===
 
 title: WilliamGote_Intro
+position: 942,215
 ---
 Narrator: A young man marches in, the extraneous zippers and chain on his clothing clinking with every heavy bootstep.
 Narrator: He crashes into his seat and glares at you.
@@ -46,12 +49,14 @@ Punk: Lets just get this over with.
 
 
 title: WilliamGote_Problem_Pass
+position: -16,663
 ---
 Punk: No.
 ===
 
 
 title: WilliamGote_Problem_Fail
+position: -363,228
 ---
 Punk: Other than your ugly mug? No.
 Force: [Fo]Asshole.[/Fo]
@@ -63,6 +68,7 @@ Force: [Fo]Asshole.[/Fo]
 // ==========================
 
 title: WilliamGote_Hub
+position: 1230,741
 ---
 You look at your compliance form. You have questions to ask.
 -> Please state your name. <<once>>
@@ -80,6 +86,7 @@ You look at your compliance form. You have questions to ask.
 // ===== NAME ===============
 // ==========================
 title: WilliamGote_Name
+position: 321,343
 ---
 Punk: Billy's my name.
 <<form_set_name YarnManager "Billy">>
@@ -105,6 +112,7 @@ Force: [Fo]Wait, you didn't fill his name out already, did you? That would be re
 ===
 
 title: WilliamGote_Name_PassNode
+position: -128,328
 ---
 Force: [Fo]That's right, we're not [i]just[/i] powerful, we're smart too.[/Fo]
 Insight: [In]You're welcome.[/In]
@@ -126,6 +134,7 @@ Insight:[In]He still hasn't told us his last name. He must think he's slick.[/In
 ===
 
 title: WilliamGote_Name_FailNode
+position: 90,-317
 ---
 [Fo]You meekly open your mouth to speak, but his [b]eyes[/b] pierce you. Your body tenses.[/Fo]
 Punk: What's wrong, pig? Got some boot stuck in your throat?
@@ -137,6 +146,7 @@ Punk: Seriously, lets move on.
 // ==========================
 
 title: WilliamGote_Occupation
+position: 368,-180
 ---
 <<form_set_occupation YarnManager "Courier">>
 Punk: I'm a bike-courier for Devon Mail.
@@ -147,22 +157,25 @@ Insight: [In]Devon Mail is a coast-to-coast postal business whose marketing feat
 Punk: I was en-route to a delivery when I was stopped for compliance. The republic has a knack for timing.
 <<SkillCheck "YarnManager" "Empathy" 8>>
 <<if $last_check_success>>
-Empathy: [Em]He smirks. What does he know?[/Em]
+Empathy: [Em]He's grinning. What does he know?[/Em]
 <<endif>>
 ===
-
 
 // ==========================
 // ===== LOYALTY ============
 // ==========================
 
 title: WilliamGote_Loyalty
+position: -158,-48
 ---
 Punk: The Republic's been paying my bills for years and now they want to question my loyalty?
 Punk: Of course I'm loyal. If I weren't loyal, I'd be dead.
 <<SkillCheck "YarnManager" "Insight" 9>>
 <<if $last_check_success>>
-[Im]Dead? What the fuck is he talking about?[/Im]
+Insight: [In]Dead? What the fuck is he talking about?[/In]
+-> What do you mean you'd be dead?
+    <<jump WilliamGote_Dead>>
+-> (Continue)
 <<endif>>
 
 <<SkillCheck "YarnManager" "Empathy" 9>>
@@ -174,14 +187,24 @@ CONTENT
 <<jump WilliamGote_Hub>>
 ===
 
+title: WilliamGote_Dead
+---
+
+===
 
 // ==========================
 // ===== END ================
 // ==========================
 
 title: WilliamGote_End
+position: 564,65
 ---
 CONTENT
 
 <<form_submit YarnManager>>
+===
+title: Node_1775067058752
+position: 1019,63
+---
+New node
 ===

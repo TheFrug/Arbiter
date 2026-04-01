@@ -1,0 +1,214 @@
+﻿title: Interview_EthanMiller
+---
+// ==========================
+// ===== INITIAL SETUP ======
+// ==========================
+
+<<form_reset YarnManager>>
+
+<<set $asked_name = false>>
+<<set $asked_occupation = false>>
+<<set $asked_loyalty = false>>
+
+// ==========================
+// ===== ENTRY POINT ========
+// ==========================
+
+<<jump EthanMiller_Intro>>
+===
+
+
+title: EthanMiller_Intro
+---
+A lad marches in wearing freshly-pressed khakis and a clean microfleece embroidered with the a red patch depicting the Statue of Harmony's torch.
+<<SkillCheck "YarnManager" "Force" 10>>
+<<if $last_check_success>>
+Force: [Fo]Ah, one of the Second Republic's many glorious symbols. Here we have a fine young patriot.[/Fo]
+<<endif>>
+<<SkillCheck "YarnManager" "Insight" 12>>
+<<if $last_check_success>>
+Insight: [In]The Beer Party, one of the Second Republic's many supporters, used to abhor the symbol of the Statue of Harmony's torch, as it then carried a different name.[/In]
+Insight: [In]Their stance officially changed once the Atlantic Bulwark Decree of 3AT saw the statue re-engineered to defend against naval threats, adding multiple heat-seeking missile launchers and rail gun stations in her crown.[/In]
+-> Have those guns been put to use yet?
+    Insight: [In]Unfortunately note, as the Second Republic hasn't faced a sea invasion in several decades.[/In]
+-> That sounds like a big waste of taxpayer money.
+    Insight: [In]Maybe, but the Second Republic hasn't faced a sea invasion in your lifetime. Be grateful.[/In] 
+-> God, I love this country.
+Insight: [In]After the statue's revision, the Beer Party adopted her as one of their symbols, particularly her torch, whose carmine inferno glows 24 hours a day.[/In]
+<<endif>>
+The young man sits upright in his chair and beams with excitement. You get the incredibly uncommon sense that this person respects you.
+Bright-Eyed Young Patriot: I'm ready for whatever questions you have for me, sir!
+<<SkillCheck "YarnManager" "Empathy" 1>>
+<<if $last_check_success>>
+Empathy: [Em]His face hides it well, but if this lad tensed up any more, his shoulders would be touching his earlobes.[/Em]
+<<endif>>
+-> Good morning.
+-> Hello, there.
+-> At ease, young man. I'm won't bite.<<if $last_check_success>> #skillcheck:Force:9 
+    <<SkillCheck "YarnManager" "Empathy" 9>>
+    <<if $last_check_success>>
+        <<detour EthanMiller_Ease_Pass>>
+    <<else>>
+        <<detour EthanMiller_Ease_Fail>>
+    <<endif>>
+<<jump EthanMiller_Hub>>
+===
+
+title: EthanMiller_Ease_Pass
+---
+He lets out a steady sigh, his posture starting to slouch a bit.
+Bright-Eyed Young Patriot: Yes, sir. Thank you, sir.
+Empathy: [Em]That felt nice, didn't it? We helped him relax.[/Em]
+Force: [Fo]He called us 'sir'. That feels right.[/Fo]
+-> You alright, my friend? You seem tense.
+    Bright-Eyed Young Patriot: *Sigh* Yeah, its just... its my first time doing this. My birthday was just a few weeks ago.
+    <<SkillCheck "YarnManager" "Insight" 10>>
+    <<if $last_check_success>>
+    Insight: [In]Compliance interviews are only conducted with Republic citizens of or over the age of eighteen.[/In]
+    Insight: [In]There is a growing population that wishes to lower this minimum age, given recent reports of anti-government terrorists recruiting children as young as thirteen.[/In]
+    <<endif>>
+    -> You'll be alright. It gets easier each time.
+    -> This is why we should start this process younger, that way you'd have more time to get used to it.
+    -> This should only make you nervous if you're infected with 'insubordinate thoughts'.
+-> Jeez, kid. I almost thought you were tweaking for a second, there.
+    Bright-Eyed Young Patriot: Tweaking? Sir, I'd never- I'm as sober as the day I was born!
+    -> Alright, alright, I'm just playing around. I know its just nerves. 
+    -> We'll just have to find out by asking some questions. 
+===
+
+title: EthanMiller_Ease_Fail
+---
+Empathy: [Em]Your frustration shines through as you growl the words at him and his teeth start to chatter. You could impale yourself on the cortisol spike.[/Em]
+Bright-Eyed Young Patriot: URP- Sorry, sir! Won't happen again, sir!
+Force: [Fo]He called us 'sir'. That feels right, at least.[/Fo]
+===
+
+// ==========================
+// ===== HUB LOOP ===========
+// ==========================
+
+title: EthanMiller_Hub
+---
+You look at your compliance form. You have questions to ask.
+-> Please state your name. <<once>>
+    <<jump EthanMiller_Name>>
+-> What is your current occupation? <<if not $asked_occupation>>
+    <<jump EthanMiller_Occupation>>
+-> Do you consider yourself loyal to the second republic? <<if not $asked_loyalty>>
+    <<jump EthanMiller_Loyalty>>
+-> I have everything I needed from you. Thank you. <<if $asked_name and $asked_occupation and $asked_loyalty>>
+    <<jump EthanMiller_End>>
+===
+
+// ==========================
+// ===== NAME ===============
+// ==========================
+
+title: EthanMiller_Name
+---
+CONTENT
+
+<<form_set_name YarnManager "CONTENT">>
+<<set $asked_name = true>>
+
+<<SkillCheck "YarnManager" "Empathy" 7>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<SkillCheck "YarnManager" "Insight" 7>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+-> CONTENT
+-> CONTENT <<if $last_check_success>>
+    <<detour EthanMiller_Name_Followup>>
+
+<<jump EthanMiller_Hub>>
+===
+
+
+title: EthanMiller_Name_Followup
+---
+CONTENT
+===
+
+
+// ==========================
+// ===== OCCUPATION =========
+// ==========================
+
+title: EthanMiller_Occupation
+---
+<<form_set_occupation YarnManager "CONTENT">>
+
+CONTENT
+
+<<SkillCheck "YarnManager" "Insight" 9>>
+<<if $last_check_success>>
+CONTENT
+
+    <<SkillCheck "YarnManager" "Empathy" 7>>
+    <<if $last_check_success>>
+    CONTENT
+    <<endif>>
+
+<<endif>>
+
+-> CONTENT
+-> CONTENT
+    <<form_set_occupation YarnManager "CONTENT">>
+
+<<set $asked_occupation = true>>
+<<jump EthanMiller_Hub>>
+===
+
+title: EthanMiller_Late_Pass
+---
+Bright-Eyed Young Patriot: Wow, sir, you really know your stuff! Technically, I'm a Junior Compliance Officer.
+Bright-Eyed Young Patriot: How'd you get so good at what ya do?
+-> Practice, mostly. 
+-> I do as I'm told and I don't deviate.
+-> When in doubt, I listen to the colored voices in my head.
+===
+
+
+title: EthanMiller_Late_Fail
+---
+CONTENT
+===
+
+// ==========================
+// ===== LOYALTY ============
+// ==========================
+
+title: EthanMiller_Loyalty
+---
+CONTENT
+
+<<SkillCheck "YarnManager" "Insight" 6>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<SkillCheck "YarnManager" "Empathy" 9>>
+<<if $last_check_success>>
+CONTENT
+<<endif>>
+
+<<set $asked_loyalty = true>>
+<<jump EthanMiller_Hub>>
+===
+
+
+// ==========================
+// ===== END ================
+// ==========================
+
+title: EthanMiller_End
+---
+CONTENT
+
+<<form_submit YarnManager>>
+===

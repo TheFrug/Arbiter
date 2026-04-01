@@ -1,6 +1,8 @@
-﻿title: Init
+title: Init
+position: 77,-135
 ---
-// --- Variables ---
+// --- Variables --- 
+//MOVE ALL THESE TO THE CHARACTER CREATOR??? 
 <<declare $lastCheckSuccess = false>>
 <<declare $lastRollTotal = 0>>
 <<declare $lastRollStat = 0>>
@@ -31,6 +33,7 @@
 ===
 
 title: SkillCheckTest1
+position: 157,81
 ---
 
 Narrator: Choose.
@@ -54,17 +57,20 @@ Narrator: Choose.
 ===
 
 title: MeanMug_Pass
+position: 92,426
 ---
 Force: [Fo]They are willows against the gale of your dominance.[/Fo]
 Force: uuuuh
 ===
 
 title: MeanMug_Fail
+position: 361,298
 ---
 Force: [Fo]No reaction...[/Fo]
 ===
 
 title: End
+position: 802,12
 ---
 Empathy: [Em]The moment from has passed[/Em]
 <<SkillCheck "YarnManager" "Force" 2>>
