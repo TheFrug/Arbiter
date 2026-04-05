@@ -1,4 +1,4 @@
-﻿title: Interview_EthanMiller
+﻿title: Interview_EethinMiller
 ---
 // ==========================
 // ===== INITIAL SETUP ======
@@ -14,23 +14,23 @@
 // ===== ENTRY POINT ========
 // ==========================
 
-<<jump EthanMiller_Intro>>
+<<jump EethinMiller_Intro>>
 ===
 
 
-title: EthanMiller_Intro
+title: EethinMiller_Intro
 ---
-A lad marches in wearing freshly-pressed khakis and a clean microfleece embroidered with the a red patch depicting the Statue of Harmony's torch.
+A lad marches in wearing freshly-pressed khakis and a worn microfleece embroidered with the a red patch depicting the Statue of Harmony's torch.
 <<SkillCheck "YarnManager" "Force" 10>>
 <<if $last_check_success>>
 Force: [Fo]Ah, one of the Second Republic's many glorious symbols. Here we have a fine young patriot.[/Fo]
 <<endif>>
 <<SkillCheck "YarnManager" "Insight" 12>>
 <<if $last_check_success>>
-Insight: [In]The Beer Party, one of the Second Republic's many supporters, used to abhor the symbol of the Statue of Harmony's torch, as it then carried a different name.[/In]
-Insight: [In]Their stance officially changed once the Atlantic Bulwark Decree of 3AT saw the statue re-engineered to defend against naval threats, adding multiple heat-seeking missile launchers and rail gun stations in her crown.[/In]
+Insight: [In]The Beer Party, one of the political groups that founded the Second Republic, used to abhor the image the Statue of Harmony's torch, as it's copper bearer then carried a different name.[/In]
+Insight: [In]Their stance officially changed once the Atlantic Bulwark Decree of 3AT saw the statue re-engineered to defend against naval threats, adding multiple heat-seeking missile launchers at her base and rail guns in her crown.[/In]
 -> Have those guns been put to use yet?
-    Insight: [In]Unfortunately note, as the Second Republic hasn't faced a sea invasion in several decades.[/In]
+    Insight: [In]Unfortunately not, as the Second Republic hasn't faced a sea invasion in several decades.[/In]
 -> That sounds like a big waste of taxpayer money.
     Insight: [In]Maybe, but the Second Republic hasn't faced a sea invasion in your lifetime. Be grateful.[/In] 
 -> God, I love this country.
@@ -38,23 +38,23 @@ Insight: [In]After the statue's revision, the Beer Party adopted her as one of t
 <<endif>>
 The young man sits upright in his chair and beams with excitement. You get the incredibly uncommon sense that this person respects you.
 Bright-Eyed Young Patriot: I'm ready for whatever questions you have for me, sir!
-<<SkillCheck "YarnManager" "Empathy" 1>>
+<<SkillCheck "YarnManager" "Empathy" 10>>
 <<if $last_check_success>>
 Empathy: [Em]His face hides it well, but if this lad tensed up any more, his shoulders would be touching his earlobes.[/Em]
 <<endif>>
 -> Good morning.
 -> Hello, there.
--> At ease, young man. I'm won't bite.<<if $last_check_success>> #skillcheck:Force:9 
+-> At ease, young man. I'm won't bite.<<if $last_check_success>> #skillcheck:Empathy:9 
     <<SkillCheck "YarnManager" "Empathy" 9>>
     <<if $last_check_success>>
-        <<detour EthanMiller_Ease_Pass>>
+        <<detour EethinMiller_Ease_Pass>>
     <<else>>
-        <<detour EthanMiller_Ease_Fail>>
+        <<detour EethinMiller_Ease_Fail>>
     <<endif>>
-<<jump EthanMiller_Hub>>
+<<jump EethinMiller_Hub>>
 ===
 
-title: EthanMiller_Ease_Pass
+title: EethinMiller_Ease_Pass
 ---
 He lets out a steady sigh, his posture starting to slouch a bit.
 Bright-Eyed Young Patriot: Yes, sir. Thank you, sir.
@@ -76,9 +76,9 @@ Force: [Fo]He called us 'sir'. That feels right.[/Fo]
     -> We'll just have to find out by asking some questions. 
 ===
 
-title: EthanMiller_Ease_Fail
+title: EethinMiller_Ease_Fail
 ---
-Empathy: [Em]Your frustration shines through as you growl the words at him and his teeth start to chatter. You could impale yourself on the cortisol spike.[/Em]
+Empathy: [Em]Your frustration shines through as you growl the words at him and his teeth start to chatter. You could impale yourself on his cortisol spike.[/Em]
 Bright-Eyed Young Patriot: URP- Sorry, sir! Won't happen again, sir!
 Force: [Fo]He called us 'sir'. That feels right, at least.[/Fo]
 ===
@@ -87,62 +87,69 @@ Force: [Fo]He called us 'sir'. That feels right, at least.[/Fo]
 // ===== HUB LOOP ===========
 // ==========================
 
-title: EthanMiller_Hub
+title: EethinMiller_Hub
 ---
 You look at your compliance form. You have questions to ask.
 -> Please state your name. <<once>>
-    <<jump EthanMiller_Name>>
+    <<jump EethinMiller_Name>>
 -> What is your current occupation? <<if not $asked_occupation>>
-    <<jump EthanMiller_Occupation>>
+    <<jump EethinMiller_Occupation>>
 -> Do you consider yourself loyal to the second republic? <<if not $asked_loyalty>>
-    <<jump EthanMiller_Loyalty>>
+    <<jump EethinMiller_Loyalty>>
 -> I have everything I needed from you. Thank you. <<if $asked_name and $asked_occupation and $asked_loyalty>>
-    <<jump EthanMiller_End>>
+    <<jump EethinMiller_End>>
 ===
 
 // ==========================
 // ===== NAME ===============
 // ==========================
 
-title: EthanMiller_Name
+title: EethinMiller_Name
 ---
-CONTENT
-
-<<form_set_name YarnManager "CONTENT">>
+Bright-Eyed Young Patriot: My full name is Ethan Roosevelt Miller, sir!
+Bright-Eyed Young Patriot: I should spell that for you. That's Miller spelt with an M-I...
+<<SkillCheck "YarnManager" "Force" 7>>
+<<if $last_check_success>>
+Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could do it.[/Fo]
+<<endif>>
+-> I know how to spell your name, kid.
+    <<form_set_name YarnManager "Ethan Roosevelt Miller">>
+-> (Let him continue spelling)
+    Bright-Eyed Young Patriot: L-L-E-R! My middle name, Roosevelt, is spelt R-O-O...
+    <<SkillCheck "YarnManager" "Force" 8>>
+    <<if $last_check_success>>
+    Force: [Fo]He's seriously going to spell out his whole name if you don't stop him.[/Fo]
+    <<endif>>
+    -> Alright, alright. I think I can get the rest.
+        <<form_set_name YarnManager "Ethan Roosevelt Miller">>
+    -> (Might as well let him finish)
+    Bright-Eyed Young Patriot: S-E-V-E-L-T! My first name's tricky. It's spelt E-E-T-H-I-N.
+        <<form_set_name YarnManager "Eethin Roosevelt Miller">>
+        <<SkillCheck "YarnManager" "Empathy" 14>>
+        <<if $last_check_success>>
+        Empathy:[Em]There is a tinge of frustration in his use of the word "tricky" that gives you the sense he has apologized for his name many times before.[/Em]
+        <<endif>>
+        Bright-Eyed Young Patriot: I know that's an unsual spelling.
+        <<SkillCheck "YarnManager" "Force" 9>>
+        <<if $last_check_success>>
+        Force: [Fo]What the fuck kind of spelling of 'Ethan' is that?[/Fo]
+        <<endif>>
+        <<SkillCheck "YarnManager" "Insight" 12>>
+        <<if $last_check_success>>
+        Insight: [In]New mothers sometimes alter the spellings of common names to give their child's name a unique flair.[/In]
+        Insight: [In]This trend started before even the birth of the Second Republic, but has ramped up in recent times with declining literacy rates.[/In]
+        <<endif>>
 <<set $asked_name = true>>
-
-<<SkillCheck "YarnManager" "Empathy" 7>>
-<<if $last_check_success>>
-CONTENT
-<<endif>>
-
-<<SkillCheck "YarnManager" "Insight" 7>>
-<<if $last_check_success>>
-CONTENT
-<<endif>>
-
--> CONTENT
--> CONTENT <<if $last_check_success>>
-    <<detour EthanMiller_Name_Followup>>
-
-<<jump EthanMiller_Hub>>
+<<jump EethinMiller_Hub>>
 ===
-
-
-title: EthanMiller_Name_Followup
----
-CONTENT
-===
-
 
 // ==========================
 // ===== OCCUPATION =========
 // ==========================
 
-title: EthanMiller_Occupation
+title: EethinMiller_Occupation
 ---
-<<form_set_occupation YarnManager "CONTENT">>
-
+<<form_set_occupation YarnManager "Compliance Officer">>
 CONTENT
 
 <<SkillCheck "YarnManager" "Insight" 9>>
@@ -161,10 +168,10 @@ CONTENT
     <<form_set_occupation YarnManager "CONTENT">>
 
 <<set $asked_occupation = true>>
-<<jump EthanMiller_Hub>>
+<<jump EethinMiller_Hub>>
 ===
 
-title: EthanMiller_Late_Pass
+title: EethinMiller_Late_Pass
 ---
 Bright-Eyed Young Patriot: Wow, sir, you really know your stuff! Technically, I'm a Junior Compliance Officer.
 Bright-Eyed Young Patriot: How'd you get so good at what ya do?
@@ -174,7 +181,7 @@ Bright-Eyed Young Patriot: How'd you get so good at what ya do?
 ===
 
 
-title: EthanMiller_Late_Fail
+title: EethinMiller_Late_Fail
 ---
 CONTENT
 ===
@@ -183,7 +190,7 @@ CONTENT
 // ===== LOYALTY ============
 // ==========================
 
-title: EthanMiller_Loyalty
+title: EethinMiller_Loyalty
 ---
 CONTENT
 
@@ -198,7 +205,7 @@ CONTENT
 <<endif>>
 
 <<set $asked_loyalty = true>>
-<<jump EthanMiller_Hub>>
+<<jump EethinMiller_Hub>>
 ===
 
 
@@ -206,7 +213,7 @@ CONTENT
 // ===== END ================
 // ==========================
 
-title: EthanMiller_End
+title: EethinMiller_End
 ---
 CONTENT
 

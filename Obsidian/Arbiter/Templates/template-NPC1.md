@@ -12,5 +12,5 @@ RC-DN-G-BYYY
 **Nicknames (if any):**
 ### Occupation
 **Description:**
-**Interesting Facts:**
+**Interesting Lore:**
 ### Loyalty
