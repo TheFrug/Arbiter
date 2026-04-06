@@ -149,61 +149,73 @@ Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could
 
 title: EethinMiller_Occupation
 ---
-<<form_set_occupation YarnManager "Compliance Officer">>
-CONTENT
-
-<<SkillCheck "YarnManager" "Insight" 9>>
+Bright-Eyed Young Patriot: You might not believe this, but I'm a compliance offcer like you! 
+<<SkillCheck "YarnManager" "Force" 12>>
 <<if $last_check_success>>
-CONTENT
-
-    <<SkillCheck "YarnManager" "Empathy" 7>>
-    <<if $last_check_success>>
-    CONTENT
-    <<endif>>
-
+Force:[Fo]This guy's a compliance officer? I can see the potential, but there's no way he's experienced enough, yet.[/Fo]
+Insight:[In]Unless we're talking to a [b]legendary[/b] servant of the Republic.[/In]
 <<endif>>
-
--> CONTENT
--> CONTENT
-    <<form_set_occupation YarnManager "CONTENT">>
-
+-> Great career choice.
+    <<form_set_occupation YarnManager "Compliance Officer">>
+    <<SkillCheck "YarnManager" "Empathy" 9>>
+    <<if $last_check_success>>
+    Empathy: [Em]For just a moment, he smirks.[/Em]
+    <<endif>>
+-> You seem a little young for that position. #skillcheck:Force:13 
+    <<SkillCheck "YarnManager" "Force" 13>>
+    <<if $last_check_success>>
+        <<detour EethinMiller_Press_Pass>>
+    <<else>>
+        <<detour EethinMiller_Press_Fail>>
+    <<endif>>
+//-> Hold on a second, are you some kind of legend? <<if $last_check_success>>
+//    <<detour EethinMiller_Press_Pass>>
 <<set $asked_occupation = true>>
 <<jump EethinMiller_Hub>>
 ===
 
-title: EethinMiller_Late_Pass
+title: EethinMiller_Press_Pass
 ---
+<<form_set_occupation YarnManager "Junior Compliance Officer">>
 Bright-Eyed Young Patriot: Wow, sir, you really know your stuff! Technically, I'm a Junior Compliance Officer.
-Bright-Eyed Young Patriot: How'd you get so good at what ya do?
+Force: [Fo]HAH! I knew it![/Fo]
+Bright-Eyed Young Patriot: How'd you get so good at the job? I want to be the best in the whole Republic!
 -> Practice, mostly. 
--> I do as I'm told and I don't deviate.
+-> Do as you're told and do not deviate.
 -> When in doubt, I listen to the colored voices in my head.
 ===
 
-
-title: EethinMiller_Late_Fail
+title: EethinMiller_Press_Fail
 ---
-CONTENT
+Force:[Fo]Your observation comes off pathetic, like a geriatric musician talking down to a young star. Can't you just let people be talented?[/Fo]
+<<form_set_occupation YarnManager "Junior Compliance Officer">>
+Bright-Eyed Young Patriot: To be honest, sir, I am! But I'm not far from it. To tell you the truth, I'm only a Junior Compliance Officer with big dreams!
+<<SkillCheck "YarnManager" "Insight" 16>>
+<<if $last_check_success>>
+Insight: [In]The average junior compliance officer starts the job at twenty. You were twenty-two, nothing to be ashamed of.[/In]
+<<endif>>
+<<SkillCheck "YarnManager" "Force" 13>>
+<<if $last_check_success>>
+Force:[Fo]The little shit is testing us, like saying 'nya nya, I'm on the fast track in life.'[/Fo]
+Force:[Fo]He should watch his back. Right now, he's just a subject, and you're a mighty compliance officer. You could ruin his life with just a piece of paper.[/Fo]
+<<endif>>
 ===
 
 // ==========================
 // ===== LOYALTY ============
 // ==========================
-
 title: EethinMiller_Loyalty
 ---
-CONTENT
-
-<<SkillCheck "YarnManager" "Insight" 6>>
+Bright-Eyed Young Patriot: I give my heart, my mind, and my body to the Second Republic to do with it as she pleases!
+<<SkillCheck "YarnManager" "Force" 16>>
 <<if $last_check_success>>
-CONTENT
+The Voice of Someone Important:[Fo]*Sniff* It's enough to make me cry.[/Fo]
 <<endif>>
-
-<<SkillCheck "YarnManager" "Empathy" 9>>
+Bright-Eyed Young Patriot: Although its the only one I've ever known, the Second Republic is the greatest country in the world!
+<<SkillCheck "YarnManager" "Empathy" 14>>
 <<if $last_check_success>>
-CONTENT
+Empathy:[Em]His eyes dart around the room, searching for extra eyes and ears.[/Em]
 <<endif>>
-
 <<set $asked_loyalty = true>>
 <<jump EethinMiller_Hub>>
 ===
@@ -215,7 +227,6 @@ CONTENT
 
 title: EethinMiller_End
 ---
-CONTENT
-
+Bright-Eyed Young Patriot: Thanks so much for the experience! God bless the Second Republic!
 <<form_submit YarnManager>>
 ===

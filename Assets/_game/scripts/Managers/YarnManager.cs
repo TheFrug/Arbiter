@@ -243,6 +243,99 @@ public class YarnManager : MonoBehaviour
     }
 
     // =========================================================
+    // ================= PERFORMANCE EVALUATION =================
+    // =========================================================
+
+    [YarnCommand("get_total_score")]
+    public void GetTotalScore()
+    {
+        if (ComplianceResultsManager.Instance == null)
+        {
+            Debug.LogWarning("No ComplianceResultsManager found.");
+            return;
+        }
+
+        var results = ComplianceResultsManager.Instance.EvaluateAll();
+
+        int total = 0;
+        int max = 0;
+
+        foreach (var r in results)
+        {
+            total += r.score;
+            max += r.maxScore;
+        }
+
+        variableStorage.SetValue("$totalScore", total);
+        variableStorage.SetValue("$maxScore", max);
+
+        Debug.Log($"Total Score: {total}/{max}");
+    }
+
+
+    [YarnCommand("get_subject_score")]
+    public void GetSubjectScore(string interviewID)
+    {
+        if (ComplianceResultsManager.Instance == null)
+        {
+            Debug.LogWarning("No ComplianceResultsManager found.");
+            return;
+        }
+
+        var results = ComplianceResultsManager.Instance.EvaluateAll();
+        var result = results.Find(r => r.interviewID == interviewID);
+
+        if (result != null)
+        {
+            variableStorage.SetValue("$subjectScore", result.score);
+            variableStorage.SetValue("$subjectMax", result.maxScore);
+
+            Debug.Log($"Subject {interviewID}: {result.score}/{result.maxScore}");
+        }
+        else
+        {
+            variableStorage.SetValue("$subjectScore", 0);
+            variableStorage.SetValue("$subjectMax", 0);
+
+            Debug.LogWarning($"No result found for {interviewID}");
+        }
+    }
+
+    [YarnCommand("get_subject_breakdown")]
+    public void GetSubjectBreakdown(string interviewID)
+    {
+        var results = ComplianceResultsManager.Instance.EvaluateAll();
+        var result = results.Find(r => r.interviewID == interviewID);
+
+        if (result == null)
+        {
+            Debug.LogWarning($"No result for {interviewID}");
+            return;
+        }
+
+        variableStorage.SetValue("$nameCorrect", result.nameCorrect);
+        variableStorage.SetValue("$occupationCorrect", result.occupationCorrect);
+        variableStorage.SetValue("$loyaltyCorrect", result.loyaltyCorrect);
+
+        variableStorage.SetValue("$subjectScore", result.score);
+        variableStorage.SetValue("$subjectMax", result.maxScore);
+    }
+
+    [YarnCommand("end_day")]
+    public void EndDay(string message = "end")
+    {
+        PauseMenuUI pause = FindObjectOfType<PauseMenuUI>();
+
+        if (pause == null)
+        {
+            Debug.LogWarning("PauseMenuUI not found.");
+            return;
+        }
+
+        pause.ShowEndScreen(message);
+    }
+
+    // =========================================================
     // ================= DEBUG / UTILITIES =====================
     // =========================================================
 

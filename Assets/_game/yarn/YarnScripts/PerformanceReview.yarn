@@ -1,0 +1,101 @@
+﻿title: PerformanceReview
+---
+<<get_total_score "YarnManager">>
+A figure steps into the room. Their presence is suffocatingly calm.
+Reviewer: Your shift has concluded, Arbiter.
+Reviewer: Let us review your performance.
+<<if $totalScore >= $maxScore * 0.75>>
+    Reviewer: You have performed well.
+<<elseif $totalScore >= $maxScore * 0.4>>
+    Reviewer: Your performance was... acceptable.
+<<else>>
+    Reviewer: Your performance is deeply concerning.
+<<endif>>
+-> Continue
+    <<jump PerformanceReview_Mary>>
+===
+
+title: PerformanceReview_Mary
+---
+<<get_subject_breakdown "YarnManager" "MaryGonzalez">>
+
+Reviewer: Subject: Mary Gonzalez.
+<<if not $nameCorrect>>
+    Reviewer: You failed to correctly record her identity.
+<<endif>>
+<<if not $occupationCorrect>>
+    Reviewer: You misrepresented her occupation.
+<<endif>>
+<<if not $loyaltyCorrect>>
+    Reviewer: Your loyalty assessment was flawed.
+    Reviewer: She expressed sentiments bordering on ideological deviation.
+<<endif>>
+<<if $subjectScore == $subjectMax>>
+    Reviewer: A precise and efficient evaluation.
+<<elseif $subjectScore > ($subjectMax / 2)>>
+    Reviewer: Some errors, but nothing catastrophic.
+<<else>>
+    Reviewer: This report is unreliable.
+<<endif>>
+-> Continue
+    <<jump PerformanceReview_Eethin>>
+===
+
+title: PerformanceReview_Eethin
+---
+<<get_subject_breakdown "YarnManager" "EethinMiller">>
+Reviewer: Subject: Eethin Roosevelt Miller.
+<<if not $nameCorrect>>
+    Reviewer: You filled out his name wrong, in part because you interrupted his spelling.
+    Reviewer: You should know how common a spelling 'EE-thin' is. 
+<<endif>>
+<<if not $occupationCorrect>>
+    Reviewer: His position within the Compliance structure was incorrectly recorded.
+    Reviewer: Given his evasive answer, we can forgive this. 
+<<endif>>
+<<if not $loyaltyCorrect>>
+    Reviewer: You underrestimated his loyalty.
+    Reviewer: The Republic should seek to uplift devoted youths like him. 
+<<endif>>
+<<if $subjectScore == $subjectMax>>
+    Reviewer: A flawless assessment.
+<<elseif $subjectScore > ($subjectMax / 2)>>
+    Reviewer: Your results are adequate.
+<<else>>
+    Reviewer: A complete failure in judgment. Your betters [b]will[/b] hear of this.
+    <<SkillCheck "YarnManager" "Force" 10>>
+    <<if $last_check_success>>
+    Force: [Fo]Damn.[/Fo]
+    <<endif>>
+<<endif>>
+-> (Final Evaluation)
+    <<jump PerformanceReview_Final>>
+===
+
+title: PerformanceReview_Final
+---
+<<get_total_score "YarnManager">>
+Reviewer: Here's the results overall:
+<<if $totalScore >= $maxScore * 0.85>>
+    Reviewer: I rarely say this, but I'm impressed.
+    Reviewer: Continue in this manner, and the Republic will reward you greatly for your service.
+    <<SkillCheck "YarnManager" "Force" 12>>
+    <<if $last_check_success>>
+        Force: [Fo]Boosh.[/Fo]
+    <<endif>>
+<<elseif $totalScore >= $maxScore * 0.5>>
+    Reviewer: Your performance was... adequate. 
+    Reviewer: We expect improvement.
+<<else>>
+    Reviewer: Your performance was lacking.
+    Reviewer: Keep in mind there are many 'Eethins' out there jumping to take your place.
+    <<SkillCheck "YarnManager" "Force" 12>>
+    <<if $last_check_success>>
+        Force: [Fo]If I were more than just a fragment of your psyche and had a physical form, I'd be shitting my physical pants.[/Fo]
+    <<endif>>
+<<endif>>
+Reviewer: That will be all for today. We'll see you tomorrow.
+-> End Day
+
+<<end_day "YarnManager" "END">>
+===

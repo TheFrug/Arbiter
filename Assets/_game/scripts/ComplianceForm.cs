@@ -202,6 +202,7 @@ public class ComplianceForm : MonoBehaviour
         };
 
         OnFormSubmitted?.Invoke(data);
+        ComplianceResultsManager.Instance?.RegisterForm(data);
     }
 
     #endregion
