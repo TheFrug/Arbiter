@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MaryGonzalez
   m_EditorClassIdentifier: 
   InterviewID: MaryGonzalez
-  Date: 04-11-55
+  Date: 04-11-45
   displayName: Mary Gonzalez
   occupation: Gardener
-  IdentificationCode: 77-5921-A
+  IdentificationCode: 05-09-2-9180
   correctName: Mary Gonzalez
   correctOccupation: Gardener
   correctLoyalty: 2

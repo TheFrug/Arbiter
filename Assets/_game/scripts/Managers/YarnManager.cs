@@ -249,11 +249,7 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("get_total_score")]
     public void GetTotalScore()
     {
-        if (ComplianceResultsManager.Instance == null)
-        {
-            Debug.LogWarning("No ComplianceResultsManager found.");
-            return;
-        }
+        if (ComplianceResultsManager.Instance == null) return;
 
         var results = ComplianceResultsManager.Instance.EvaluateAll();
 
@@ -262,25 +258,20 @@ public class YarnManager : MonoBehaviour
 
         foreach (var r in results)
         {
-            total += r.score;
-            max += r.maxScore;
+            total += r.score;      // use already computed score
+            max += r.maxScore;     // use already computed maxScore
         }
 
         variableStorage.SetValue("$totalScore", total);
         variableStorage.SetValue("$maxScore", max);
 
-        Debug.Log($"Total Score: {total}/{max}");
+        Debug.Log($"Total Score (flag-based): {total}/{max}");
     }
-
 
     [YarnCommand("get_subject_score")]
     public void GetSubjectScore(string interviewID)
     {
-        if (ComplianceResultsManager.Instance == null)
-        {
-            Debug.LogWarning("No ComplianceResultsManager found.");
-            return;
-        }
+        if (ComplianceResultsManager.Instance == null) return;
 
         var results = ComplianceResultsManager.Instance.EvaluateAll();
         var result = results.Find(r => r.interviewID == interviewID);
@@ -290,7 +281,7 @@ public class YarnManager : MonoBehaviour
             variableStorage.SetValue("$subjectScore", result.score);
             variableStorage.SetValue("$subjectMax", result.maxScore);
 
-            Debug.Log($"Subject {interviewID}: {result.score}/{result.maxScore}");
+            Debug.Log($"Subject {interviewID} score: {result.score}/{result.maxScore}");
         }
         else
         {
@@ -307,11 +298,7 @@ public class YarnManager : MonoBehaviour
         var results = ComplianceResultsManager.Instance.EvaluateAll();
         var result = results.Find(r => r.interviewID == interviewID);
 
-        if (result == null)
-        {
-            Debug.LogWarning($"No result for {interviewID}");
-            return;
-        }
+        if (result == null) return;
 
         variableStorage.SetValue("$nameCorrect", result.nameCorrect);
         variableStorage.SetValue("$occupationCorrect", result.occupationCorrect);

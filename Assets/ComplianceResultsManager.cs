@@ -65,8 +65,11 @@ public class ComplianceResultsManager : MonoBehaviour
             var subject = GetSubject(form.interviewID);
             if (subject == null) continue;
 
+            // Ensure arrays are same length for comparison
+            int flagCount = Mathf.Min(form.behaviorFlags.Length, subject.correctBehaviorFlags.Length);
+
             int score = 0;
-            int max = 3 + subject.correctBehaviorFlags.Length;
+            int max = 3 + flagCount; // 3 base points (name, occupation, loyalty) + behavior flags
 
             bool nameCorrect = form.subjectName == subject.correctName;
             bool occupationCorrect = form.occupation == subject.correctOccupation;
@@ -76,11 +79,10 @@ public class ComplianceResultsManager : MonoBehaviour
             if (occupationCorrect) score++;
             if (loyaltyCorrect) score++;
 
-            // Behavior flags
-            for (int i = 0; i < subject.correctBehaviorFlags.Length; i++)
+            // Behavior flags comparison
+            for (int i = 0; i < flagCount; i++)
             {
-                if (i < form.behaviorFlags.Length &&
-                    form.behaviorFlags[i] == subject.correctBehaviorFlags[i])
+                if (form.behaviorFlags[i] == subject.correctBehaviorFlags[i])
                 {
                     score++;
                 }
@@ -91,11 +93,13 @@ public class ComplianceResultsManager : MonoBehaviour
                 interviewID = form.interviewID,
                 score = score,
                 maxScore = max,
-
                 nameCorrect = nameCorrect,
                 occupationCorrect = occupationCorrect,
                 loyaltyCorrect = loyaltyCorrect
             });
+
+            // Debug log for rapid testing
+            Debug.Log($"Evaluated {form.interviewID}: Name({nameCorrect}), Occ({occupationCorrect}), Loyalty({loyaltyCorrect}), Score({score}/{max})");
         }
 
         return results;
