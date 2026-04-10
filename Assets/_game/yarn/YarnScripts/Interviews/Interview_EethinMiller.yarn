@@ -27,7 +27,7 @@ Force: [Fo]Ah, one of the Second Republic's many glorious symbols. Here we have 
 <<endif>>
 <<SkillCheck "YarnManager" "Insight" 12>>
 <<if $last_check_success>>
-Insight: [In]The Beer Party, one of the political groups that founded the Second Republic, used to abhor the image the Statue of Harmony's torch, as it's copper bearer then carried a different name.[/In]
+Insight: [In]The Beer Party, one of the political groups that founded the Second Republic, used to abhor the image the Statue of Harmony's torch, as its copper bearer then carried a different name.[/In]
 Insight: [In]Their stance officially changed once the Atlantic Bulwark Decree of 3AT saw the statue re-engineered to defend against naval threats, adding multiple heat-seeking missile launchers at her base and rail guns in her crown.[/In]
 -> Have those guns been put to use yet?
     Insight: [In]Unfortunately not, as the Second Republic hasn't faced a sea invasion in several decades.[/In]
@@ -44,7 +44,7 @@ Empathy: [Em]His face hides it well, but if this lad tensed up any more, his sho
 <<endif>>
 -> Good morning.
 -> Hello, there.
--> At ease, young man. I'm won't bite.<<if $last_check_success>> #skillcheck:Empathy:9 
+-> At ease, young man. I won't bite.<<if $last_check_success>> #skillcheck:Empathy:9 
     <<SkillCheck "YarnManager" "Empathy" 9>>
     <<if $last_check_success>>
         <<detour EethinMiller_Ease_Pass>>
@@ -61,7 +61,7 @@ Bright-Eyed Young Patriot: Yes, sir. Thank you, sir.
 Empathy: [Em]That felt nice, didn't it? We helped him relax.[/Em]
 Force: [Fo]He called us 'sir'. That feels right.[/Fo]
 -> You alright, my friend? You seem tense.
-    Bright-Eyed Young Patriot: *Sigh* Yeah, its just... its my first time doing this. My birthday was just a few weeks ago.
+    Bright-Eyed Young Patriot: *Sigh* Yeah, it's just... it's my first time doing this. My birthday was just a few weeks ago.
     <<SkillCheck "YarnManager" "Insight" 10>>
     <<if $last_check_success>>
     Insight: [In]Compliance interviews are only conducted with Republic citizens of or over the age of eighteen.[/In]
@@ -72,7 +72,7 @@ Force: [Fo]He called us 'sir'. That feels right.[/Fo]
     -> This should only make you nervous if you're infected with 'insubordinate thoughts'.
 -> Jeez, kid. I almost thought you were tweaking for a second, there.
     Bright-Eyed Young Patriot: Tweaking? Sir, I'd never- I'm as sober as the day I was born!
-    -> Alright, alright, I'm just playing around. I know its just nerves. 
+    -> Alright, alright, I'm just playing around. I know it's just nerves. 
     -> We'll just have to find out by asking some questions. 
 ===
 
@@ -207,11 +207,11 @@ Force:[Fo]He should watch his back. Right now, he's just a subject, and you're a
 title: EethinMiller_Loyalty
 ---
 Bright-Eyed Young Patriot: I give my heart, my mind, and my body to the Second Republic to do with it as she pleases!
-<<SkillCheck "YarnManager" "Force" 16>>
+<<SkillCheck "YarnManager" "Force" 13>>
 <<if $last_check_success>>
 The Voice of Someone Important:[Fo]*Sniff* It's enough to make me cry.[/Fo]
 <<endif>>
-Bright-Eyed Young Patriot: Although its the only one I've ever known, the Second Republic is the greatest country in the world!
+Bright-Eyed Young Patriot: Although it's the only one I've ever known, the Second Republic is the greatest country in the world!
 <<SkillCheck "YarnManager" "Empathy" 14>>
 <<if $last_check_success>>
 Empathy:[Em]His eyes dart around the room, searching for extra eyes and ears.[/Em]
