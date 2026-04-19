@@ -36,6 +36,11 @@ public class YarnManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Add this to your YarnManager Awake or Start
+        dialogueRunner.AddFunction("is_form_complete", () => {
+            return complianceForm.IsFormComplete;
+        });
     }
 
     public void RegisterSceneDependencies(
@@ -106,6 +111,7 @@ public class YarnManager : MonoBehaviour
 
         complianceForm.ResetForm();
     }
+
 
 
     // =========================================================
@@ -295,17 +301,33 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("get_subject_breakdown")]
     public void GetSubjectBreakdown(string interviewID)
     {
+        if (ComplianceResultsManager.Instance == null) return;
+
+        // Normalize the input string
+        string targetID = interviewID.Trim();
         var results = ComplianceResultsManager.Instance.EvaluateAll();
-        var result = results.Find(r => r.interviewID == interviewID);
+        var result = results.Find(r => r.interviewID.Trim() == targetID);
 
-        if (result == null) return;
+        if (result != null)
+        {
+            variableStorage.SetValue("$nameCorrect", result.nameCorrect);
+            variableStorage.SetValue("$occupationCorrect", result.occupationCorrect);
+            variableStorage.SetValue("$loyaltyCorrect", result.loyaltyCorrect);
+            variableStorage.SetValue("$subjectScore", (float)result.score);
+            variableStorage.SetValue("$subjectMax", (float)result.maxScore);
 
-        variableStorage.SetValue("$nameCorrect", result.nameCorrect);
-        variableStorage.SetValue("$occupationCorrect", result.occupationCorrect);
-        variableStorage.SetValue("$loyaltyCorrect", result.loyaltyCorrect);
-
-        variableStorage.SetValue("$subjectScore", result.score);
-        variableStorage.SetValue("$subjectMax", result.maxScore);
+            Debug.Log($"Breakdown found for {targetID}: Name:{result.nameCorrect}, Score:{result.score}");
+        }
+        else
+        {
+            // This is why you get "Wrong -> Wrong -> Wrong"
+            Debug.LogWarning($"Yarn requested breakdown for '{targetID}', but no submitted form matches that ID.");
+            variableStorage.SetValue("$nameCorrect", false);
+            variableStorage.SetValue("$occupationCorrect", false);
+            variableStorage.SetValue("$loyaltyCorrect", false);
+            variableStorage.SetValue("$subjectScore", 0f);
+            variableStorage.SetValue("$subjectMax", 0f);
+        }
     }
 
     [YarnCommand("end_day")]

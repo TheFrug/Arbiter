@@ -65,21 +65,20 @@ public class ComplianceResultsManager : MonoBehaviour
             var subject = GetSubject(form.interviewID);
             if (subject == null) continue;
 
-            // Ensure arrays are same length for comparison
             int flagCount = Mathf.Min(form.behaviorFlags.Length, subject.correctBehaviorFlags.Length);
-
             int score = 0;
-            int max = 3 + flagCount; // 3 base points (name, occupation, loyalty) + behavior flags
+            int max = 3 + flagCount;
 
-            bool nameCorrect = form.subjectName == subject.correctName;
-            bool occupationCorrect = form.occupation == subject.correctOccupation;
-            bool loyaltyCorrect = form.loyaltyRating == subject.correctLoyalty;
+            // Strict string comparison to prevent "False" results from minor formatting
+            bool nameMatch = string.Equals(form.subjectName?.Trim(), subject.correctName?.Trim(), System.StringComparison.Ordinal);
+            bool occMatch = string.Equals(form.occupation?.Trim(), subject.correctOccupation?.Trim(), System.StringComparison.Ordinal);
+            bool loyaltyMatch = (form.loyaltyRating == subject.correctLoyalty);
 
-            if (nameCorrect) score++;
-            if (occupationCorrect) score++;
-            if (loyaltyCorrect) score++;
+            if (nameMatch) score++;
+            if (occMatch) score++;
+            if (loyaltyMatch) score++;
 
-            // Behavior flags comparison
+            // Behavior flags
             for (int i = 0; i < flagCount; i++)
             {
                 if (form.behaviorFlags[i] == subject.correctBehaviorFlags[i])
@@ -93,13 +92,10 @@ public class ComplianceResultsManager : MonoBehaviour
                 interviewID = form.interviewID,
                 score = score,
                 maxScore = max,
-                nameCorrect = nameCorrect,
-                occupationCorrect = occupationCorrect,
-                loyaltyCorrect = loyaltyCorrect
+                nameCorrect = nameMatch,
+                occupationCorrect = occMatch,
+                loyaltyCorrect = loyaltyMatch
             });
-
-            // Debug log for rapid testing
-            Debug.Log($"Evaluated {form.interviewID}: Name({nameCorrect}), Occ({occupationCorrect}), Loyalty({loyaltyCorrect}), Score({score}/{max})");
         }
 
         return results;

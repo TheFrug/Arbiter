@@ -149,26 +149,66 @@ public class ComplianceForm : MonoBehaviour
 
     #region Button Logic
 
+    [Header("Confirmation UI")]
+    [SerializeField] private GameObject confirmationPrompt; // Assign in Inspector
+    private Action pendingConfirmationAction;
+
+    // The Yarn script can check this property
+    public bool IsFormComplete
+    {
+        get
+        {
+            // Checks if strings are filled and a loyalty toggle is selected
+            bool identityFilled = !string.IsNullOrEmpty(subjectName) && !string.IsNullOrEmpty(occupation);
+            bool loyaltySelected = (loyaltyLow != null && loyaltyLow.isOn) ||
+                                   (loyaltyMid != null && loyaltyMid.isOn) ||
+                                   (loyaltyHigh != null && loyaltyHigh.isOn);
+
+            return identityFilled && loyaltySelected;
+        }
+    }
+
+    // Updated button listeners to trigger "Are you sure?"
     private void OnNameClicked()
     {
-        if (string.IsNullOrEmpty(revealedName))
-            return;
+        if (string.IsNullOrEmpty(revealedName)) return;
 
-        subjectName = revealedName;
-        nameDisplayText.text = subjectName;
-
-        nameFillButton.interactable = false;
+        ShowConfirmation(() => {
+            subjectName = revealedName;
+            nameDisplayText.text = subjectName;
+            nameFillButton.interactable = false;
+        });
     }
 
     private void OnOccupationClicked()
     {
-        if (string.IsNullOrEmpty(revealedOccupation))
-            return;
+        if (string.IsNullOrEmpty(revealedOccupation)) return;
 
-        occupation = revealedOccupation;
-        occupationDisplayText.text = occupation;
+        ShowConfirmation(() => {
+            occupation = revealedOccupation;
+            occupationDisplayText.text = occupation;
+            occupationFillButton.interactable = false;
+        });
+    }
 
-        occupationFillButton.interactable = false;
+    private void ShowConfirmation(Action onConfirm)
+    {
+        pendingConfirmationAction = onConfirm;
+        if (confirmationPrompt != null) confirmationPrompt.SetActive(true);
+    }
+
+    // Hook these to the buttons on your "Are you sure?" UI object
+    public void ConfirmAction()
+    {
+        pendingConfirmationAction?.Invoke();
+        pendingConfirmationAction = null;
+        if (confirmationPrompt != null) confirmationPrompt.SetActive(false);
+    }
+
+    public void CancelAction()
+    {
+        pendingConfirmationAction = null;
+        if (confirmationPrompt != null) confirmationPrompt.SetActive(false);
     }
 
     #endregion

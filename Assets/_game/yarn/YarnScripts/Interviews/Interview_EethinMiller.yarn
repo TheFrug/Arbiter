@@ -227,6 +227,27 @@ Empathy:[Em]His eyes dart around the room, searching for extra eyes and ears.[/E
 
 title: EethinMiller_End
 ---
-Bright-Eyed Young Patriot: Thanks so much for the experience! God bless the Second Republic!
+Bright-Eyed Young Patriot: Is that all, sir? I hope my answers were satisfactory!
+
+<<if is_form_complete() == false>>
+    The Voice of Someone Important: [Fo]You're about to submit a half-finished report on a fellow officer? Sloppy work.[/Fo]
+    -> Go back and fix it.
+        The Voice of Someone Important: [Fo]Good. Professionalism is the bedrock of the Republic.[/Fo]
+        <<jump EethinMiller_Hub>>
+    -> Submit anyways.
+        The Voice of Someone Important: [Fo]He's going to be your boss one day, and he'll remember this paperwork error.[/Fo]
+        <<jump EethinMiller_FinalExit>>
+<<else>>
+    -> [Submit Form]
+        <<jump EethinMiller_FinalExit>>
+<<endif>>
+===
+
+title: EethinMiller_FinalExit
+---
+Bright-Eyed Young Patriot: Thanks so much for the experience! It's been an absolute honor. 
+Bright-Eyed Young Patriot: God bless the Second Republic!
+He stands up and gives you a practiced salute before marching out.
+
 <<form_submit YarnManager>>
 ===

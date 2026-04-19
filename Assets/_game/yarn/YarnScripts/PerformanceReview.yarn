@@ -32,7 +32,7 @@ Miranda: Subject: Mary Gonzalez.
     Miranda: Your loyalty assessment was flawed.
     Miranda: Even an overall reputable citizen will engage in disloyal speech on occasion. 
 <<endif>>
-<<if $subjectScore == $subjectMax>>
+<<if $subjectScore >= $subjectMax>>
     Miranda: Your evaluation was precise and efficient. Well done.
 <<elseif $subjectScore > ($subjectMax / 2)>>
     Miranda: Some errors, but nothing major.

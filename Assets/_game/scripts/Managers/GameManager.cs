@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         }
 
         complianceForm.ResetForm();
-        complianceForm.SetInterviewID(subject.IdentificationCode);
+        complianceForm.SetInterviewID(subject.InterviewID);
         complianceForm.SetInterviewDate(subject.Date);
 
         dialogueRunner.VariableStorage.SetValue("$asked_name", false);

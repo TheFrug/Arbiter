@@ -154,10 +154,26 @@ Empathy: [Em]Oooh, she definitely should not say that in earshot of a microphone
 <<jump MaryGonzalez_Nucleus>>
 ===
 
-
 title: MaryGonzalez_End
 ---
 Intense Woman: If that's it, then I'm leaving. 
+
+<<if is_form_complete() == false>>
+    The Voice of Someone Important: [Fo]Hey lad, I think you missed a few places on the form. You don't want to lose your job, do you?[/Fo]
+    -> Go back and fix it.
+        The Voice of Someone Important: [Fo]Good idea. I'll wait.[/Fo]
+        <<jump MaryGonzalez_Nucleus>>
+    -> Submit anyways.
+        The Voice of Someone Important: [Fo]Your funeral, Arbiter.[/Fo]
+        <<jump MaryGonzalez_FinalExit>>
+<<else>>
+    -> [Submit Form]
+        <<jump MaryGonzalez_FinalExit>>
+<<endif>>
+===
+
+title: MaryGonzalez_FinalExit
+---
 Intense Woman: If you ever have time to appreciate true beauty, visit the Gregory Mansion.
 Intense Woman: My gardens are so vibrant, you'll be able to see them from the outer gate!
 She struts out of the room, earrings jingling as she goes. 
