@@ -5,8 +5,15 @@ This is an example of a Yarn Spinner script. Write your dialogue here!
 
 title: VISO_Intro
 ---
-The Voice of Someone Important: You're doing well, kiddo! I'm proud of you!
+The Voice of Someone Important: [Fo]You're doing well, kiddo! I'm proud of you![/Fp]
 -> I am honored to receive your praise.
 -> Really? I thought I did about average.
 -> Fuck off. I like you less than the other voices.
+    The Voice of Someone Important:[Fo]Woah woah [b]woah[/b] there, champ! Remember whose head you're inside of![/Fo]
+
+The Voice of Someone Important: [Fo]Look, kid. There's a lotta guys who'll try and screw you over! [/Fo]
+Empathy:[Em]But must it?[/Em]
+Force:[Fo]Of course.[/Fo]
+Insight:[In]Perhaps... I'll reserve judgement until we know more.[/In]
+The Voice of Someone Important: [Fo]There's no need! This country was founded by experts.[/Fo]
 ===
