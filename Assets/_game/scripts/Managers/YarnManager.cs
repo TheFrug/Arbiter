@@ -37,6 +37,16 @@ public class YarnManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        dialogueRunner.AddFunction("is_name_filled", () => {
+            // This assumes your ComplianceForm has a public way to see the subjectName
+            return !string.IsNullOrEmpty(complianceForm.GetFilledName());
+        });
+
+        dialogueRunner.AddFunction("is_occupation_filled", () => {
+            // This assumes your ComplianceForm has a public way to see the subjectName
+            return !string.IsNullOrEmpty(complianceForm.GetFilledOccupation());
+        });
+
         // Add this to your YarnManager Awake or Start
         dialogueRunner.AddFunction("is_form_complete", () => {
             return complianceForm.IsFormComplete;

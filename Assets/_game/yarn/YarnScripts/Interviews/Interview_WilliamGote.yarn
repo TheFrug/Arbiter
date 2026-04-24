@@ -22,22 +22,22 @@ position: 957,-3
 title: WilliamGote_Intro
 position: 942,215
 ---
-Narrator: A young man marches in, the extraneous zippers and chain on his clothing clinking with every heavy bootstep.
+Narrator: A middle-aged man marches in, the extraneous zippers and chains on his outfit clinking with each heavy bootstep.
 Narrator: He crashes into his seat and glares at you.
 <<SkillCheck "YarnManager" "Empathy" 11>>
 <<if $last_check_success>>
-Empathy: [Em]He keeps glancing at your badge, and he grimaces slightly every time. [/Em]
-Empathy: [Em]You are getting the sense that for whatever reason, and despite you having never met him in your life, this man doesn't like you very much.[/Em]
+Empathy: [Em]He keeps glancing at your badge. His face contorts with disgust each time. [/Em]
+Empathy: [Em]There's something oddly familiar about the way this man grimaces.[/Em]
 <<endif>>
 <<SkillCheck "YarnManager" "Force" 7>>
 <<if $last_check_success>>
-Force: [Fo]Oh yeah, this guy fucking [b]HATES[/b] you.[/Fo]
+Force: [Fo]Oh yeah, this guy fucking [b]HATES[/b] you. Can't imagine why.[/Fo]
 <<endif>>
 Punk: ...
 -> Good afternoon, citizen.
--> Hello!
+-> Hello there!
 -> Is there something on my face? #skillcheck:Force:11
-    <<SkillCheck "YarnManager" "Force" 12>>
+    <<SkillCheck "YarnManager" "Force" 11>>
     <<if $last_check_success>>
         <<detour WilliamGote_Problem_Pass>>
     <<else>>
@@ -47,19 +47,17 @@ Punk: Lets just get this over with.
 <<jump WilliamGote_Hub>>
 ===
 
-
 title: WilliamGote_Problem_Pass
 position: -16,663
 ---
 Punk: No.
 ===
 
-
 title: WilliamGote_Problem_Fail
 position: -363,228
 ---
 Punk: Other than your ugly mug? No.
-Force: [Fo]Asshole.[/Fo]
+Force: [Fo]Prick.[/Fo]
 ===
 
 
@@ -88,15 +86,21 @@ You look at your compliance form. You have questions to ask.
 title: WilliamGote_Name
 position: 321,343
 ---
-Punk: Billy's my name.
+Punk: Billy's the name.
 <<form_set_name YarnManager "Billy">>
 <<set $asked_name = true>>
-<<SkillCheck "YarnManager" "Insight" 5>>
+<<SkillCheck "YarnManager" "Insight" 4>>
 <<if $last_check_success>>
 Insight: [In]Hold up, mononymity was outlawed by the Second Republic in June of 28 AT, over twelve years ago. Something's off.[/In]
 Force: [Fo]He lied to us! He wanted us to fill out his name wrong on the form.[/Fo]
-Force: [Fo]Wait, you didn't fill his name out already, did you? That would be really stupid if you did.[/Fo]
+    <<if is_name_filled()>>
+        Force: [Fo]Good thing we didn't write his name down already, right?[/Fo]
+        Force: [Fo]...[/Fo]
+    <<else>>
+        Force: [Fo]Thank God you haven't filled that name out yet. That would be really stupid if you did.[/Fo]
+    <<endif>>
 <<endif>>
+Punk: Uh... hello? I just told you my name's Billy, can we keep it movin'?
 -> Sounds good to me.
     Punk: I'm sure it does.
 -> That's a strange name.
@@ -117,20 +121,42 @@ position: -128,328
 Force: [Fo]That's right, we're not [i]just[/i] powerful, we're smart too.[/Fo]
 Insight: [In]You're welcome.[/In]
 Punk: You figured it out, oh wise hand of the Republic. Billy's not my government name.
-    <<form_set_name YarnManager "William">>
+<<form_set_name YarnManager "William">>
 Punk: My pals call me Billy, but the name my ma gave me is William.
-<<SkillCheck "YarnManager" "Empathy" 11>>
+<<SkillCheck "YarnManager" "Insight" 11>>
 <<if $last_check_success>>
-Empathy: [Em]His tone rises and shifts into an accent as he mentions his mother. Its a sound that was recorded in a different time.[/Em] 
+Insight: [In]William's tone rises and shifts into an accent as he mentions his mother. Its sound was recorded in a different time.[/In]
 <<endif>>
-<<SkillCheck "YarnManager" "Insight" 8>>
+<<SkillCheck "YarnManager" "Empathy" 8>>
 <<if $last_check_success>>
-Insight:[In]He still hasn't told us his last name. He must think he's slick.[/In] 
+Empathy: [Em]We knew of a 'William', from before we actualized into who we are now.[/Em]
 <<endif>>
--> Thank you
--> William... what?
+-> Thank you, William.
+-> William... what? What's your last name?
     <<form_set_name YarnManager "William Gote">>
-    Punk: William Gote. Not that you care, but its pronounced more like the facial hair, than the animal. 
+    Punk: William Gote. Not that you care, but its pronounced more like the facial hair than the animal.
+    -> Thank you.
+    Punk: Whatever.
+    -> It's about time you complied.
+    Punk: Fuck you.
+    -> I do care. Thank you for clarifying. #skillcheck:Empathy:10
+    <<SkillCheck "YarnManager" "Empathy" 11>>
+    <<if $last_check_success>>
+        <<detour WilliamGote_Care_Pass>>
+    <<else>>
+        <<detour WilliamGote_Care_Fail>>
+    <<endif>>
+===
+
+title: WilliamGote_Care_Pass
+---
+Punk: Huh, a pig with a heart. Next I'll meet one with a brain.
+===
+
+
+title: WilliamGote_Care_Fail
+---
+The Voice of Someone Important:[Fo]No need to lie. Why waste precious your care on a scoundrel like this?[/Fo]
 ===
 
 title: WilliamGote_Name_FailNode
@@ -138,7 +164,7 @@ position: 90,-317
 ---
 [Fo]You meekly open your mouth to speak, but his [b]eyes[/b] pierce you. Your body tenses.[/Fo]
 Punk: What's wrong, pig? Got some boot stuck in your throat?
-Punk: Seriously, lets move on. 
+Punk: Seriously, lets move on.
 ===
 
 // ==========================
@@ -152,13 +178,17 @@ position: 368,-180
 Punk: I'm a bike-courier for Devon Mail.
 <<SkillCheck "YarnManager" "Insight" 10>>
 <<if $last_check_success>>
-Insight: [In]Devon Mail is a coast-to-coast postal business whose marketing features its motorbike-operating mail delivery force. The comapny promises efficient service and limited questions asked.[/In]
+Insight: [In]Devon Mail is a coast-to-coast postal business whose marketing features its motorbike-driving mail delivery force. The comapny promises efficient service and limited questions asked.[/In]
 <<endif>>
 Punk: I was en-route to a delivery when I was stopped for compliance. The republic has a knack for timing.
+Force: [Fo]He's grinning. What does he know?[/Fo]
 <<SkillCheck "YarnManager" "Empathy" 8>>
 <<if $last_check_success>>
-Empathy: [Em]He's grinning. What does he know?[/Em]
+Empathy: [Em]He's being sarcastic, obviously.[/Fo]
 <<endif>>
+-> The Republic has a knack for everything a loyal citizen might require.
+-> I apologize on behalf of the Republic for any inconvenience caused by your compliance requirement, but understand that routine compliance checks are vital to maintaining the safety of our communities. <<if $last_check_success>> 
+Punk: That compliance stop didn't just fuck up my day, it made me miss a gig. 
 ===
 
 // ==========================
@@ -178,10 +208,6 @@ Insight: [In]Dead? What the fuck is he talking about?[/In]
 -> (Continue)
 <<endif>>
 
-<<SkillCheck "YarnManager" "Empathy" 9>>
-<<if $last_check_success>>
-CONTENT
-<<endif>>
 
 <<set $asked_loyalty = true>>
 <<jump WilliamGote_Hub>>
@@ -189,7 +215,8 @@ CONTENT
 
 title: WilliamGote_Dead
 ---
-
+Punk: Do I really need to spell it out to you? The disloyal get culled, and the sycophants rise.
+Punk: A tale as old as time.
 ===
 
 // ==========================
@@ -203,6 +230,7 @@ CONTENT
 
 <<form_submit YarnManager>>
 ===
+
 title: Node_1775067058752
 position: 1019,63
 ---

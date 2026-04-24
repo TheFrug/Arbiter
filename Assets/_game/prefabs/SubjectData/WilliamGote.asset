@@ -20,6 +20,6 @@ MonoBehaviour:
   correctName: William Gote
   correctOccupation: 
   correctLoyalty: 1
-  correctBehaviorFlags: 000000000000
+  correctBehaviorFlags: 010101010101
   yarnStartNode: Interview_WilliamGote
   portrait: {fileID: 21300000, guid: d37d14d410521554183523ba7d97cc9c, type: 3}

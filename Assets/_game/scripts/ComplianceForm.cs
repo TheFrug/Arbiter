@@ -102,7 +102,8 @@ public class ComplianceForm : MonoBehaviour
     #endregion
 
     #region Yarn Integration
-
+    public string GetFilledName() => subjectName;
+    public string GetFilledOccupation() => occupation;
     public void RevealNameFromYarn(string name)
     {
         revealedName = name;
