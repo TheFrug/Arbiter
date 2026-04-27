@@ -228,7 +228,6 @@ Empathy:[Em]His eyes dart around the room, searching for extra eyes and ears.[/E
 title: EethinMiller_End
 ---
 Bright-Eyed Young Patriot: Is that all, sir? I hope my answers were satisfactory!
-
 <<if is_form_complete() == false>>
     The Voice of Someone Important: [Fo]You're about to submit a half-finished report on a fellow officer? Sloppy work.[/Fo]
     -> Go back and fix it.
