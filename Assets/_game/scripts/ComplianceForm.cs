@@ -195,7 +195,12 @@ public class ComplianceForm : MonoBehaviour
     private void ShowConfirmation(Action onConfirm)
     {
         pendingConfirmationAction = onConfirm;
-        if (confirmationPrompt != null) confirmationPrompt.SetActive(true);
+        if (confirmationPrompt != null)
+        {
+            confirmationPrompt.SetActive(true);
+            // Force the UI to focus on the popup
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     // Hook these to the buttons on your "Are you sure?" UI object
@@ -208,10 +213,27 @@ public class ComplianceForm : MonoBehaviour
 
     public void CancelAction()
     {
+        Debug.Log("Cancel button was pressed!");
         pendingConfirmationAction = null;
-        if (confirmationPrompt != null) confirmationPrompt.SetActive(false);
-    }
 
+        if (confirmationPrompt != null)
+        {
+            confirmationPrompt.SetActive(false);
+        }
+        else
+        {
+            // FAILSAFE: If the inspector reference is lost, 
+            // try to find the object by name or tag as a backup.
+            Debug.LogError("CancelAction called, but confirmationPrompt is missing! Attempting failsafe...");
+
+            // This looks for the object in the children of the object this script is on
+            var backup = transform.Find("ConfirmationPopup");
+            if (backup != null)
+            {
+                backup.gameObject.SetActive(false);
+            }
+        }
+    }
     #endregion
 
     #region Submission

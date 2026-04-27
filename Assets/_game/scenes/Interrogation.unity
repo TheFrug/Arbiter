@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 382792563}
   - component: {fileID: 382792562}
   m_Layer: 5
-  m_Name: AreyouSure
+  m_Name: AreYouSure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3929,7 +3929,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7898225512315861986, guid: 240e02e4f10d20d45a666f8b2d839c29, type: 3}
+      - m_Target: {fileID: 917379000}
         m_TargetAssemblyTypeName: ComplianceForm, Assembly-CSharp
         m_MethodName: CancelAction
         m_Mode: 1
