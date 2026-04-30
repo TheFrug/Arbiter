@@ -49,6 +49,9 @@ public class ComplianceResultsManager : MonoBehaviour
         public bool nameCorrect;
         public bool occupationCorrect;
         public bool loyaltyCorrect;
+
+        // LOCK-IN: Added this so YarnManager can check for empty strings
+        public ComplianceForm.ComplianceFormData formData;
     }
 
     private SubjectData GetSubject(string interviewID)
@@ -69,7 +72,6 @@ public class ComplianceResultsManager : MonoBehaviour
             int score = 0;
             int max = 3 + flagCount;
 
-            // Strict string comparison to prevent "False" results from minor formatting
             bool nameMatch = string.Equals(form.subjectName?.Trim(), subject.correctName?.Trim(), System.StringComparison.Ordinal);
             bool occMatch = string.Equals(form.occupation?.Trim(), subject.correctOccupation?.Trim(), System.StringComparison.Ordinal);
             bool loyaltyMatch = (form.loyaltyRating == subject.correctLoyalty);
@@ -78,7 +80,6 @@ public class ComplianceResultsManager : MonoBehaviour
             if (occMatch) score++;
             if (loyaltyMatch) score++;
 
-            // Behavior flags
             for (int i = 0; i < flagCount; i++)
             {
                 if (form.behaviorFlags[i] == subject.correctBehaviorFlags[i])
@@ -94,7 +95,8 @@ public class ComplianceResultsManager : MonoBehaviour
                 maxScore = max,
                 nameCorrect = nameMatch,
                 occupationCorrect = occMatch,
-                loyaltyCorrect = loyaltyMatch
+                loyaltyCorrect = loyaltyMatch,
+                formData = form // LOCK-IN: Storing the raw form here
             });
         }
 

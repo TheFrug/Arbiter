@@ -2,15 +2,18 @@
 ---
 <<declare $nameCorrect = false>>
 <<declare $occupationCorrect = false>>
+<<declare $loyaltyCorrect = false>>
+<<declare $subjectScore = 0>>
+<<declare $subjectmax = 0>>
 
 <<get_total_score "YarnManager">>
-Miranda strides into the room wearing a freshly-laundered suit.
+Miranda strides into the room wearing a freshly-laundered suit. She taps her stylus an odd number of times and scribbles on a tablet.
 <<SkillCheck "YarnManager" "Empathy" 10>>
 <<if $last_check_success>>
 Empathy:[Em]Her presence is as suffocating as when she first interviewed you.[/Em]
 <<endif>>
-Miranda: Your shift is up, Arbiter
-Miranda: Let's review your performance.
+Miranda: Alright, your shift is up, Arbiter.
+Miranda: Let's review today's performance.
 -> Continue
     <<jump PerformanceReview_Mary>>
 ===
@@ -22,11 +25,15 @@ title: PerformanceReview_Mary
 
 Miranda: Subject: Mary Gonzalez.
 <<if not $nameCorrect>>
-    Miranda: You failed to correctly record her identity.
+    Miranda: Looks like you forgot to write her name down.
+    Miranda: Rookie mistake, Jonny.
 <<endif>>
-<<if not $occupationCorrect>>
-    Miranda: The occupation you listed is inaccurate.
-    Miranda: We don't differentiate between ranks of gardener, they aren't military personnel. 
+<<if $occupationEmpty>>
+    Miranda: The occupation field is blank.
+    Miranda: Tsk, tsk.
+<<elseif not $occupationCorrect>>
+    Miranda: The occupation you wrote down doesn't exist in our system.
+    Miranda: And really, who gives a damn about the ranks of gardners?
 <<endif>>
 <<if not $loyaltyCorrect>>
     Miranda: Your loyalty assessment was flawed.
@@ -51,6 +58,38 @@ Miranda: Subject: Eethin Roosevelt Miller.
 <<if not $nameCorrect>>
     Miranda: You filled out his name wrong, in part because you interrupted his spelling.
     Miranda: You should know how common a spelling 'EE-thin' is. 
+<<endif>>
+<<if not $occupationCorrect>>
+    Miranda: His position within the Compliance structure was incorrectly recorded.
+    Miranda: Given his evasive answer, we can forgive this. 
+<<endif>>
+<<if not $loyaltyCorrect>>
+    Miranda: You underestimated his loyalty.
+    Miranda: The Republic should seek to uplift devoted youths like him. 
+<<endif>>
+<<if $subjectScore == $subjectMax>>
+    Miranda: A flawless assessment.
+<<elseif $subjectScore > ($subjectMax / 2)>>
+    Miranda: Your results are adequate.
+<<else>>
+    Miranda: A complete failure in judgment. Your betters [b]will[/b] hear of this.
+    <<SkillCheck "YarnManager" "Force" 10>>
+    <<if $last_check_success>>
+    Force: [Fo]Damn.[/Fo]
+    <<endif>>
+<<endif>>
+-> (Final Evaluation)
+    <<jump PerformanceReview_Final>>
+===
+
+title: PerformanceReview_Will
+---
+<<print_variable "$submittedFormsCount">>
+<<get_subject_breakdown "YarnManager" "WilliamGote">>
+Miranda: Subject: WilliamGote.
+<<if not $nameCorrect>>
+    Miranda: 'Billy' is nobody's full legal name.
+    Miranda: Even a junior arbiter like Eethin knows mononyms are illegal.
 <<endif>>
 <<if not $occupationCorrect>>
     Miranda: His position within the Compliance structure was incorrectly recorded.

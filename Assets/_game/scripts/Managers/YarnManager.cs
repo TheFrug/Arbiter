@@ -323,6 +323,10 @@ public class YarnManager : MonoBehaviour
             variableStorage.SetValue("$nameCorrect", result.nameCorrect);
             variableStorage.SetValue("$occupationCorrect", result.occupationCorrect);
             variableStorage.SetValue("$loyaltyCorrect", result.loyaltyCorrect);
+
+            variableStorage.SetValue("$nameEmpty", string.IsNullOrEmpty(result.formData.subjectName));
+            variableStorage.SetValue("$occupationEmpty", string.IsNullOrEmpty(result.formData.occupation));
+
             variableStorage.SetValue("$subjectScore", (float)result.score);
             variableStorage.SetValue("$subjectMax", (float)result.maxScore);
 

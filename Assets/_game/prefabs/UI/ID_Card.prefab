@@ -469,8 +469,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29
-  m_fontSizeBase: 29
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -832,6 +832,7 @@ MonoBehaviour:
   forceText: {fileID: 8883609325318459818}
   insightText: {fileID: 5667421185526962082}
   cardRoot: {fileID: 1043083652048159940}
+  toggleButton: {fileID: 0}
 --- !u!1 &2238050331731395653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,8 +1216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: -10}
-  m_SizeDelta: {x: 200, y: 250}
+  m_AnchoredPosition: {x: 140, y: -10}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5619276530172985292
 CanvasRenderer:
@@ -1292,8 +1293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 15}
-  m_SizeDelta: {x: 400, y: 200}
+  m_AnchoredPosition: {x: 125.6, y: 15}
+  m_SizeDelta: {x: 339.2, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2221803022732942969
 MonoBehaviour:
@@ -2332,9 +2333,9 @@ RectTransform:
   - {fileID: 8682609159835914190}
   m_Father: {fileID: 8598058675827276632}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -130}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -250, y: 75}
   m_SizeDelta: {x: 275, y: 57.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442054207257805727
@@ -2429,7 +2430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 433c303b2a66fb64c9dcc2868510c7a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2716,9 +2717,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Jean Rah
-
-'
+  m_text: Jonathan Rush
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e8c4dea3100ab548b01443ba4e54976, type: 2}
   m_sharedMaterial: {fileID: 2746351825013817036, guid: 9e8c4dea3100ab548b01443ba4e54976, type: 2}
@@ -2745,8 +2744,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 33
+  m_fontSizeBase: 33
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
