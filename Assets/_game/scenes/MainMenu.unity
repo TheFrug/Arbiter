@@ -2993,7 +2993,7 @@ MonoBehaviour:
   HighPitchRange: 1.05
   audioLibrary:
   - clipName: LoopMusic
-    clip: {fileID: 8300000, guid: e8b5b3f9a7a8e3e4d9ec367b039021e1, type: 3}
+    clip: {fileID: 8300000, guid: 450fc99d0532c6b40aed34a7e2468f90, type: 3}
   - clipName: LoopAmbience
     clip: {fileID: 8300000, guid: 716906009a4f380418a892d02478abbb, type: 3}
   - clipName: InterrogationAmbience
