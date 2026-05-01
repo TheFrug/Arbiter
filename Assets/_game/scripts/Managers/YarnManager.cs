@@ -247,8 +247,27 @@ public class YarnManager : MonoBehaviour
     public void FinalizeCharacter(string nextScene)
     {
         Debug.Log("Character creation finalized.");
+
         FindObjectOfType<IDCardUI>()?.FinishCharacterCreation();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+
+        // Pass the string key name directly as a string to match the AudioManager library
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.TransitionAmbience("InterrogationAmbience", 1.5f);
+        }
+
+        if (ScreenFader.Instance != null)
+        {
+            ScreenFader.Instance.FadeToBlack(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+                ScreenFader.Instance.FadeToClear();
+            });
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+        }
     }
 
     // ID Card Control

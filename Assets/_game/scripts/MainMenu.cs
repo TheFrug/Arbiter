@@ -1,28 +1,44 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public string firstLevel;
+
+    [Header("Audio")]
+    // Changed from AudioClip to string so it matches the AudioManager library
+    [SerializeField] private string characterCreationAmbienceKey = "LoopAmbience";
+
+    [Header("Panels")]
     [SerializeField] private GameObject CreditsPanel;
     [SerializeField] private GameObject OptionsPanel;
 
     public void StartGame()
     {
-        SceneManager.LoadScene(firstLevel);
+        // Pass the string key instead of the direct AudioClip reference
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.TransitionAmbience(characterCreationAmbienceKey, 1.5f);
+        }
+
+        // Trigger the screen fade
+        if (ScreenFader.Instance != null)
+        {
+            ScreenFader.Instance.FadeToBlack(() =>
+            {
+                SceneManager.LoadScene(firstLevel);
+                ScreenFader.Instance.FadeToClear();
+            });
+        }
+        else
+        {
+            SceneManager.LoadScene(firstLevel);
+        }
     }
 
-    public void OpenOptions()
-    {
-
-    }
-
-    public void CloseOptions()
-    {
-
-    }
+    public void OpenOptions() { }
+    public void CloseOptions() { }
 
     public void OpenCredits()
     {
@@ -37,6 +53,5 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Working");
     }
 }
