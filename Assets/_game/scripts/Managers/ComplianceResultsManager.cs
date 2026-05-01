@@ -50,7 +50,6 @@ public class ComplianceResultsManager : MonoBehaviour
         public bool occupationCorrect;
         public bool loyaltyCorrect;
 
-        // LOCK-IN: Added this so YarnManager can check for empty strings
         public ComplianceForm.ComplianceFormData formData;
     }
 
@@ -96,7 +95,7 @@ public class ComplianceResultsManager : MonoBehaviour
                 nameCorrect = nameMatch,
                 occupationCorrect = occMatch,
                 loyaltyCorrect = loyaltyMatch,
-                formData = form // LOCK-IN: Storing the raw form here
+                formData = form
             });
         }
 

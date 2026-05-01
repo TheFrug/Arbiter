@@ -4,7 +4,14 @@
 <<declare $occupationCorrect = false>>
 <<declare $loyaltyCorrect = false>>
 <<declare $subjectScore = 0>>
-<<declare $subjectmax = 0>>
+<<declare $subjectMax = 0>>
+
+<<declare $nameEmpty = false>>
+<<declare $occupationEmpty = false>>
+<<declare $loyaltyEmpty = false>>
+
+<<declare $perfectForms = 0>>
+<<declare $badForms = 0>>
 
 <<get_total_score "YarnManager">>
 Miranda strides into the room wearing a freshly-laundered suit. She taps her stylus an odd number of times and scribbles on a tablet.
@@ -24,27 +31,32 @@ title: PerformanceReview_Mary
 <<get_subject_breakdown "YarnManager" "MaryGonzalez">>
 
 Miranda: Subject: Mary Gonzalez.
-<<if not $nameCorrect>>
-    Miranda: Looks like you forgot to write her name down.
+<<if $nameEmpty>>
+    Miranda: You didn't write her name down. 
     Miranda: Rookie mistake, Jonny.
 <<endif>>
 <<if $occupationEmpty>>
     Miranda: The occupation field is blank.
     Miranda: Tsk, tsk.
 <<elseif not $occupationCorrect>>
-    Miranda: The occupation you wrote down doesn't exist in our system.
-    Miranda: And really, who gives a damn about the ranks of gardners?
+    Miranda: What you wrote down doesn't exist in our system.
+    Miranda: And really, who gives a damn about the ranks of gardeners?
 <<endif>>
-<<if not $loyaltyCorrect>>
-    Miranda: Your loyalty assessment was flawed.
-    Miranda: Even an overall reputable citizen will engage in disloyal speech on occasion. 
+<<if $loyaltyEmpty>>
+    Miranda: You left the loyalty rating completely unselected. 
+    Miranda: We'll have to call her back for another assessment soon. That's always a headache. 
+<<else>>
+    Miranda: We trust your loyalty assessment.
 <<endif>>
 <<if $subjectScore >= $subjectMax>>
-    Miranda: Your evaluation was precise and efficient. Well done.
+    <<set $perfectForms = $perfectForms + 1>>
+    Miranda: Good work, Arbiter.
 <<elseif $subjectScore > ($subjectMax / 2)>>
-    Miranda: Some errors, but nothing major.
+    Miranda: There are some errors on Ms. Gonzalez's form, but nothing major.
 <<else>>
-    Miranda: This report is unreliable. Your betters [b]will[/b] hear of this.
+    <<set $badForms = $badForms + 1>>
+    Miranda: This report is a failure, but one your betters won't hear of.
+    Force: [Fo]She's covering your ass, even though she doesn't have to.[/Fo]
 <<endif>>
 -> Continue
     <<jump PerformanceReview_Eethin>>
@@ -54,60 +66,98 @@ title: PerformanceReview_Eethin
 ---
 <<print_variable "$submittedFormsCount">>
 <<get_subject_breakdown "YarnManager" "EethinMiller">>
-Miranda: Subject: Eethin Roosevelt Miller.
-<<if not $nameCorrect>>
+Miranda: Subject: Eethin Roosevelt Miller. 
+<<if $nameEmpty>>
+    Miranda: You skipped his name. We have a clear mandate to record their identities.
+<<elseif not $nameCorrect>>
     Miranda: You filled out his name wrong, in part because you interrupted his spelling.
     Miranda: You should know how common a spelling 'EE-thin' is. 
 <<endif>>
-<<if not $occupationCorrect>>
-    Miranda: His position within the Compliance structure was incorrectly recorded.
+<<if $occupationEmpty>>
+    Miranda: The occupation field for Miller is completely blank.
+<<elseif not $occupationCorrect>>
+    Miranda: His position within the Republic's compliance structure was incorrectly recorded.
     Miranda: Given his evasive answer, we can forgive this. 
 <<endif>>
-<<if not $loyaltyCorrect>>
-    Miranda: You underestimated his loyalty.
-    Miranda: The Republic should seek to uplift devoted youths like him. 
+<<if $loyaltyEmpty>>
+    Miranda: No loyalty assessment provided for this subject.
+<<elseif not $loyaltyCorrect>>
+    Miranda: You underestimated his loyalty. The Republic should seek to uplift devoted youths like him. 
+    Miranda: Unless you were... intimidated by his enthusiasm?
 <<endif>>
 <<if $subjectScore == $subjectMax>>
-    Miranda: A flawless assessment.
+    <<set $perfectForms = $perfectForms + 1>>
+    <<if $perfectForms >= 2>>
+        Miranda: Once again, flawless work. Well done, Jonny!
+        <<SkillCheck "YarnManager" "Insight" 13>>
+        <<if $last_check_success>>
+            Insight: [In]Praise to intellect! Sweet, sweet praise![/In]
+        <<endif>>
+    <<else>>
+    Miranda: This form is flawless. Well done.
+    <<endif>>
 <<elseif $subjectScore > ($subjectMax / 2)>>
-    Miranda: Your results are adequate.
+    Miranda: As far as forms go, this'll do just fine. 
 <<else>>
-    Miranda: A complete failure in judgment. Your betters [b]will[/b] hear of this.
+    <<set $badForms = $badForms + 1>>
+    Miranda: A complete failure in judgment. This one should have been easy.
     <<SkillCheck "YarnManager" "Force" 10>>
     <<if $last_check_success>>
     Force: [Fo]Damn.[/Fo]
     <<endif>>
+    <<if $badForms >= 2>>
+        Miranda: ...
+        Empathy: [Em]I don't think she's happy with us.[/Em]
+    <<endif>>
 <<endif>>
--> (Final Evaluation)
-    <<jump PerformanceReview_Final>>
+-> Continue
+    <<jump PerformanceReview_William>>
 ===
 
-title: PerformanceReview_Will
+title: PerformanceReview_William
 ---
 <<print_variable "$submittedFormsCount">>
 <<get_subject_breakdown "YarnManager" "WilliamGote">>
-Miranda: Subject: WilliamGote.
-<<if not $nameCorrect>>
+Miranda: Subject: William Gote. Let's see...
+<<if $nameEmpty>>
+    Miranda: You neglected to write his name.
+<<elseif not $nameCorrect>>
     Miranda: 'Billy' is nobody's full legal name.
     Miranda: Even a junior arbiter like Eethin knows mononyms are illegal.
+    Insight: [In]We definitely have that in our notes somewhere.[/In]
 <<endif>>
-<<if not $occupationCorrect>>
-    Miranda: His position within the Compliance structure was incorrectly recorded.
-    Miranda: Given his evasive answer, we can forgive this. 
+<<if $occupationEmpty>>
+    Miranda: You left the occupation line empty. I never understand how that can happen.
 <<endif>>
-<<if not $loyaltyCorrect>>
-    Miranda: You underestimated his loyalty.
-    Miranda: The Republic should seek to uplift devoted youths like him. 
+<<if $loyaltyEmpty>>
+    Miranda: Am I seeing this right? You never put down his loyalty?
+    Miranda: This is particularly egregious, considering the subject.
+<<elseif not $loyaltyCorrect>>
+    Miranda: Normally, I'd say that I trust your judgement of people's loyalty to the Republic.
+    Miranda: But I have trouble doing so given William's... demeanor. 
 <<endif>>
 <<if $subjectScore == $subjectMax>>
-    Miranda: A flawless assessment.
+    <<set $perfectForms = $perfectForms + 1>>
+    Miranda: This form looks excellent, top to bottom.
+    <<if $perfectForms >= 3>>
+        Miranda: That makes three flawless assessments.
+        Miranda: Your perception is not to be underestimated, Jonathan.
+        Force: [Fo]Fuck yeah! Doesn't that just feel amazing?[/Fo]
+        Empathy: [Em]Sure it does...[/Em]
+    <<endif>>
 <<elseif $subjectScore > ($subjectMax / 2)>>
-    Miranda: Your results are adequate.
+    Miranda: Despite the mistakes, we can still work with this form.
 <<else>>
-    Miranda: A complete failure in judgment. Your betters [b]will[/b] hear of this.
+    <<set $badForms = $badForms + 1>>
+    Miranda: A complete failure in judgment. 
     <<SkillCheck "YarnManager" "Force" 10>>
     <<if $last_check_success>>
     Force: [Fo]Damn.[/Fo]
+    <<endif>>
+    <<if $badForms >= 3>>
+        Miranda: Never have I seen such terrible performance from you or any other Arbiter.
+        Miranda: You realize this reflects poorly on me, don't you? We can manage these issues discreetly for now, but if you don't shape up soon...
+        Miranda: [Fo]The Republic[/Fo] will take notice.
     <<endif>>
 <<endif>>
 -> (Final Evaluation)
@@ -117,9 +167,8 @@ Miranda: Subject: WilliamGote.
 title: PerformanceReview_Final
 ---
 <<get_total_score "YarnManager">>
-Miranda: Here's the results overall:
 <<if $totalScore >= $maxScore * 0.85>>
-    Miranda: I rarely say this, but I'm impressed.
+    Miranda: I rarely say this, but I'm impressed, Jonny
     Miranda: Continue in this manner, and the Republic will reward you greatly for your service.
     <<SkillCheck "YarnManager" "Force" 12>>
     <<if $last_check_success>>

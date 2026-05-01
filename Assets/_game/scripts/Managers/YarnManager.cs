@@ -326,6 +326,7 @@ public class YarnManager : MonoBehaviour
 
             variableStorage.SetValue("$nameEmpty", string.IsNullOrEmpty(result.formData.subjectName));
             variableStorage.SetValue("$occupationEmpty", string.IsNullOrEmpty(result.formData.occupation));
+            variableStorage.SetValue("$loyaltyEmpty", result.formData.loyaltyRating == 0);
 
             variableStorage.SetValue("$subjectScore", (float)result.score);
             variableStorage.SetValue("$subjectMax", (float)result.maxScore);
@@ -334,11 +335,15 @@ public class YarnManager : MonoBehaviour
         }
         else
         {
-            // This is why you get "Wrong -> Wrong -> Wrong"
             Debug.LogWarning($"Yarn requested breakdown for '{targetID}', but no submitted form matches that ID.");
             variableStorage.SetValue("$nameCorrect", false);
             variableStorage.SetValue("$occupationCorrect", false);
             variableStorage.SetValue("$loyaltyCorrect", false);
+
+            variableStorage.SetValue("$nameEmpty", true);
+            variableStorage.SetValue("$occupationEmpty", true);
+            variableStorage.SetValue("$loyaltyEmpty", true);
+
             variableStorage.SetValue("$subjectScore", 0f);
             variableStorage.SetValue("$subjectMax", 0f);
         }

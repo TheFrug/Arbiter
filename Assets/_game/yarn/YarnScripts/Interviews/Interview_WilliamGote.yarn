@@ -74,7 +74,7 @@ Force: [Fo]Prick.[/Fo]
 title: WilliamGote_Hub
 position: 1230,741
 ---
-You look at your compliance form. You have questions to ask.
+You look at your compliance form.
 -> Please state your name. <<once>>
     <<jump WilliamGote_Name>>
 -> What is your current occupation? <<if not $asked_occupation>>
@@ -356,17 +356,16 @@ title: WilliamGote_End
 ---
 Punk: So that's it, yeah?
 Punk: I walk out, you file your little paper, we both pretend this meant something.
-
 <<if is_form_complete() == false>>
-    The Voice of Someone Important: [Fo]You're about to submit an incomplete compliance form? Sloppy. Careless. Beneath you.[/Fo]
-    -> Go back and finish the form.
+    The Voice of Someone Important: [Fo]Hold up, Jonny-boy! You're about to submit an incomplete compliance form![/Fo]
+    -> (Go back and finish the form)
         The Voice of Someone Important: [Fo]Good. Procedure exists for a reason.[/Fo]
         <<jump WilliamGote_Hub>>
-    -> Submit anyway.
-        The Voice of Someone Important: [Fo]Cutting corners already? Let's hope that doesn't become a habit.[/Fo]
+    -> (Submit anyway)
+        The Voice of Someone Important: [Fo]Cutting corners, are we? Let's hope that doesn't become a habit.[/Fo]
         <<jump WilliamGote_End_Determine>>
 <<else>>
-    -> [Submit Form]
+    -> That's right. You're free to go.
         <<jump WilliamGote_End_Determine>>
 <<endif>>
 ===
@@ -382,48 +381,44 @@ title: WilliamGote_End_Determine
 
 title: WilliamGote_End_Trust
 ---
--> You're free to go.
 Punk: ...
 Punk: Hey, before I go...
 Punk: You ever get people coming through here that get dealt with a little differently?
-The Voice of Someone Important: [Fo]Uh oh. What's this guy's angle?[/Fo]
+The Voice of Someone Important: [Fo]Uh oh.[/Fo]
 -> Everyone who comes through here is processed the same.
     <<set $william_respect -= 1>>
-    Punk: Yeah.
-    Punk: Figured.
-    The Voice of Someone Important:[Fo]Excellent response. I'm proud of you, kiddo![/Fo]
+    Punk: Yeah, I figured.
+    The Voice of Someone Important: [Fo]Perfect response. I'm proud of you, kiddo![/Fo]
     <<jump WilliamGote_End_Standard>>
--> Depends what you mean.
+-> Depends on what you mean.
     <<set $william_respect += 1>>
     Punk: I got a buddy. He calls himself Sticky Drums.
     Force: [Fo]Sticky Drums? That's the worst name I've ever heard.[/Fo]
-    Punk: Good guy. Plays the keys in our band.
-    Punk: I love him, but he's kind of an... unsubtle idiot.
-    Empathy: [Em]Glowing warmth. He loves this 'Sticky Drums', even his godawful name.[/Em]
+    Punk: Good guy. Plays the keys in our band. He's kind of an... unsubtle idiot.
+    <<SkillCheck "YarnManager" "Empathy" 8>>
+    <<if $last_check_success>>
+        Empathy: [Em]He's practically glowing. He loves this 'Sticky Drums', even his godawful name.[/Em]
+    <<endif>>
     Punk: He has a compliance check tomorrow morning before we head out. If he ends up in your office...
     Punk: Just... Don't look too hard, yeah?
     Punk: He's a good man. That should be all that matters.
     Punk: But I know that's not how this works.
-The Voice of Someone Important: [Fo]I don't think I need to point this out, but this is a direct request to undermine procedure.[/Fo]
-<<SkillCheck "YarnManager" "Empathy" 14>>
-<<if $last_check_success>>
-Empathy: [Em]"Where there is an opportunity to do good, you take it."[/Em]
-Empathy: [Em]That's what he taught you.[/Em]
-<<endif>>
--> I can't do that.
-    <<set $william_respect -= 2>>
-    Punk: Yeah.
-    Punk: Didn't think you could.
-    Punk: Worth a shot.
-    <<jump WilliamGote_End_Standard>>
--> I'll keep that in mind.
-    <<set $william_respect += 1>>
-    Punk: That's all I'm asking.
-    Punk: Don't do it for me. Do it... for someone who doesn't know how to play the game.
-    Punk: Anyways, thanks for not being a complete piece of shit.
-He stands, adjusts his jacket, ensuring his zippers hang lazily, and heads for the door.
-Punk: See you around, Arbiter.
-<<form_submit YarnManager>>
+    The Voice of Someone Important: [Fo]I don't think I need to point this out, but this is a direct request to undermine procedure.[/Fo]
+    <<SkillCheck "YarnManager" "Empathy" 14>>
+    <<if $last_check_success>>
+        Empathy: [Em]"Where there is an opportunity to do good, you take it."[/Em]
+        Empathy: [Em]That's what he taught you.[/Em]
+    <<endif>>
+    -> I can't do that.
+        <<set $william_respect -= 2>>
+        Punk: Yeah, I didn't think you could.
+        Punk: Worth a shot.
+        <<jump WilliamGote_End_Standard>>
+    -> I'll keep that in mind.
+        <<set $william_respect += 1>>
+        Punk: That's all I'm asking.
+        Punk: Anyways, thanks for not being a complete piece of shit.
+        <<jump WilliamGote_Exit>>
 ===
 
 title: WilliamGote_End_Standard
@@ -431,8 +426,15 @@ title: WilliamGote_End_Standard
 -> You're free to go.
 Punk: Yeah, real generous of you.
 Punk: Try not to lose any sleep over it.
-He stands, adjusts his jacket, ensuring his zippers hang lazily, and heads for the door.
-The Voice of Someone Important: [Fo]You've conquered this challenge well! Have no fear, the process will come down on him shortly.[/Fo]
-<<form_submit YarnManager>>
+<<jump WilliamGote_Exit>>
 ===
 
+title: WilliamGote_Exit
+---
+He stands, adjusts his jacket, ensuring his zippers hang lazily, and heads for the door.
+Punk: See you around, Arbiter.
+<<if $william_respect <= 1>>
+    The Voice of Someone Important: [Fo]You've conquered this challenge well! Have no fear, the process will come down on him shortly.[/Fo]
+<<endif>>
+<<form_submit YarnManager>>
+===
