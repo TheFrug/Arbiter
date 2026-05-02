@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Serializable struct that pairs a string key with an AudioClip in the inspector
     [System.Serializable]
     public struct NamedAudioClip
     {
         public string clipName;
         public AudioClip clip;
+    }
+
+    [System.Serializable]
+    public struct NamedAudioClipArray
+    {
+        public string groupName;
+        public AudioClip[] clips;
     }
 
     [Header("Audio Players Components")]
@@ -22,9 +28,11 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance = null;
 
-    // The single list that you can add to from the Inspector
     [Header("Audio Library")]
     [SerializeField] private List<NamedAudioClip> audioLibrary = new List<NamedAudioClip>();
+
+    [Header("Random Audio Library")]
+    [SerializeField] private List<NamedAudioClipArray> randomAudioLibrary = new List<NamedAudioClipArray>();
 
     private void Awake()
     {
@@ -39,6 +47,9 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        // Safely play ambience
+        PlayAmbience("LoopMusic");
     }
 
     // Play a single clip by string key through the sound effects source.
@@ -56,10 +67,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Play a random clip from an array, and randomize the pitch slightly.
-    public void RandomSoundEffect(params AudioClip[] clips)
+    // Play a random clip from the random library by string key.
+    public void PlayRandomSoundEffect(string groupName)
     {
-        if (clips.Length == 0) return;
+        AudioClip[] clips = GetRandomClips(groupName);
+
+        if (clips == null || clips.Length == 0)
+        {
+            Debug.LogWarning($"Random audio group '{groupName}' not found or is empty in AudioManager.");
+            return;
+        }
 
         int randomIndex = Random.Range(0, clips.Length);
         float randomPitch = Random.Range(LowPitchRange, HighPitchRange);
@@ -132,6 +149,19 @@ public class AudioManager : MonoBehaviour
             if (item.clipName == targetName)
             {
                 return item.clip;
+            }
+        }
+        return null;
+    }
+
+    // Helper method to look up clip arrays by name
+    private AudioClip[] GetRandomClips(string targetName)
+    {
+        foreach (var item in randomAudioLibrary)
+        {
+            if (item.groupName == targetName)
+            {
+                return item.clips;
             }
         }
         return null;

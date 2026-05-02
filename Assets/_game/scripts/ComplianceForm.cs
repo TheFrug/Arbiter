@@ -85,6 +85,18 @@ public class ComplianceForm : MonoBehaviour
 
         if (toggleButton != null)
             toggleButton.onClick.AddListener(ToggleForm);
+
+        // Add listeners to loyalty toggles
+        if (loyaltyLow != null) loyaltyLow.onValueChanged.AddListener((bool isOn) => OnCheckboxToggled(isOn));
+        if (loyaltyMid != null) loyaltyMid.onValueChanged.AddListener((bool isOn) => OnCheckboxToggled(isOn));
+        if (loyaltyHigh != null) loyaltyHigh.onValueChanged.AddListener((bool isOn) => OnCheckboxToggled(isOn));
+
+        // Add listeners to behavior toggles
+        for (int i = 0; i < behaviorToggles.Length; i++)
+        {
+            int index = i;
+            behaviorToggles[index].onValueChanged.AddListener((bool isOn) => OnCheckboxToggled(isOn));
+        }
     }
 
     private void Start()
@@ -178,6 +190,9 @@ public class ComplianceForm : MonoBehaviour
             subjectName = revealedName;
             nameDisplayText.text = subjectName;
             nameFillButton.interactable = false;
+
+            // Audio trigger for writing out the name
+            AudioManager.Instance.PlayRandomSoundEffect("WriteSounds");
         });
     }
 
@@ -189,7 +204,19 @@ public class ComplianceForm : MonoBehaviour
             occupation = revealedOccupation;
             occupationDisplayText.text = occupation;
             occupationFillButton.interactable = false;
+
+            // Audio trigger for writing out the occupation
+            AudioManager.Instance.PlayRandomSoundEffect("WriteSounds");
         });
+    }
+
+    // Audio trigger modified to only play when checked/toggled on
+    private void OnCheckboxToggled(bool isOn)
+    {
+        if (isOn)
+        {
+            AudioManager.Instance.PlayRandomSoundEffect("CheckboxSounds");
+        }
     }
 
     private void ShowConfirmation(Action onConfirm)
@@ -260,7 +287,7 @@ public class ComplianceForm : MonoBehaviour
             interviewID = interviewID,
             subjectName = subjectName,
             occupation = occupation,
-            loyaltyRating = loyaltyValue,
+            loyaltyRating = loyaltyValue, // Use existing parameter layout
             behaviorFlags = flags
         };
 
@@ -286,6 +313,9 @@ public class ComplianceForm : MonoBehaviour
     private IEnumerator SlideForm(bool show)
     {
         isSliding = true;
+
+        // Play the paper sound effect whenever the form is toggled
+        AudioManager.Instance.PlayRandomSoundEffect("PaperSounds");
 
         Vector2 start = rectTransform.anchoredPosition;
         Vector2 target = show ? visiblePosition : hiddenPosition;
@@ -389,5 +419,4 @@ public class ComplianceForm : MonoBehaviour
 
         img.color = original;
     }
-
 }
