@@ -6301,12 +6301,13 @@ MonoBehaviour:
   - {fileID: 842184663677059033}
   toggleButton: {fileID: 0}
   rectTransform: {fileID: 8507594473196419053}
-  slideSpeed: 6
+  slideSpeed: 4
   hiddenPosition: {x: -430, y: -1300}
   visiblePosition: {x: -430, y: 35}
   flashColor: {r: 1, g: 0.9, b: 0.2, a: 1}
   flashCount: 3
   flashDuration: 0.15
+  confirmationPrompt: {fileID: 0}
 --- !u!1 &8342260931978712487
 GameObject:
   m_ObjectHideFlags: 0
