@@ -52,7 +52,7 @@ MonoBehaviour:
   HighPitchRange: 1.05
   audioLibrary:
   - clipName: LoopMusic
-    clip: {fileID: 8300000, guid: 450fc99d0532c6b40aed34a7e2468f90, type: 3}
+    clip: {fileID: 8300000, guid: ded6d386ab3456d44936645c379efc7d, type: 3}
   - clipName: LoopAmbience
     clip: {fileID: 8300000, guid: 716906009a4f380418a892d02478abbb, type: 3}
   - clipName: InterrogationAmbience
@@ -65,6 +65,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d243553b31d54464d9549afbd3879451, type: 3}
   - clipName: Force
     clip: {fileID: 8300000, guid: 519b168b35b56b3468567e352612fe09, type: 3}
+  - clipName: TypewriterClick
+    clip: {fileID: 8300000, guid: 2ab5ec04b04fa0c40a36509305325215, type: 3}
+  - clipName: Maria
+    clip: {fileID: 8300000, guid: cce71ad4f00d421419efd7c7be353c40, type: 3}
+  - clipName: Eethin
+    clip: {fileID: 8300000, guid: 3825db450ef131a4c95a53ad25941684, type: 3}
+  - clipName: William
+    clip: {fileID: 8300000, guid: 0f2af0cddf7d69743b1490c115ad8d0b, type: 3}
   randomAudioLibrary:
   - groupName: WriteSounds
     clips:

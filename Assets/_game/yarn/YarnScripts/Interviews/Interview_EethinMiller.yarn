@@ -23,29 +23,35 @@ title: EethinMiller_Intro
 A lad marches in wearing freshly-pressed khakis and a worn microfleece embroidered with the a red patch depicting the Statue of Harmony's torch.
 <<SkillCheck "YarnManager" "Force" 10>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]Ah, one of the Second Republic's many glorious symbols. Here we have a fine young patriot.[/Fo]
 <<endif>>
-<<SkillCheck "YarnManager" "Insight" 12>>
+<<SkillCheck "YarnManager" "Insight" 10>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
 Insight: [In]The Beer Party, one of the political groups that founded the Second Republic, used to abhor the image the Statue of Harmony's torch, as its copper bearer then carried a different name.[/In]
 Insight: [In]Their stance officially changed once the Atlantic Bulwark Decree of 3AT saw the statue re-engineered to defend against naval threats, adding multiple heat-seeking missile launchers at her base and rail guns in her crown.[/In]
 -> Have those guns been put to use yet?
+    <<play_sound "YarnManager" "Insight">>
     Insight: [In]Unfortunately not, as the Second Republic hasn't faced a sea invasion in several decades.[/In]
 -> That sounds like a big waste of taxpayer money.
+    <<play_sound "YarnManager" "Insight">>
     Insight: [In]Maybe, but the Second Republic hasn't faced a sea invasion in your lifetime. Be grateful.[/In] 
 -> God, I love this country.
-Insight: [In]After the statue's revision, the Beer Party adopted her as one of their symbols, particularly her torch, whose carmine inferno glows 24 hours a day.[/In]
+    <<play_sound "YarnManager" "Insight">>
+    Insight: [In]After the statue's revision, the Beer Party adopted her as one of their symbols, particularly her torch, whose carmine inferno glows 24 hours a day.[/In]
 <<endif>>
 The young man sits upright in his chair and beams with excitement. You get the incredibly uncommon sense that this person respects you.
 Bright-Eyed Young Patriot: I'm ready for whatever questions you have for me, sir!
 <<SkillCheck "YarnManager" "Empathy" 10>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]His face hides it well, but if this lad tensed up any more, his shoulders would be touching his earlobes.[/Em]
 <<endif>>
 -> Good morning.
 -> Hello, there.
--> At ease, young man. I won't bite.<<if $last_check_success>> #skillcheck:Empathy:9 
-    <<SkillCheck "YarnManager" "Empathy" 9>>
+-> At ease, young man. I won't bite.<<if $last_check_success>> #skillcheck:Empathy:5
+    <<SkillCheck "YarnManager" "Empathy" 5>>
     <<if $last_check_success>>
         <<detour EethinMiller_Ease_Pass>>
     <<else>>
@@ -58,12 +64,15 @@ title: EethinMiller_Ease_Pass
 ---
 He lets out a steady sigh, his posture starting to slouch a bit.
 Bright-Eyed Young Patriot: Yes, sir. Thank you, sir.
+<<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]That felt nice, didn't it? We helped him relax.[/Em]
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]He called us 'sir'. That feels right.[/Fo]
 -> You alright, my friend? You seem tense.
     Bright-Eyed Young Patriot: *Sigh* Yeah, it's just... it's my first time doing this. My birthday was just a few weeks ago.
     <<SkillCheck "YarnManager" "Insight" 10>>
     <<if $last_check_success>>
+    <<play_sound "YarnManager" "Insight">>
     Insight: [In]Compliance interviews are only conducted with Republic citizens of or over the age of eighteen.[/In]
     Insight: [In]There is a growing population that wishes to lower this minimum age, given recent reports of anti-government terrorists recruiting children as young as thirteen.[/In]
     <<endif>>
@@ -78,8 +87,10 @@ Force: [Fo]He called us 'sir'. That feels right.[/Fo]
 
 title: EethinMiller_Ease_Fail
 ---
+<<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]Your frustration shines through as you growl the words at him and his teeth start to chatter. You could impale yourself on his cortisol spike.[/Em]
 Bright-Eyed Young Patriot: URP- Sorry, sir! Won't happen again, sir!
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]He called us 'sir'. That feels right, at least.[/Fo]
 ===
 
@@ -110,6 +121,7 @@ Bright-Eyed Young Patriot: My full name is Ethan Roosevelt Miller, sir!
 Bright-Eyed Young Patriot: I should spell that for you. That's Miller spelt with an M-I...
 <<SkillCheck "YarnManager" "Force" 7>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could do it.[/Fo]
 <<endif>>
 -> I know how to spell your name, kid.
@@ -118,6 +130,7 @@ Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could
     Bright-Eyed Young Patriot: L-L-E-R! My middle name, Roosevelt, is spelt R-O-O...
     <<SkillCheck "YarnManager" "Force" 8>>
     <<if $last_check_success>>
+    <<play_sound "YarnManager" "Force">>
     Force: [Fo]He's seriously going to spell out his whole name if you don't stop him.[/Fo]
     <<endif>>
     -> Alright, alright. I think I can get the rest.
@@ -125,17 +138,20 @@ Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could
     -> (Might as well let him finish)
     Bright-Eyed Young Patriot: S-E-V-E-L-T! My first name's tricky. It's spelt E-E-T-H-I-N.
         <<form_set_name YarnManager "Eethin Roosevelt Miller">>
-        <<SkillCheck "YarnManager" "Empathy" 14>>
+        <<SkillCheck "YarnManager" "Empathy" 11>>
         <<if $last_check_success>>
-        Empathy:[Em]There is a tinge of frustration in his use of the word "tricky" that gives you the sense he has apologized for his name many times before.[/Em]
+        <<play_sound "YarnManager" "Empathy">>
+        Empathy: [Em]There is a tinge of frustration in his use of the word "tricky" that gives you the sense he has apologized for his name many times before.[/Em]
         <<endif>>
         Bright-Eyed Young Patriot: I know that's an unsual spelling.
-        <<SkillCheck "YarnManager" "Force" 9>>
+        <<SkillCheck "YarnManager" "Force" 6>>
         <<if $last_check_success>>
+        <<play_sound "YarnManager" "Force">>
         Force: [Fo]What the fuck kind of spelling of 'Ethan' is that?[/Fo]
         <<endif>>
-        <<SkillCheck "YarnManager" "Insight" 12>>
+        <<SkillCheck "YarnManager" "Insight" 11>>
         <<if $last_check_success>>
+        <<play_sound "YarnManager" "Insight">>
         Insight: [In]New mothers sometimes alter the spellings of common names to give their child's name a unique flair.[/In]
         Insight: [In]This trend started before even the birth of the Second Republic, but has ramped up in recent times with declining literacy rates.[/In]
         <<endif>>
@@ -150,26 +166,27 @@ Force: [Fo]'Ethan Roosevelt Miller' is not that difficult to spell. Even I could
 title: EethinMiller_Occupation
 ---
 Bright-Eyed Young Patriot: You might not believe this, but I'm a compliance offcer like you! 
-<<SkillCheck "YarnManager" "Force" 12>>
+<<SkillCheck "YarnManager" "Force" 8>>
 <<if $last_check_success>>
-Force:[Fo]This guy's a compliance officer? I can see the potential, but there's no way he's experienced enough, yet.[/Fo]
-Insight:[In]Unless we're talking to a [b]legendary[/b] servant of the Republic.[/In]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]This guy's a compliance officer? I can see the potential, but there's no way he's experienced enough, yet.[/Fo]
+<<play_sound "YarnManager" "Insight">>
+Insight: [In]Unless we're talking to a [b]legendary[/b] servant of the Republic.[/In]
 <<endif>>
 -> Great career choice.
     <<form_set_occupation YarnManager "Compliance Officer">>
     <<SkillCheck "YarnManager" "Empathy" 9>>
     <<if $last_check_success>>
+    <<play_sound "YarnManager" "Empathy">>
     Empathy: [Em]For just a moment, he smirks.[/Em]
     <<endif>>
 -> You seem a little young for that position. #skillcheck:Force:13 
-    <<SkillCheck "YarnManager" "Force" 13>>
+    <<SkillCheck "YarnManager" "Force" 10>>
     <<if $last_check_success>>
         <<detour EethinMiller_Press_Pass>>
     <<else>>
         <<detour EethinMiller_Press_Fail>>
     <<endif>>
-//-> Hold on a second, are you some kind of legend? <<if $last_check_success>>
-//    <<detour EethinMiller_Press_Pass>>
 <<set $asked_occupation = true>>
 <<jump EethinMiller_Hub>>
 ===
@@ -178,43 +195,50 @@ title: EethinMiller_Press_Pass
 ---
 <<form_set_occupation YarnManager "Junior Compliance Officer">>
 Bright-Eyed Young Patriot: Wow, sir, you really know your stuff! Technically, I'm a Junior Compliance Officer.
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]HAH! I knew it![/Fo]
 Bright-Eyed Young Patriot: How'd you get so good at the job? I want to be the best in the whole Republic!
 -> Practice, mostly. 
 -> Do as you're told and do not deviate.
--> When in doubt, I listen to the colored voices in my head.
+-> When in doubt, I listen to the colorful voices in my head.
 ===
 
 title: EethinMiller_Press_Fail
 ---
-Force:[Fo]Your observation comes off pathetic, like a geriatric musician talking down to a young star. Can't you just let people be talented?[/Fo]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]Your observation comes off pathetic, like a geriatric musician talking down to a young star. Can't you just let people be talented?[/Fo]
 <<form_set_occupation YarnManager "Junior Compliance Officer">>
 Bright-Eyed Young Patriot: To be honest, sir, I am! But I'm not far from it. To tell you the truth, I'm only a Junior Compliance Officer with big dreams!
-<<SkillCheck "YarnManager" "Insight" 16>>
+<<SkillCheck "YarnManager" "Insight" 10>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
 Insight: [In]The average junior compliance officer starts the job at twenty. You were twenty-two, nothing to be ashamed of.[/In]
 <<endif>>
-<<SkillCheck "YarnManager" "Force" 13>>
+<<SkillCheck "YarnManager" "Force" 12>>
 <<if $last_check_success>>
-Force:[Fo]The little shit is testing us, like saying 'nya nya, I'm on the fast track in life.'[/Fo]
-Force:[Fo]He should watch his back. Right now, he's just a subject, and you're a mighty compliance officer. You could ruin his life with just a piece of paper.[/Fo]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]The little shit is testing us, like saying 'nya nya, I'm on the fast track in life.'[/Fo]
+Force: [Fo]He should watch his back. Right now, he's just a subject, and you're a mighty compliance officer. You could ruin his life with just a piece of paper.[/Fo]
 <<endif>>
 ===
 
 // ==========================
 // ===== LOYALTY ============
 // ==========================
+
 title: EethinMiller_Loyalty
 ---
 Bright-Eyed Young Patriot: I give my heart, my mind, and my body to the Second Republic to do with it as she pleases!
-<<SkillCheck "YarnManager" "Force" 13>>
+<<SkillCheck "YarnManager" "Force" 7>>
 <<if $last_check_success>>
-The Voice of Someone Important:[Fo]*Sniff* It's enough to make me cry.[/Fo]
+<<play_sound "YarnManager" "VISO">>
+The Voice of Someone Important: [Fo]*Sniff* It's enough to make me cry.[/Fo]
 <<endif>>
 Bright-Eyed Young Patriot: Although it's the only one I've ever known, the Second Republic is the greatest country in the world!
-<<SkillCheck "YarnManager" "Empathy" 14>>
+<<SkillCheck "YarnManager" "Empathy" 10>>
 <<if $last_check_success>>
-Empathy:[Em]His eyes dart around the room, searching for extra eyes and ears.[/Em]
+<<play_sound "YarnManager" "Empathy">>
+Empathy: [Em]His eyes dart around the room, searching for extra eyes and ears.[/Em]
 <<endif>>
 <<set $asked_loyalty = true>>
 <<jump EethinMiller_Hub>>
@@ -229,11 +253,14 @@ title: EethinMiller_End
 ---
 Bright-Eyed Young Patriot: Is that all, sir? I hope my answers were satisfactory!
 <<if is_form_complete() == false>>
+    <<play_sound "YarnManager" "VISO">>
     The Voice of Someone Important: [Fo]You're about to submit a half-finished report on a fellow officer? Sloppy work.[/Fo]
     -> Go back and fix it.
+        <<play_sound "YarnManager" "VISO">>
         The Voice of Someone Important: [Fo]Good. Professionalism is the bedrock of the Republic.[/Fo]
         <<jump EethinMiller_Hub>>
     -> Submit anyways.
+        <<play_sound "YarnManager" "VISO">>
         The Voice of Someone Important: [Fo]He's going to be your boss one day, and he'll remember this paperwork error.[/Fo]
         <<jump EethinMiller_FinalExit>>
 <<else>>

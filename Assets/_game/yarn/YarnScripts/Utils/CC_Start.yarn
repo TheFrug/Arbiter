@@ -17,15 +17,18 @@ position: 11,-342
 Interviewer: What motivates you most?
 
 -> Helping others.
-    <<add_stat "YarnManager" "Empathy" 1>>
+    <<play_sound "YarnManager" "Empathy">>
+    <<add_stat "YarnManager" "Empathy" 2>>
     Interviewer: How noble. You will come to learn that there are some who are... undeserving of your help.
     <<jump CC_Question2>>
 -> Becoming stronger.
-    <<add_stat "YarnManager" "Force" 1>>
+    <<play_sound "YarnManager" "Force">>
+    <<add_stat "YarnManager" "Force" 2>>
     Interviewer: Some say strength runs the world. They are right.
     <<jump CC_Question2>>
 -> Understanding the truth.
-    <<add_stat "YarnManager" "Insight" 1>>
+    <<play_sound "YarnManager" "Insight">>
+    <<add_stat "YarnManager" "Insight" 2>>
     Interviewer: The only truth you will understand is ours.
     <<jump CC_Question2>>
 ===
@@ -36,15 +39,18 @@ position: 362,-348
 Interviewer: When conflict arises, your first instinct is to—
 
 -> De-escalate and find common ground.
-    <<add_stat "YarnManager" "Empathy" 1>>
+    <<play_sound "YarnManager" "Empathy">>
+    <<add_stat "YarnManager" "Empathy" 2>>
     Interviewer: So, you see the peace in cooperation. Excellent.
     <<jump CC_Question3>>
 -> Take control of the situation with my MASSIVE MUSCLES.
-    <<add_stat "YarnManager" "Force" 1>>
+    <<play_sound "YarnManager" "Force">>
+    <<add_stat "YarnManager" "Force" 2>>
     Interviewer: You can't control every situation, but you can control most people.
     <<jump CC_Question3>>
 -> Observe and make judgements before acting. 
-    <<add_stat "YarnManager" "Insight" 1>>
+    <<play_sound "YarnManager" "Insight">>
+    <<add_stat "YarnManager" "Insight" 2>>
     Interviewer: You see the forest [i]and[/] its trees.
     <<jump CC_Question3>>
 ===
@@ -55,13 +61,16 @@ position: 694,-355
 Interviewer: In your previous work, you were known for:
 
 -> Working well with others.
-    <<add_stat "YarnManager" "Empathy" 2>>
+    <<play_sound "YarnManager" "Empathy">>
+    <<add_stat "YarnManager" "Empathy" 3>>
     Interviewer: That should translate nicely.
 -> Getting results.
-    <<add_stat "YarnManager" "Force" 2>>
+    <<play_sound "YarnManager" "Force">>
+    <<add_stat "YarnManager" "Force" 3>>
     Interviewer: Good answer.
 -> Actually knowing how to do my job.
-    <<add_stat "YarnManager" "Insight" 2>>
+    <<play_sound "YarnManager" "Insight">>
+    <<add_stat "YarnManager" "Insight" 3>>
     Interviewer: You'll be in competent company here.
 Interviewer: We're almost done here.
 <<jump CC_Question4>>
@@ -87,6 +96,7 @@ Someone Important: [Fo]Good save, lad. You already show a knack for following or
 title: CC_HoldUp
 position: 1068,-130
 ---
+<<stop_music "YarnManager">>
 The Voice of Someone Important: [Fo]Woah woah [b]WOAH[/b], buddy.[/Fo]
 The Voice of Someone Important: [Fo]You weren't about to say [i]that[/i], were you? You know that isn't the right answer![/Fo]
 The Voice of Someone Important: [Fo]Think of what they [i]want[/i] to hear, and if that's too hard, think about what [b]I[/b] want to hear.[/Fo]
@@ -97,7 +107,7 @@ title: CC_Final
 position: 1431,-347
 ---
 Interviewer: It appears you are a perfect match for the role of Arbiter. 
-<<show_id YarnManager>>
+<<show_id "YarnManager">>
 Interviewer: Here is your official ID card.
 // CHANGE THIS ITS SHIT AND PLACEHOLDER
 Interviewer: We thank you for your assistance in establishing an orderly society.

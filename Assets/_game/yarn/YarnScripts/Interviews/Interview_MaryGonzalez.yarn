@@ -56,14 +56,16 @@ Intense Woman: Lets get this sorted, shall we?
 
 title: MaryGonzalez_Late_PassNode
 ---
-[Fo]Your face becomes like granite carved into an expression that screams 'Not happy' as you relay her tardiness to her.[/Fo]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]Your face becomes like granite carved into an expression that screams 'Not happy' as you relay her tardiness to her.[/Fo]
 Intense Woman: Well I- I'm sorry, officer.
 The Voice of Someone Important: [Fo][b]Oh yeah.[/b] That's the stuff.[/Fo]
 ===
 
 title: MaryGonzalez_Late_FailNode
 ---
-[Fo]You squeak the words out, and her expression sours.[/Fo]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]You squeak the words out, and her expression sours.[/Fo]
 Intense Woman: Yes, well, some of us do more rigorous work than sit in an office and ask people questions. 
 The Voice of Someone Important: [Fo]What are you, a school teacher? That was fucking lame.[/Fo]
 ===
@@ -88,12 +90,14 @@ position: 451,-195
 Intense Woman: My name is Mary Gonzalez.
 <<form_set_name YarnManager "Mary Gonzalez">>
 <<set $asked_name = true>>
-<<SkillCheck "YarnManager" "Empathy" 7>>
+<<SkillCheck "YarnManager" "Empathy" 6>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]Her pronunciation shifts as she sings her last name. She watches your reaction closely.[/Em]
 <<endif>>
 <<SkillCheck "YarnManager" "Insight" 7>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
 Insight: [In]'Gonzalez' is a Spanish surname of Germanic origin. It was much more common in the Second Republic before the Purification Movement[/In]
 <<endif>>
 -> Thank you.
@@ -105,8 +109,9 @@ Insight: [In]'Gonzalez' is a Spanish surname of Germanic origin. It was much mor
 title: MaryGonzalez_LastName
 ---
 Intense Woman: Yes, I am aware. Just make sure you spell it right on the form. 
-<<SkillCheck "YarnManager" "Force" 10>>
+<<SkillCheck "YarnManager" "Force" 9>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Force">>
 Force: [Fo]Her gaze intesifies, almost theateningly, as though  a platoon of gunmen stood behind her ready to fire upon any she points at.[/Fo]
 <<endif>>
 ===
@@ -120,9 +125,11 @@ She smirks.
 Intense Woman: I work at the Gregory Estate.
 <<SkillCheck "YarnManager" "Insight" 9>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
 Insight: [In]The Gregory family owns one of the largest tech companies in the Second Republic. Their surveilance technology and charitable donations were instrumental in the New Freedom Party's rise to dominance.[/In]
 <<SkillCheck "YarnManager" "Empathy" 7>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]This gardener is both proud and relieved to be associated with such a family.[/Em]
 <<endif>>
 <<endif>>
@@ -143,12 +150,14 @@ Intense Woman: Of course I am.
 Intense Woman: The Gregory family built half the systems that run this *lovely* country.
 <<SkillCheck "YarnManager" "Insight" 6>>
 <<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
 Insight: [In]'Lovely' is hardly a word one would use to describe the Second Republic. Awe-inspiring, dominant, efficient, these all fit the bill.[/In]
 <<endif>>
 Intense Woman: The only thing that could make this place better is if the Gregory family were running the show!
-<<SkillCheck "YarnManager" "Empathy" 9>>
+<<SkillCheck "YarnManager" "Force" 9>>
 <<if $last_check_success>>
-Empathy: [Em]Oooh, she definitely should not say that in earshot of a microphone.[/Em]
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]She definitely should not say that in earshot of a microphone.[/Fo]
 <<endif>>
 <<set $asked_loyalty = true>>
 <<jump MaryGonzalez_Nucleus>>

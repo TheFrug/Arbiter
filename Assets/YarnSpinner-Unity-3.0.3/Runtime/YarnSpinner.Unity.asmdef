@@ -8,7 +8,8 @@
         "Unity.InputSystem",
         "Unity.Localization",
         "UniTask",
-        "UniTask.Addressables"
+        "UniTask.Addressables",
+        "Unity.Collections"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -29,7 +30,8 @@
         "Yarn.Microsoft.Bcl.AsyncInterfaces.dll",
         "Yarn.System.Text.Json.dll",
         "Yarn.System.Text.Encodings.Web.dll",
-        "Yarn.System.Threading.Tasks.Extensions.dll"
+        "Yarn.System.Threading.Tasks.Extensions.dll",
+        "System.Collections.Immutable.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

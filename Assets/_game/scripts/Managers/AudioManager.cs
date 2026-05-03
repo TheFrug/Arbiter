@@ -141,6 +141,14 @@ public class AudioManager : MonoBehaviour
         AmbienceSource.volume = startVolume;
     }
 
+    public void StopMusic()
+    {
+        if (AmbienceSource.isPlaying)
+        {
+            AmbienceSource.Stop();
+        }
+    }
+
     // Helper method to look up audio clips by name
     private AudioClip GetClip(string targetName)
     {
@@ -152,6 +160,11 @@ public class AudioManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public AudioClip GetClipForTypewriter(string targetName)
+    {
+        return GetClip(targetName);
     }
 
     // Helper method to look up clip arrays by name

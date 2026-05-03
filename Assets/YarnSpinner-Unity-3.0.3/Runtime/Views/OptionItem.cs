@@ -23,7 +23,7 @@ namespace Yarn.Unity
         [SerializeField] internal Color colour;
     }
 
-    public sealed class OptionItem : UnityEngine.UI.Selectable, ISubmitHandler, IPointerClickHandler, IPointerEnterHandler
+    public sealed class OptionItem : UnityEngine.UI.Selectable, ISubmitHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [MustNotBeNull, SerializeField] TextMeshProUGUI? text;
         [SerializeField] UnityEngine.UI.Image? selectionImage;
@@ -57,8 +57,6 @@ namespace Yarn.Unity
 
                 hasSubmittedOptionSelection = false;
 
-                // When we're given an Option, use its text and update our
-                // interactibility.
                 string line = value.Line.TextWithoutCharacterName.Text;
                 if (disabledStrikeThrough && !value.IsAvailable)
                 {
@@ -74,7 +72,6 @@ namespace Yarn.Unity
                 text.text = line;
                 interactable = value.IsAvailable;
 
-                // we want to apply the default styling to the option item when they are given an option
                 ApplyStyle(normal);
             }
         }
@@ -115,14 +112,12 @@ namespace Yarn.Unity
         public override void OnSelect(BaseEventData eventData)
         {
             base.OnSelect(eventData);
-
             ApplyStyle(selected);
         }
 
         public override void OnDeselect(BaseEventData eventData)
         {
             base.OnDeselect(eventData);
-
             ApplyStyle(normal);
         }
 
@@ -134,7 +129,6 @@ namespace Yarn.Unity
             }
         }
 
-        // If we receive a submit or click event, invoke our "we just selected this option" handler.
         public void OnSubmit(BaseEventData eventData)
         {
             InvokeOptionSelected();
@@ -142,16 +136,11 @@ namespace Yarn.Unity
 
         public void InvokeOptionSelected()
         {
-            // turns out that Selectable subclasses aren't intrinsically interactive/non-interactive
-            // based on their canvasgroup, you still need to check at the moment of interaction
             if (!IsInteractable())
             {
                 return;
             }
 
-            // We only want to invoke this once, because it's an error to
-            // submit an option when the Dialogue Runner isn't expecting it. To
-            // prevent this, we'll only invoke this if the flag hasn't been cleared already.
             if (hasSubmittedOptionSelection == false && !completionToken.IsCancellationRequested)
             {
                 hasSubmittedOptionSelection = true;
@@ -164,11 +153,26 @@ namespace Yarn.Unity
             InvokeOptionSelected();
         }
 
-        // If we mouse-over, we're telling the UI system that this element is
-        // the currently 'selected' (i.e. focused) element. 
         public override void OnPointerEnter(PointerEventData eventData)
         {
+            base.OnPointerEnter(eventData);
+
+            // Defensively select this element to prevent the EventSystem from getting lost
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+
             base.Select();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            // Reset to normal style if we were selected
+            if (!IsHighlighted)
+            {
+                ApplyStyle(normal);
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2958262985454349540}
   - component: {fileID: 2958262985454349543}
   - component: {fileID: 2958262985454349548}
+  - component: {fileID: 4111845416141231178}
   m_Layer: 5
   m_Name: Line Presenter
   m_TagString: Untagged
@@ -112,6 +113,10 @@ MonoBehaviour:
   showCharacterNameInLineView: 1
   characterNameText: {fileID: 2958262987206614838}
   characterNameContainer: {fileID: 0}
+  narratorSoundKeys:
+  - Insight
+  - Empathy
+  - Force
   useFadeEffect: 1
   fadeUpDuration: 0.25
   fadeDownDuration: 0.1
@@ -121,6 +126,20 @@ MonoBehaviour:
   typewriterEffectSpeed: 60
   eventHandlers:
   - {fileID: 8877867826578261527}
+  - {fileID: 4111845416141231178}
+--- !u!114 &4111845416141231178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958262985454349538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7447b59cac45e4d42a8decbd74bca772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: TypewriterClick
 --- !u!1 &2958262986393358530
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,17 +476,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -593,17 +610,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -833,10 +848,6 @@ MonoBehaviour:
   multiAdvanceIsCancel: 0
   advanceRequestsBeforeCancellingLine: 2
   inputMode: 1
-  hurryUpLineAction: {fileID: 0}
-  nextLineAction: {fileID: 0}
-  cancelDialogueAction: {fileID: 0}
-  enableActions: 1
   hurryUpLineAxis: Jump
   nextLineAxis: Cancel
   cancelDialogueAxis: 
@@ -1039,6 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 8020628925107869969}
   optionViewPrefab: {fileID: 2576261519635394347, guid: e605972137b0b4c1399ffb07beae9a9b, type: 3}
+  skillCheckOptionItemPrefab: {fileID: 0}
   showsLastLine: 1
   lastLineText: {fileID: 8020628925673895294}
   lastLineContainer: {fileID: 0}
@@ -1252,17 +1264,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

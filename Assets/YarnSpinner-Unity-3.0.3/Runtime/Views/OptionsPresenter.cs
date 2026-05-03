@@ -4,6 +4,7 @@ Yarn Spinner is licensed to you under the terms found in the file LICENSE.md.
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Yarn.Unity.Attributes;
 
 #if USE_TMP
@@ -18,11 +19,6 @@ using System.Threading;
 
 namespace Yarn.Unity
 {
-    /// <summary>
-    /// Receives options from a <see cref="DialogueRunner"/>, and displays and
-    /// manages a collection of <see cref="OptionItem"/> views for the user
-    /// to choose from.
-    /// </summary>
     [HelpURL("https://docs.yarnspinner.dev/using-yarnspinner-with-unity/components/dialogue-view/options-list-view")]
     public sealed class OptionsPresenter : DialoguePresenterBase
     {
@@ -33,7 +29,6 @@ namespace Yarn.Unity
         [MustNotBeNull]
         [SerializeField] OptionItem? skillCheckOptionItemPrefab;
 
-        // A cached pool of OptionView objects so that we can reuse them
         List<OptionItem> optionViews = new List<OptionItem>();
 
         [Space]
@@ -58,11 +53,6 @@ namespace Yarn.Unity
 
         LocalizedLine? lastSeenLine;
 
-        /// <summary>
-        /// Controls whether or not to display options whose <see
-        /// cref="OptionSet.Option.IsAvailable"/> value is <see
-        /// langword="false"/>.
-        /// </summary>
         [Space]
         public bool showUnavailableOptions = false;
 
@@ -80,11 +70,6 @@ namespace Yarn.Unity
 
         private const string TruncateLastLineMarkupName = "lastline";
 
-        /// <summary>
-        /// Called by a <see cref="DialogueRunner"/> to dismiss the options view
-        /// when dialogue is complete.
-        /// </summary>
-        /// <returns>A completed task.</returns>
         public override YarnTask OnDialogueCompleteAsync()
         {
             if (canvasGroup != null)
@@ -97,9 +82,6 @@ namespace Yarn.Unity
             return YarnTask.CompletedTask;
         }
 
-        /// <summary>
-        /// Called by Unity to set up the object.
-        /// </summary>
         private void Start()
         {
             if (canvasGroup != null)
@@ -119,11 +101,23 @@ namespace Yarn.Unity
             }
         }
 
-        /// <summary>
-        /// Called by a <see cref="DialogueRunner"/> to set up the options view
-        /// when dialogue begins.
-        /// </summary>
-        /// <returns>A completed task.</returns>
+        private void Update()
+        {
+            // Defensive recovery: If we have instantiated options and the EventSystem loses selection, 
+            // ensure at least one element is selected to prevent soft locking.
+            if (optionViews.Count > 0 && EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+            {
+                for (int i = 0; i < optionViews.Count; i++)
+                {
+                    if (optionViews[i] != null && optionViews[i].gameObject.activeSelf && optionViews[i].interactable)
+                    {
+                        optionViews[i].Select();
+                        break;
+                    }
+                }
+            }
+        }
+
         public override YarnTask OnDialogueStartedAsync()
         {
             if (canvasGroup != null)
@@ -136,17 +130,6 @@ namespace Yarn.Unity
             return YarnTask.CompletedTask;
         }
 
-        /// <summary>
-        /// Called by a <see cref="DialogueRunner"/> when a line needs to be
-        /// presented, and stores the line as the 'last seen line' so that it
-        /// can be shown when options appear.
-        /// </summary>
-        /// <remarks>This view does not display lines directly, but instead
-        /// stores lines so that when options are run, the last line that ran
-        /// before the options appeared can be shown.</remarks>
-        /// <inheritdoc cref="DialoguePresenterBase.RunLineAsync"
-        /// path="/param"/>
-        /// <returns>A completed task.</returns>
         public override YarnTask RunLineAsync(LocalizedLine line, LineCancellationToken token)
         {
             if (showsLastLine)
@@ -156,20 +139,10 @@ namespace Yarn.Unity
             return YarnTask.CompletedTask;
         }
 
-        /// <summary>
-        /// Called by a <see cref="DialogueRunner"/> to display a collection of
-        /// options to the user. 
-        /// </summary>
-        /// <inheritdoc cref="DialoguePresenterBase.RunOptionsAsync"
-        /// path="/param"/>
-        /// <inheritdoc cref="DialoguePresenterBase.RunOptionsAsync"
-        /// path="/returns"/>
-
         public override async YarnTask<DialogueOption?> RunOptionsAsync(
     DialogueOption[] dialogueOptions,
     CancellationToken cancellationToken)
         {
-            // Destroy any previously created option views
             foreach (var view in optionViews)
             {
                 if (view != null)
@@ -195,10 +168,6 @@ namespace Yarn.Unity
 
             CancelSourceWhenDialogueCancelled().Forget();
 
-            // ==========================================
-            // CREATE OPTION VIEWS PER OPTION (3.0 SAFE)
-            // ==========================================
-
             for (int i = 0; i < dialogueOptions.Length; i++)
             {
                 var option = dialogueOptions[i];
@@ -206,7 +175,6 @@ namespace Yarn.Unity
                 if (option.IsAvailable == false && showUnavailableOptions == false)
                     continue;
 
-                // --- Detect and parse skillcheck tag ---
                 bool isSkillCheck = false;
                 string skillStat = string.Empty;
                 int skillDifficulty = 0;
@@ -215,15 +183,11 @@ namespace Yarn.Unity
                 {
                     foreach (var tag in option.Line.Metadata)
                     {
-                        // Expected format:
-                        // skillcheck:StatName:Difficulty
                         if (tag.StartsWith("skillcheck"))
                         {
                             isSkillCheck = true;
-
                             var parts = tag.Split(':');
 
-                            // Ensure we actually have parameters
                             if (parts.Length >= 3)
                             {
                                 skillStat = parts[1];
@@ -233,14 +197,11 @@ namespace Yarn.Unity
                                     skillDifficulty = 0;
                                 }
                             }
-
                             break;
                         }
                     }
                 }
 
-
-                // --- Choose prefab ---
                 OptionItem prefabToUse =
                     isSkillCheck && skillCheckOptionItemPrefab != null
                     ? skillCheckOptionItemPrefab
@@ -252,7 +213,6 @@ namespace Yarn.Unity
                         "OptionsPresenter: Prefab reference missing.");
                 }
 
-                // --- Instantiate ---
                 var optionView = Instantiate(prefabToUse);
 
                 var targetTransform =
@@ -262,28 +222,13 @@ namespace Yarn.Unity
                 optionView.transform.SetAsLastSibling();
                 optionView.gameObject.SetActive(true);
 
-                // --- Bind Yarn data ---
                 optionView.Option = option;
-                /*
-                if (isSkillCheck)
-                {
-                    var skillUI = optionView.GetComponent<SkillCheckUI>();
-                    if (skillUI != null)
-                    {
-                        skillUI.Configure(skillStat, skillDifficulty);
-                    }
-                }
-                */
 
                 optionView.OnOptionSelected = selectedOptionCompletionSource;
                 optionView.completionToken = completionCancellationSource.Token;
 
                 optionViews.Add(optionView);
             }
-
-            // ==========================================
-            // HIGHLIGHT FIX (UNCHANGED FROM 3.0 SOURCE)
-            // ==========================================
 
             int optionIndexToSelect = -1;
 
@@ -308,10 +253,6 @@ namespace Yarn.Unity
             {
                 optionViews[optionIndexToSelect].Select();
             }
-
-            // ==========================================
-            // LAST LINE DISPLAY (UNCHANGED)
-            // ==========================================
 
             if (lastLineContainer != null)
             {
@@ -408,7 +349,6 @@ namespace Yarn.Unity
 
             return completedTask;
         }
-
 
         private OptionItem CreateNewOptionView()
         {

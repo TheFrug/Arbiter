@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yarn.Unity;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// YarnManager
@@ -10,6 +11,7 @@ using System;
 /// - Skill checks
 /// - Variable access
 /// - Dialogue branching
+/// - Audio triggering
 /// </summary>
 public class YarnManager : MonoBehaviour
 {
@@ -23,7 +25,6 @@ public class YarnManager : MonoBehaviour
     [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PlayerManager playerManager;
 
-
     #region Unity Lifecycle
 
     private void Awake()
@@ -36,21 +37,54 @@ public class YarnManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Find the new DialogueRunner in the scene if it isn't assigned or was destroyed
+        if (dialogueRunner == null)
+        {
+            dialogueRunner = FindObjectOfType<DialogueRunner>();
+        }
+
+        // Only register if we successfully found a valid runner
+        if (dialogueRunner != null)
+        {
+            RegisterYarnFunctions();
+        }
+    }
+
+    private void RegisterYarnFunctions()
+    {
+        // Unregister existing functions to avoid duplicate errors, if supported by the version
+        // (Adding a function usually overwrites the existing one in Yarn Spinner)
 
         dialogueRunner.AddFunction("is_name_filled", () => {
-            // This assumes your ComplianceForm has a public way to see the subjectName
+            if (complianceForm == null) return false;
             return !string.IsNullOrEmpty(complianceForm.GetFilledName());
         });
 
         dialogueRunner.AddFunction("is_occupation_filled", () => {
-            // This assumes your ComplianceForm has a public way to see the subjectName
+            if (complianceForm == null) return false;
             return !string.IsNullOrEmpty(complianceForm.GetFilledOccupation());
         });
 
-        // Add this to your YarnManager Awake or Start
         dialogueRunner.AddFunction("is_form_complete", () => {
+            if (complianceForm == null) return false;
             return complianceForm.IsFormComplete;
         });
+
+        Debug.Log("Yarn functions successfully registered for the active scene.");
     }
 
     public void RegisterSceneDependencies(
@@ -62,8 +96,20 @@ public class YarnManager : MonoBehaviour
         dialogueRunner = runner;
         variableStorage = storage;
         playerManager = player;
-        playerManager = FindObjectOfType<PlayerManager>();
+
+        // Safety check to re-assign if empty
+        if (playerManager == null)
+        {
+            playerManager = FindObjectOfType<PlayerManager>();
+        }
+
         complianceForm = compliance;
+
+        // Register functions when dependencies are set
+        if (dialogueRunner != null)
+        {
+            RegisterYarnFunctions();
+        }
     }
 
     #endregion
@@ -74,27 +120,27 @@ public class YarnManager : MonoBehaviour
 
     /*
      * Yarn Usage:
-     * <<set_name YarnManager "John Halberd">>
+     * <<form_set_name "John Halberd">>
      */
     [YarnCommand("form_set_name")]
     public void SetName(string name)
     {
-        complianceForm.RevealNameFromYarn(name);
+        complianceForm?.RevealNameFromYarn(name);
     }
 
     /*
      * Yarn Usage:
-     * <<set_occupation YarnManager "Mechanic">>
+     * <<form_set_occupation "Mechanic">>
      */
     [YarnCommand("form_set_occupation")]
     public void SetOccupation(string occupation)
     {
-        complianceForm.RevealOccupationFromYarn(occupation);
+        complianceForm?.RevealOccupationFromYarn(occupation);
     }
 
     /*
      * Yarn Usage:
-     * <<submit_form YarnManager>>
+     * <<form_submit>>
      */
     [YarnCommand("form_submit")]
     public void SubmitComplianceForm()
@@ -111,7 +157,7 @@ public class YarnManager : MonoBehaviour
     /*
      * Optional — start a new interview cleanly
      * Yarn Usage:
-     * <<reset_form YarnManager>>
+     * <<form_reset>>
      */
     [YarnCommand("form_reset")]
     public void ResetComplianceForm()
@@ -148,15 +194,18 @@ public class YarnManager : MonoBehaviour
 
         Debug.Log(
             $"SkillCheck: {statName} | " +
-            $"{result.Die1}+{result.Die2} + {statValue} = {result.FinalTotal} " +
+            $"Result: {result.DiceTotal} + {statValue} = {result.FinalTotal} " +
             $"vs {difficulty} | Success: {result.Success}"
         );
 
-        dialogueRunner.VariableStorage.SetValue("$last_check_roll", result.DiceTotal);
-        dialogueRunner.VariableStorage.SetValue("$last_check_total", result.FinalTotal);
-        dialogueRunner.VariableStorage.SetValue("$last_check_stat", result.StatValue);
-        dialogueRunner.VariableStorage.SetValue("$last_check_difficulty", result.Difficulty);
-        dialogueRunner.VariableStorage.SetValue("$last_check_success", result.Success);
+        if (dialogueRunner != null)
+        {
+            dialogueRunner.VariableStorage.SetValue("$last_check_roll", result.DiceTotal);
+            dialogueRunner.VariableStorage.SetValue("$last_check_total", result.FinalTotal);
+            dialogueRunner.VariableStorage.SetValue("$last_check_stat", result.StatValue);
+            dialogueRunner.VariableStorage.SetValue("$last_check_difficulty", result.Difficulty);
+            dialogueRunner.VariableStorage.SetValue("$last_check_success", result.Success);
+        }
     }
 
 
@@ -252,7 +301,6 @@ public class YarnManager : MonoBehaviour
 
         FindObjectOfType<IDCardUI>()?.FinishCharacterCreation();
 
-        // Pass the string key name directly as a string to match the AudioManager library
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.TransitionAmbience("InterrogationAmbience", 1.5f);
@@ -280,13 +328,43 @@ public class YarnManager : MonoBehaviour
     }
 
     // =========================================================
+    // ================= AUDIO PLAYBACK ========================
+    // =========================================================
+    [YarnCommand("play_sound")]
+    public void PlayNarratorSound(string speakerKey)
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play(speakerKey);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager instance not found in the scene.");
+        }
+    }
+
+    [YarnCommand("stop_music")]
+    public void StopMusic()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager instance not found in the scene.");
+        }
+    }
+
+
+    // =========================================================
     // ================= PERFORMANCE EVALUATION =================
     // =========================================================
 
     [YarnCommand("get_total_score")]
     public void GetTotalScore()
     {
-        if (ComplianceResultsManager.Instance == null) return;
+        if (ComplianceResultsManager.Instance == null || variableStorage == null) return;
 
         var results = ComplianceResultsManager.Instance.EvaluateAll();
 
@@ -295,8 +373,8 @@ public class YarnManager : MonoBehaviour
 
         foreach (var r in results)
         {
-            total += r.score;      // use already computed score
-            max += r.maxScore;     // use already computed maxScore
+            total += r.score;
+            max += r.maxScore;
         }
 
         variableStorage.SetValue("$totalScore", total);
@@ -308,7 +386,7 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("get_subject_score")]
     public void GetSubjectScore(string interviewID)
     {
-        if (ComplianceResultsManager.Instance == null) return;
+        if (ComplianceResultsManager.Instance == null || variableStorage == null) return;
 
         var results = ComplianceResultsManager.Instance.EvaluateAll();
         var result = results.Find(r => r.interviewID == interviewID);
@@ -332,9 +410,8 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("get_subject_breakdown")]
     public void GetSubjectBreakdown(string interviewID)
     {
-        if (ComplianceResultsManager.Instance == null) return;
+        if (ComplianceResultsManager.Instance == null || variableStorage == null) return;
 
-        // Normalize the input string
         string targetID = interviewID.Trim();
         var results = ComplianceResultsManager.Instance.EvaluateAll();
         var result = results.Find(r => r.interviewID.Trim() == targetID);

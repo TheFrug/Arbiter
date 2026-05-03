@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Markup;
 using Yarn.Unity.Attributes;
+using System;
+using System.Collections;
 
 #nullable enable
 
@@ -91,6 +93,9 @@ namespace Yarn.Unity
         [ShowIf(nameof(showCharacterNameInLineView))]
         public GameObject? characterNameContainer = null;
 
+        [Group("Character")]
+        [Label("Narrator Sound Keys")]
+        public List<string> narratorSoundKeys = new List<string> { "Insight", "Empathy", "Force" };
 
         /// <summary>
         /// Controls whether the line view should fade in when lines appear, and
@@ -239,9 +244,6 @@ namespace Yarn.Unity
         {
             if (useTypewriterEffect)
             {
-                // need to add a pause handler also
-                // and add it to the front of the list
-                // that way it always happens first
                 var pauser = new PauseEventProcessor();
                 ActionMarkupHandlers.Insert(0, pauser);
             }
@@ -254,7 +256,6 @@ namespace Yarn.Unity
 
         private void Start()
         {
-            // we add all the monobehaviour handlers into the shared list
             ActionMarkupHandlers.AddRange(eventHandlers);
         }
 
@@ -291,8 +292,6 @@ namespace Yarn.Unity
             }
             else
             {
-                // we don't want to show character names but do have a valid container for showing them
-                // so we should just disable that and continue as if it didn't exist
                 if (characterNameContainer != null)
                 {
                     characterNameContainer.SetActive(false);
@@ -325,7 +324,6 @@ namespace Yarn.Unity
                 }
                 else
                 {
-                    // We're not fading up, so set the canvas group's alpha to 1 immediately.
                     canvasGroup.alpha = 1;
                 }
             }
