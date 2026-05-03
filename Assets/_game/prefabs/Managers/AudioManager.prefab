@@ -59,10 +59,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 716906009a4f380418a892d02478abbb, type: 3}
   - clipName: Buzzer
     clip: {fileID: 8300000, guid: 85da17e42135e0642aaad819ce01df31, type: 3}
-  - clipName: SlideUpSound
-    clip: {fileID: 0}
-  - clipName: SlideDownSound
-    clip: {fileID: 0}
+  - clipName: Insight
+    clip: {fileID: 8300000, guid: 8f8e9a1481c80474eaeb2243810c4109, type: 3}
+  - clipName: Empathy
+    clip: {fileID: 8300000, guid: d243553b31d54464d9549afbd3879451, type: 3}
+  - clipName: Force
+    clip: {fileID: 8300000, guid: 519b168b35b56b3468567e352612fe09, type: 3}
   randomAudioLibrary:
   - groupName: WriteSounds
     clips:

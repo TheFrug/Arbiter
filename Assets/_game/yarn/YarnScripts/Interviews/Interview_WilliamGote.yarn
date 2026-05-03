@@ -12,6 +12,8 @@ position: 957,-3
 <<set $asked_loyalty = false>>
 <<set $william_respect = 0>>
 
+<<set $rebel = false>>
+
 // ==========================
 // ===== ENTRY POINT ========
 // ==========================
@@ -416,6 +418,7 @@ The Voice of Someone Important: [Fo]Uh oh.[/Fo]
         <<jump WilliamGote_End_Standard>>
     -> I'll keep that in mind.
         <<set $william_respect += 1>>
+        <<set $rebel = true>>
         Punk: That's all I'm asking.
         Punk: Anyways, thanks for not being a complete piece of shit.
         <<jump WilliamGote_Exit>>
