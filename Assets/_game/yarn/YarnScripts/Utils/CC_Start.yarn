@@ -7,7 +7,7 @@ position: -384,-339
 Interviewer: Before we proceed, Arbiter, we require clarification.
 Interviewer: These responses will be entered into your official record.
 
--> Continue
+-> (Continue)
     <<jump CC_Question1>>
 ===
 

@@ -251,7 +251,7 @@ Punk: Didn't peg you for the curious type.
     Punk: Just something on the side.
 <<endif>>
 <<play_sound "YarnManager" "Force">>
-Force: [Fo]No way. This guy? In a band?[/Fo]
+Force: [Fo]No fucking way. I thought only cool people got to be in bands.[/Fo]
 <<SkillCheck "YarnManager" "Empathy" 8>>
 <<if $last_check_success>>
 <<play_sound "YarnManager" "Empathy">>
@@ -286,7 +286,6 @@ Empathy: [Em]He's relaxed a bit. This must be his joy.[/Em]
         <<play_sound "YarnManager" "Insight">>
         Insight: [In]They play in locations without official oversight/[/In]
         <<endif>>
-        <<play_sound "YarnManager" "Force">>
     <<endif>>
 <<if $william_respect >= 2>>
     -> Do you play often?
@@ -306,28 +305,27 @@ title: WilliamGote_Loyalty
 ---
 Punk: The Republic's been paying my bills for years and now they want to question my loyalty?
 Punk: Funny how that works.
--> Do you consider yourself loyal?
-    Punk: I'm still here.
-    <<set $asked_loyalty = true>>
-    <<SkillCheck "YarnManager" "Insight" 9>>
-    <<if $last_check_success>>
-    <<play_sound "YarnManager" "Insight">>
-    Insight: [In]That wasn't an answer. That was a deflection.[/In]
-    <<play_sound "YarnManager" "Empathy">>
-    Empathy: [Em]And yet, some part of you knows what he means.[/Em]
+-> Please, just answer the question.
+Punk: I'm still here.
+<<set $asked_loyalty = true>>
+<<SkillCheck "YarnManager" "Insight" 9>>
+<<if $last_check_success>>
+<<play_sound "YarnManager" "Insight">>
+Insight: [In]That wasn't an answer. That was a deflection.[/In]
+Empathy: [Em]And yet, some part of you knows what he means.[/Em]
+<<endif>>
+-> That's not what I asked.
+    <<set $william_respect -= 1>>
+    <<if $william_respect >= 1>>
+        Punk: Yeah, I know.
+        Punk: But you aren't getting a different answer from me, today.
+    <<else>>
+        Punk: Then maybe ask a better question.
     <<endif>>
-    -> That's not what I asked.
-        <<set $william_respect -= 1>>
-        <<if $william_respect >= 1>>
-            Punk: Yeah, I know.
-            Punk: But you aren't getting a different answer from me, today.
-        <<else>>
-            Punk: Then maybe ask a better question.
-        <<endif>>
-    -> Still here?
-        <<set $william_respect += 1>>
-        <<jump WilliamGote_Loyalty_StillHere>>
-    -> Whatever you say.
+-> Still here?
+    <<set $william_respect += 1>>
+    <<jump WilliamGote_Loyalty_StillHere>>
+-> Whatever you say.
 <<jump WilliamGote_Hub>>
 ===
 
@@ -426,8 +424,6 @@ Punk: You ever get people coming through here that get dealt with a little diffe
 -> Everyone who comes through here is processed the same.
     <<set $william_respect -= 1>>
     Punk: Yeah, I figured.
-    <<play_sound "YarnManager" "VISO">>
-    The Voice of Someone Important: [Fo]Perfect response. I'm proud of you, kiddo![/Fo]
     <<jump WilliamGote_End_Standard>>
 -> Depends on what you mean.
     <<set $william_respect += 1>>

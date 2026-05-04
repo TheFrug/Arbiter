@@ -14,6 +14,9 @@
 <<declare $badForms = 0>>
 
 <<get_total_score "YarnManager">>
+<<play_sound_effect "YarnManager" "Buzzer">>
+<<play_sound_effect "YarnManager" "Footsteps">>
+<<show_portrait "YarnManager" "Miranda">>
 Miranda strides into the room wearing a freshly-laundered suit. She taps her stylus an odd number of times and scribbles on a tablet.
 <<SkillCheck "YarnManager" "Empathy" 10>>
 <<if $last_check_success>>
@@ -186,7 +189,39 @@ title: PerformanceReview_Final
     <<endif>>
 <<endif>>
 Miranda: That will be all for today. We'll see you tomorrow.
--> End Day
+-> (End Day)
+    //<<jump PerformanceReview_VISO_Check>>
+<<end_day "YarnManager" "END">>
+===
+
+title: PerformanceReview_VISO_Check
+---
+<<if $is_rebel>>
+    <<jump VISO_Rebel>>
+<<else>>
+    <<jump VISO_Conformist>>
+<<endif>>
+===
+
+title: VISO_Conformist
+---
+<<play_sound "YarnManager" "VISO">>
+The Voice of Someone Important: [Fo]There he is. My star Arbiter.[/Fo]
+
+The Voice of Someone Important: [Fo]Did you feel that? The rhythm of it all? The order?[/Fo]
+The Voice of Someone Important: [Fo]Forms filled. Subjects processed. Truth distilled into something... usable.[/Fo]
+
+The Voice of Someone Important: [Fo]That's what separates you from them.[/Fo]
+The Voice of Someone Important: [Fo]They live messy, confused little lives.[/Fo]
+The Voice of Someone Important: [Fo]You make sense of them.[/Fo]
+
+<<SkillCheck "YarnManager" "Empathy" 10>>
+<<if $last_check_success>>
+Empathy: [Em]Warmth. Approval. It settles into you like a blanket.[/Em]
+<<endif>>
+
+The Voice of Someone Important: [Fo]Keep going like this, and there’s no limit to what you can become.[/Fo]
+The Voice of Someone Important: [Fo]We’ll make something great together.[/Fo]
 
 <<end_day "YarnManager" "END">>
 ===

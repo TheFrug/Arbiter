@@ -202,13 +202,16 @@ public class YarnManager : MonoBehaviour
     [YarnCommand("SkillCheck")]
     public void SkillCheck(string statName, int difficulty)
     {
+        /*
         if (playerManager == null || SkillCheckResolver.Instance == null)
         {
             Debug.LogError("Missing PlayerManager or SkillCheckResolver.");
             return;
         }
+        */
 
-        int statValue = playerManager.GetStat(statName);
+
+        int statValue = PlayerManager.Instance.GetStat(statName);
 
         var result = SkillCheckResolver.Instance
             .RollSkillCheck(statValue, difficulty);
