@@ -168,12 +168,12 @@ Empathy: [Em]We knew of a 'William', from before we actualized into who we are n
         <<set $william_respect -= 2>>
     -> I do care. Thank you for clarifying. #skillcheck:Empathy:10
         <<set $william_respect += 1>>
-    <<SkillCheck "YarnManager" "Empathy" 10>>
-    <<if $last_check_success>>
-        <<detour WilliamGote_Care_Pass>>
-    <<else>>
-        <<detour WilliamGote_Care_Fail>>
-    <<endif>>
+        <<SkillCheck "YarnManager" "Empathy" 10>>
+        <<if $last_check_success>>
+            <<detour WilliamGote_Care_Pass>>
+        <<else>>
+            <<detour WilliamGote_Care_Fail>>
+        <<endif>>
 ===
 
 title: WilliamGote_Care_Pass
@@ -424,6 +424,7 @@ Punk: You ever get people coming through here that get dealt with a little diffe
 -> Everyone who comes through here is processed the same.
     <<set $william_respect -= 1>>
     Punk: Yeah, I figured.
+    -> You're free to go, now.
     <<jump WilliamGote_End_Standard>>
 -> Depends on what you mean.
     <<set $william_respect += 1>>
