@@ -4414,7 +4414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Accetable Loyalty
+  m_text: 'Acceptable Loyalty
 
 '
   m_isRightToLeft: 0

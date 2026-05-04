@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using Yarn.Unity;
 
 [RequireComponent(typeof(OptionItem))]
-
 public class OptionSkillCheckUI : MonoBehaviour,
     ISelectHandler,
     IDeselectHandler,
@@ -16,13 +15,16 @@ public class OptionSkillCheckUI : MonoBehaviour,
     [SerializeField] private Color forceHighlight = new Color(1f, 0.4f, 0.4f);
     [SerializeField] private Color insightHighlight = new Color(0.4f, 0.9f, 1f);
 
+    [Header("Audio Settings")]
+    [SerializeField] private string skillCheckSoundName = "diceRoll";
+
     [Range(0f, 1f)]
     [SerializeField] private float dimMultiplier = 0.6f;
 
-    private OptionItem optionItem;
-    private TextMeshProUGUI text;
+    private OptionItem? optionItem;
+    private TextMeshProUGUI? text;
 
-    public string StatName { get; private set; }
+    public string StatName { get; private set; } = string.Empty;
     public int Difficulty { get; private set; }
 
     private void Awake()
@@ -48,6 +50,7 @@ public class OptionSkillCheckUI : MonoBehaviour,
         if (optionItem == null || text == null || optionItem.Option == null)
             return;
 
+        // Use the proper Option struct/value path based on Yarn Spinner 3.x
         string baseText = optionItem.Option.Line.TextWithoutCharacterName.Text;
 
         string difficultyLabel = GetDifficultyLabel(Difficulty);
@@ -74,6 +77,20 @@ public class OptionSkillCheckUI : MonoBehaviour,
     }
 
     // ==============================
+    // SOUND LOGIC
+    // ==============================
+
+    public void PlaySelectionSound()
+    {
+        // Because this script is in your project scope, it can access the project's singletons
+        var audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.PlaySoundEffect(skillCheckSoundName);
+        }
+    }
+
+    // ==============================
     // TOOLTIP EVENTS
     // ==============================
 
@@ -81,8 +98,10 @@ public class OptionSkillCheckUI : MonoBehaviour,
     {
         Debug.Log("Pointer Enter Skill Option");
 
-        int statValue = FindObjectOfType<PlayerManager>()
-            .GetStat(StatName);
+        var playerManager = FindObjectOfType<PlayerManager>();
+        if (playerManager == null) return;
+
+        int statValue = playerManager.GetStat(StatName);
 
         float chance = SkillCheckResolver.Instance
             .CalculateChance01(statValue, Difficulty);

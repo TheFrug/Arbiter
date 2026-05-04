@@ -20,6 +20,9 @@
 
 title: EethinMiller_Intro
 ---
+<<play_sound_effect "YarnManager" "Buzzer">>
+<<play_sound_effect "YarnManager" "Footsteps">>
+<<show_portrait "YarnManager" "Eethin">>
 A lad marches in wearing freshly-pressed khakis and a worn microfleece embroidered with the a red patch depicting the Statue of Harmony's torch.
 <<SkillCheck "YarnManager" "Force" 10>>
 <<if $last_check_success>>

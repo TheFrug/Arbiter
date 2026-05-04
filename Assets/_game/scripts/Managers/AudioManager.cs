@@ -86,6 +86,32 @@ public class AudioManager : MonoBehaviour
         EffectsSource.Play();
     }
 
+    // Plays a sound effect without interrupting the standard EffectsSource, 
+    // allowing multiple sound effects to overlap.
+    public void PlaySoundEffect(string clipName, float volume = 1f)
+    {
+        AudioClip clip = GetClip(clipName);
+        if (clip == null)
+        {
+            Debug.LogWarning($"Audio clip '{clipName}' not found in AudioManager.");
+            return;
+        }
+
+        // Create a temporary game object to hold the AudioSource
+        GameObject tempAudioObject = new GameObject("TempSfx_" + clipName);
+        tempAudioObject.transform.SetParent(this.transform);
+
+        AudioSource audioSource = tempAudioObject.AddComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+
+        // Play the sound
+        audioSource.Play();
+
+        // Destroy the temporary object after the clip finishes playing
+        Destroy(tempAudioObject, clip.length);
+    }
+
     // ==========================================
     // ===== AMBIENCE CROSSFADING METHODS =======
     // ==========================================

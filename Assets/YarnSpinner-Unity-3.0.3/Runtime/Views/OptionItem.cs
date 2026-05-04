@@ -23,7 +23,7 @@ namespace Yarn.Unity
         [SerializeField] internal Color colour;
     }
 
-    public sealed class OptionItem : UnityEngine.UI.Selectable, ISubmitHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public sealed class OptionItem : MonoBehaviour, ISubmitHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
     {
         [MustNotBeNull, SerializeField] TextMeshProUGUI? text;
         [SerializeField] UnityEngine.UI.Image? selectionImage;
@@ -38,6 +38,17 @@ namespace Yarn.Unity
         public System.Threading.CancellationToken completionToken;
 
         private bool hasSubmittedOptionSelection = false;
+
+        private bool _isInteractable = true;
+        public bool Interactable
+        {
+            get => _isInteractable;
+            set
+            {
+                _isInteractable = value;
+                ApplyStyle(value ? normal : disabled);
+            }
+        }
 
         private DialogueOption? _option;
         public DialogueOption Option
@@ -54,7 +65,6 @@ namespace Yarn.Unity
             set
             {
                 _option = value;
-
                 hasSubmittedOptionSelection = false;
 
                 string line = value.Line.TextWithoutCharacterName.Text;
@@ -70,9 +80,7 @@ namespace Yarn.Unity
                 }
 
                 text.text = line;
-                interactable = value.IsAvailable;
-
-                ApplyStyle(normal);
+                Interactable = value.IsAvailable;
             }
         }
 
@@ -80,11 +88,6 @@ namespace Yarn.Unity
         {
             Color newColour = style.colour;
             Sprite newSprite = style.sprite;
-            if (!Option.IsAvailable)
-            {
-                newColour = disabled.colour;
-                newSprite = disabled.sprite;
-            }
 
             if (text == null)
             {
@@ -109,24 +112,35 @@ namespace Yarn.Unity
             }
         }
 
-        public override void OnSelect(BaseEventData eventData)
-        {
-            base.OnSelect(eventData);
-            ApplyStyle(selected);
-        }
+        // --- Added back to resolve external presenter references ---
 
-        public override void OnDeselect(BaseEventData eventData)
-        {
-            base.OnDeselect(eventData);
-            ApplyStyle(normal);
-        }
-
-        new public bool IsHighlighted
+        public bool IsHighlighted
         {
             get
             {
-                return EventSystem.current.currentSelectedGameObject == this.gameObject;
+                return EventSystem.current != null && EventSystem.current.currentSelectedGameObject == this.gameObject;
             }
+        }
+
+        public void Select()
+        {
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+            ApplyStyle(selected);
+        }
+
+        // ------------------------------------------------------------
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            ApplyStyle(selected);
+        }
+
+        public void OnDeselect(BaseEventData eventData)
+        {
+            ApplyStyle(normal);
         }
 
         public void OnSubmit(BaseEventData eventData)
@@ -136,7 +150,7 @@ namespace Yarn.Unity
 
         public void InvokeOptionSelected()
         {
-            if (!IsInteractable())
+            if (!Interactable)
             {
                 return;
             }
@@ -150,26 +164,25 @@ namespace Yarn.Unity
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            InvokeOptionSelected();
-        }
-
-        public override void OnPointerEnter(PointerEventData eventData)
-        {
-            base.OnPointerEnter(eventData);
-
-            // Defensively select this element to prevent the EventSystem from getting lost
             if (EventSystem.current != null)
             {
                 EventSystem.current.SetSelectedGameObject(this.gameObject);
             }
+            InvokeOptionSelected();
+        }
 
-            base.Select();
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+            ApplyStyle(selected);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            // Reset to normal style if we were selected
-            if (!IsHighlighted)
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != this.gameObject)
             {
                 ApplyStyle(normal);
             }

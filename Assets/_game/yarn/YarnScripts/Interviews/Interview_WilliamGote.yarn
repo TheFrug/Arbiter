@@ -25,6 +25,9 @@ position: 957,-3
 title: WilliamGote_Intro
 position: 942,215
 ---
+<<play_sound_effect "YarnManager" "Buzzer">>
+<<play_sound_effect "YarnManager" "Footsteps">>
+<<show_portrait "YarnManager" "William">>
 Narrator: A middle-aged man marches in, the extraneous zippers and chains on his outfit clinking with each heavy bootstep.
 Narrator: He crashes into his seat and glares at you.
 <<SkillCheck "YarnManager" "Empathy" 10>>
@@ -254,8 +257,6 @@ Force: [Fo]No way. This guy? In a band?[/Fo]
 <<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]He's relaxed a bit. This must be his joy.[/Em]
 <<endif>>
-<<play_sound "YarnManager" "VISO">>
-The Voice of Someone Important: [Fo]Irrelevant. Stay focused. This is not why he's here.[/Fo]
 -> What kind of music do you play?
     <<set $william_respect += 1>>
     Punk: Loud. Fast. The kind your bosses wouldn't like much.
@@ -270,7 +271,6 @@ The Voice of Someone Important: [Fo]Irrelevant. Stay focused. This is not why he
     Insight: [In]Unregulated gatherings in unmonitored locations.[/In]
     <<endif>>
     <<play_sound "YarnManager" "VISO">>
-    The Voice of Someone Important: [Fo]Lame! Can you imagine [b]listening[/b] to non-state-sanctioned music? Smells like dissent, to me.[/Fo]
 -> Sounds like a waste of time.
     <<set $william_respect -= 1>>
     Punk: I guess it would to a guy like you.
@@ -287,7 +287,6 @@ The Voice of Someone Important: [Fo]Irrelevant. Stay focused. This is not why he
         Insight: [In]They play in locations without official oversight/[/In]
         <<endif>>
         <<play_sound "YarnManager" "Force">>
-        The Voice of Someone Important: [Fo]Ugh! Unregistered gatherings are such a drag, right?[/Fo]
     <<endif>>
 <<if $william_respect >= 2>>
     -> Do you play often?
@@ -341,8 +340,12 @@ Punk: Some people aren't.
 <<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]There's no sarcasm this time. He's watching you carefully.[/Em]
 <<endif>>
-<<play_sound "YarnManager" "VISO">>
-The Voice of Someone Important: [Fo]He is playing some form of rhetorical trick on you. Don't fall for it. [/Fo]
+<<SkillCheck "YarnManager" "Force" 10>>
+<<if $last_check_success>>
+<<play_sound "YarnManager" "Force">>
+Force: [Fo]He's playing some rhetorical trick on you, tugging at your heartstrings. Scoundrels like him sway with feelings because they are starved for logic.[/Fo]
+<<endif>>
+
 -> People relocate all the time.
     <<set $william_respect -= 1>>
     Punk: Yeah.
@@ -381,8 +384,6 @@ Empathy: [Em]He's not trying to scare you. He's checking if you already know.[/E
 <<play_sound "YarnManager" "Empathy">>
 Empathy: [Em]And you [b]DO[/b]. Can you remember his face? His laughter?[/Em]
 <<endif>>
-<<play_sound "YarnManager" "VISO">>
-The Voice of Someone Important: [Fo]These claims are unverified. Do not engage.[/Fo]
 Punk: After seeing enough people gone, the rest of us stay loyal.
 Punk: Or we learn how to look like it.
 <<jump WilliamGote_Hub>>
@@ -399,12 +400,8 @@ Punk: I walk out, you file your little paper, we both pretend this meant somethi
     <<play_sound "YarnManager" "VISO">>
     The Voice of Someone Important: [Fo]Hold up, Jonny-boy! You're about to submit an incomplete compliance form![/Fo]
     -> (Go back and finish the form)
-        <<play_sound "YarnManager" "VISO">>
-        The Voice of Someone Important: [Fo]Good. Procedure exists for a reason.[/Fo]
         <<jump WilliamGote_Hub>>
     -> (Submit anyway)
-        <<play_sound "YarnManager" "VISO">>
-        The Voice of Someone Important: [Fo]Cutting corners, are we? Let's hope that doesn't become a habit.[/Fo]
         <<jump WilliamGote_End_Determine>>
 <<else>>
     -> That's right. You're free to go.
@@ -426,8 +423,6 @@ title: WilliamGote_End_Trust
 Punk: ...
 Punk: Hey, before I go...
 Punk: You ever get people coming through here that get dealt with a little differently?
-<<play_sound "YarnManager" "VISO">>
-The Voice of Someone Important: [Fo]Uh oh.[/Fo]
 -> Everyone who comes through here is processed the same.
     <<set $william_respect -= 1>>
     Punk: Yeah, I figured.
@@ -449,12 +444,10 @@ The Voice of Someone Important: [Fo]Uh oh.[/Fo]
     Punk: Just... Don't look too hard, yeah?
     Punk: He's a good man. That should be all that matters.
     Punk: But I know that's not how this works.
-    <<play_sound "YarnManager" "VISO">>
-    The Voice of Someone Important: [Fo]I don't think I need to point this out, but this is a direct request to undermine procedure.[/Fo]
     <<SkillCheck "YarnManager" "Empathy" 12>>
     <<if $last_check_success>>
         <<play_sound "YarnManager" "Empathy">>
-        Empathy: [Em]"Where there is an opportunity to do good, you take it."[/Em]
+        Empathy: [Em]"Where there is an opportunity to do good, you seize it."[/Em]
         Empathy: [Em]That's what [i]he[/i] taught you.[/Em]
     <<endif>>
     -> I can't do that.

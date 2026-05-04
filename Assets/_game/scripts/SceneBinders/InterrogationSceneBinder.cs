@@ -7,6 +7,7 @@ public class InterrogationSceneBinder : MonoBehaviour
     [SerializeField] private VariableStorageBehaviour variableStorage;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private ComplianceForm complianceForm;
+    [SerializeField] private PortraitManager portraitManager;
 
     private void Start()
     {
@@ -14,7 +15,8 @@ public class InterrogationSceneBinder : MonoBehaviour
             dialogueRunner,
             variableStorage,
             playerManager,
-            complianceForm
+            complianceForm,
+            portraitManager
         );
     }
 }

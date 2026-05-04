@@ -25,6 +25,13 @@ namespace Yarn.Unity
         [MustNotBeNullWhen(nameof(continueButton), "A " + nameof(DialogueRunner) + " must be provided for the continue button to work.")]
         [SerializeField] DialogueRunner? dialogueRunner;
 
+        [MustNotBeNull("The " + nameof(LinePresenterButtonHandler) + " needs a reference to the LineAdvancer to determine the correct skip/advance logic.")]
+        [SerializeField] private LineAdvancer? lineAdvancer;
+
+        // In Yarn 3.x, if you are using a custom text reveal component on the same GameObject, 
+        // you can reference it here (e.g. Typewriter or similar script).
+        [SerializeField] private MonoBehaviour? textRevealer;
+
         void Start()
         {
             if (continueButton == null)
@@ -43,9 +50,12 @@ namespace Yarn.Unity
                 Debug.LogWarning($"The {nameof(continueButton)} is null, is it not connected in the inspector?", this);
                 return;
             }
-            // enable the button
+
+            // Enable the button
             continueButton.interactable = true;
             continueButton.enabled = true;
+
+            continueButton.onClick.RemoveAllListeners();
 
             continueButton.onClick.AddListener(() =>
             {
@@ -55,7 +65,17 @@ namespace Yarn.Unity
                     return;
                 }
 
-                dialogueRunner.RequestNextLine();
+                // Delegate the logic directly to the LineAdvancer.
+                // It will evaluate the state (Began vs. Waiting) and automatically 
+                // choose between completing the line or advancing.
+                if (lineAdvancer != null)
+                {
+                    lineAdvancer.RequestLineHurryUp();
+                }
+                else
+                {
+                    Debug.LogWarning($"Line Advancer reference is not set in {gameObject.name}", this);
+                }
             });
         }
 
@@ -80,7 +100,7 @@ namespace Yarn.Unity
             {
                 return;
             }
-            // disable interaction
+            // Disable interaction and clean listeners
             continueButton.onClick.RemoveAllListeners();
             continueButton.interactable = false;
             continueButton.enabled = false;

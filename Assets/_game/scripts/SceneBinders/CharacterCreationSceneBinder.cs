@@ -9,6 +9,7 @@ public class CharacterCreationSceneBinder : MonoBehaviour
     [SerializeField] private VariableStorageBehaviour variableStorage;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private ComplianceForm complianceForm;
+    [SerializeField] private PortraitManager portraitManager;
 
     private void Start()
     {
@@ -16,7 +17,8 @@ public class CharacterCreationSceneBinder : MonoBehaviour
             dialogueRunner,
             variableStorage,
             playerManager,
-            complianceForm
+            complianceForm,
+            portraitManager
         );
     }
 }

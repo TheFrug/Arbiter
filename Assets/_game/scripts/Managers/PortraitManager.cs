@@ -1,20 +1,74 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PortraitManager : MonoBehaviour
 {
+    [System.Serializable]
+    public struct PortraitEntry
+    {
+        public string key;
+        public Sprite portraitSprite;
+    }
+
     [SerializeField] private Image portraitImage;
     [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private List<PortraitEntry> portraitLibrary;
 
+    private Dictionary<string, Sprite> libraryDictionary;
     private Coroutine fadeRoutine;
+
+    private void Awake()
+    {
+        // Build dictionary from list for fast lookups
+        libraryDictionary = new Dictionary<string, Sprite>();
+        foreach (var entry in portraitLibrary)
+        {
+            if (!string.IsNullOrEmpty(entry.key) && entry.portraitSprite != null)
+            {
+                // Prevent duplicate keys
+                if (!libraryDictionary.ContainsKey(entry.key))
+                {
+                    libraryDictionary.Add(entry.key, entry.portraitSprite);
+                }
+            }
+        }
+    }
+
+    private void Start()
+    {
+        // Ensure that portraits start completely hidden when the scene loads
+        if (portraitImage != null)
+        {
+            Color c = portraitImage.color;
+            c.a = 0f;
+            portraitImage.color = c;
+            portraitImage.enabled = false;
+        }
+    }
+
+    public void ShowPortrait(string key)
+    {
+        if (libraryDictionary.TryGetValue(key, out Sprite targetSprite))
+        {
+            ShowPortrait(targetSprite);
+        }
+        else
+        {
+            Debug.LogWarning($"Portrait key '{key}' not found in the library.");
+        }
+    }
 
     public void ShowPortrait(Sprite sprite)
     {
         if (fadeRoutine != null)
             StopCoroutine(fadeRoutine);
 
-        portraitImage.sprite = sprite;
+        if (sprite != null)
+        {
+            portraitImage.sprite = sprite;
+        }
         fadeRoutine = StartCoroutine(FadeIn());
     }
 

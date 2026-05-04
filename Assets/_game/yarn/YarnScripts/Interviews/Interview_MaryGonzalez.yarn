@@ -37,7 +37,10 @@ position: -215,-2
 title: MaryGonzalez_Intro
 position: 102,1
 ---
+<<play_sound_effect "YarnManager" "Buzzer">>
 The door swings open with a harsh mechanical buzz.
+<<play_sound_effect "YarnManager" "Footsteps">>
+<<show_portrait "YarnManager" "Mary">>
 A woman steps, practically stomps into the tiny office and stands behind the chair.
 
 Intense Woman: Is this compliance assessment office 11?

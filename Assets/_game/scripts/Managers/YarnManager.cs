@@ -24,6 +24,7 @@ public class YarnManager : MonoBehaviour
     [Header("Game System References")]
     [SerializeField] private ComplianceForm complianceForm;
     [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private PortraitManager portraitController;
 
     #region Unity Lifecycle
 
@@ -91,7 +92,8 @@ public class YarnManager : MonoBehaviour
         DialogueRunner runner,
         VariableStorageBehaviour storage,
         PlayerManager player,
-        ComplianceForm compliance)
+        ComplianceForm compliance,
+        PortraitManager portrait)
     {
         dialogueRunner = runner;
         variableStorage = storage;
@@ -104,6 +106,11 @@ public class YarnManager : MonoBehaviour
         }
 
         complianceForm = compliance;
+        portraitController = portrait;
+        if (portraitController == null)
+        {
+            portraitController = FindObjectOfType<PortraitManager>();
+        }
 
         // Register functions when dependencies are set
         if (dialogueRunner != null)
@@ -113,6 +120,20 @@ public class YarnManager : MonoBehaviour
     }
 
     #endregion
+
+    [YarnCommand("show_portrait")]
+    public void ShowPortraitByName(string key)
+    {
+        if (portraitController != null)
+        {
+            portraitController.ShowPortrait(key);
+        }
+        else
+        {
+            Debug.LogWarning("Portrait controller reference is missing in YarnManager.");
+        }
+    }
+
 
     // =========================================================
     // ================= COMPLIANCE FORM =======================
@@ -343,6 +364,19 @@ public class YarnManager : MonoBehaviour
         }
     }
 
+    [YarnCommand("play_sound_effect")]
+    public void PlaySFX(string speakerKey)
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySoundEffect(speakerKey);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager instance not found in the scene.");
+        }
+    }
+
     [YarnCommand("stop_music")]
     public void StopMusic()
     {
@@ -446,7 +480,7 @@ public class YarnManager : MonoBehaviour
             variableStorage.SetValue("$subjectMax", 0f);
         }
     }
-
+    
     [YarnCommand("end_day")]
     public void EndDay(string message = "end")
     {
